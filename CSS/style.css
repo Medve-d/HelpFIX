@@ -143,25 +143,53 @@ section {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-  }
+}
   
-  .Acard {
+.Acard {
 	width: calc(33.33% - 5px);
 	margin: 25px;
 	backdrop-filter: saturate(180%) blur(20px);
 	border-radius: 30px;
 	transition: .3s ease;    
 	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.62);
-  }
+}
   
-  .Acard:hover {
+.Acard:hover {
 	box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.66);
-  } 
+} 
   
-  .Acard img {
+.Acard img {
 	width: 100%;
 	object-fit: cover;
 	border-radius: 30px;
 
   }
+.promo-section {
+  padding: 20px;
+}
+
+.containerP {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: 90%;
+  margin: 10% auto; 
+}
+
+.containerP img {
+  width: 33.3%;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.text-content h2,
+.text-content p {
+  font-size: 1.5rem;
+}
+
+
+
   
