@@ -68,7 +68,7 @@ section {
 }
 .slider-wrapper .image-listW {
 	display: grid;
-	gap: 18px;
+	gap: 70px;
 	font-size: 0;
 	margin-bottom: 30px;
 	overflow-x: auto;
@@ -139,3 +139,29 @@ section {
 	top: -10px;
 	bottom: -10px;
 }
+.Acard-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+  }
+  
+  .Acard {
+	width: calc(33.33% - 5px);
+	margin: 25px;
+	backdrop-filter: saturate(180%) blur(20px);
+	border-radius: 30px;
+	transition: .3s ease;    
+	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.62);
+  }
+  
+  .Acard:hover {
+	box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.66);
+  } 
+  
+  .Acard img {
+	width: 100%;
+	object-fit: cover;
+	border-radius: 30px;
+
+  }
+  
