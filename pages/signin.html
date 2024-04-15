@@ -9,51 +9,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
 </head>
-<style>
-  body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f0f0f0;
-  }
-  form {
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-      width: 300px;
-  }
-  input[type="text"], input[type="password"], input[type="email"] {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-  }
-  input[type="submit"] {
-      width: 100%;
-      background-color: #c2c1c1c2;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-  }
-  input[type="submit"]:hover {
-      background-color: #c2c1c1c2;
-  }
-  sign-in{
-      align-items: center;
-  }
-</style>
 <body>
-  <div id="navbar-placeholder"></div>
+  <div class="form-login-signin">
   <script>
       fetch('navbar.html')
           .then(response => response.text())
@@ -63,7 +20,7 @@
   </script>
 
     <!-- Formulaire d'inscription -->
-    <form div="form-signin" class="signin-form" action="/inscription" method="post">
+    <form class="signin-form" action="/inscription" method="post">
         <h2>S'inscrire</h2>
         <label for="firstname">Prénom</label>
         <input type="text" id="firstname" name="firstname" placeholder="Votre prénom" required>
@@ -81,7 +38,7 @@
         <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
     
         <input type="submit" value="S'inscrire">
-    </form>
+    </form></div>
 
     <!-- Liens vers les scripts -->
     <script src="script.js" defer></script>
