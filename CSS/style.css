@@ -8,7 +8,7 @@ body {
 	background-color: #c2c1c1c2;
 	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	backdrop-filter: saturate(180%) blur(20px);
-	font-size: 1.5rem;
+	font-size: 30%;
 }
 .collapse {
 	flex-direction: column;
@@ -190,8 +190,4 @@ section {
   font-size: 1.5rem;
 }  
 
-.sign-in {
-	justify-content: center;
-	align-items: center;
-	display: flex;
-}
+
