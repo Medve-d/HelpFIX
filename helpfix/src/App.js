@@ -1,5 +1,23 @@
-import './App.css';
-import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom';
+import React from 'react';
+import Navbar from './components/Navbar';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Navbar />
+        {/* Autres composants et contenu de votre application */}
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+
+/* import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom';
 
 const router = createBrowserRouter ([
   {
@@ -20,7 +38,7 @@ const router = createBrowserRouter ([
 ]);
 
 function PageError() {
-  const error = UseRouteError()
+  const error = PageError();
   console.log(error)
   return <>
     <h1>Une erreur est survenue</h1>
@@ -46,4 +64,4 @@ function App() {
   return <RouterProvider router={router}/>
 }
 
-export default App;
+export default App; */

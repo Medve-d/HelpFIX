@@ -1,0 +1,39 @@
+/* Navbar.css */
+
+.navbar {
+    background-color: #333;
+    padding: 1rem;
+  }
+  
+  .navbar-brand,
+  .navbar-item {
+    color: #fff;
+  }
+  
+  .navbar-brand:hover,
+  .navbar-item:hover {
+    color: #fff;
+  }
+  
+  .navbar-menu {
+    padding: 0;
+  }
+  
+  .navbar-start,
+  .navbar-end {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-item {
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-item:hover {
+    background-color: #555;
+  }
+  
+  .buttons .button {
+    margin-left: 0.5rem;
+  }
+  
