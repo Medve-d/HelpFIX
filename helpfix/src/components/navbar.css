@@ -16,8 +16,12 @@
   }
   
   .navbar-menu {
-    padding: 0;
+    display: flex;
+    justify-content: flex-start; /* Alignement à droite */
+    justify-content: center; /* Alignement au centre */
+    /* justify-content: space-between; */ /* Espacement uniforme entre les éléments */
   }
+  
   
   .navbar-start,
   .navbar-end {
@@ -26,7 +30,7 @@
   }
   
   .navbar-item {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
   }
   
   .navbar-item:hover {
@@ -36,4 +40,3 @@
   .buttons .button {
     margin-left: 0.5rem;
   }
-  
