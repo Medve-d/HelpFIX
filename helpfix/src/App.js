@@ -14,9 +14,6 @@ class App extends React.Component {
 
 export default App;
 
-
-
-
 /* import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom';
 
 const router = createBrowserRouter ([
