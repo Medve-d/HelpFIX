@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom';
 
 class App extends React.Component {
   render() {
@@ -12,9 +13,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
-
-/* import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom';
+/* import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom'; */
 
 const router = createBrowserRouter ([
   {
@@ -56,9 +55,9 @@ function Root () {
     </div>
   </>
 }
-
+/*
 function App() {
   return <RouterProvider router={router}/>
-}
+}*/
 
-export default App; */
+export default App; 

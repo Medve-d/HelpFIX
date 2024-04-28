@@ -1,6 +1,5 @@
 import React from 'react';
 import './navbar.css'; // Importation du fichier CSS pour la stylisation
-
 class Navbar extends React.Component {
   render() {
     return (
@@ -25,7 +24,7 @@ class Navbar extends React.Component {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <a className="button is-primary" href="/signup">
+                <a href='/signin'>
                   <strong>S'inscrire</strong>
                 </a>
                 <a className="button is-light" href="/login">
@@ -38,6 +37,6 @@ class Navbar extends React.Component {
       </nav>
     );
   }
-}
+} 
 
 export default Navbar;
