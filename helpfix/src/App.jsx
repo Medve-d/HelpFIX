@@ -1,19 +1,22 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom';
+import {createBrowserRouter, Outlet, NavLink} from 'react-router-dom';
+import LoginPage from './components/LoginPage';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-class App extends React.Component {
+
+/* import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom'; */
+
+
+/*class App extends React.Component {
   render() {
     return (
       <div>
         <Navbar />
-        {/* Autres composants et contenu de votre application */}
       </div>
     );
   }
-}
-
-/* import {createBrowserRouter, Link, RouterProvider, Outlet, NavLink} from 'react-router-dom'; */
+} */
 
 const router = createBrowserRouter ([
   {
@@ -26,7 +29,7 @@ const router = createBrowserRouter ([
         element: <div>S'inscrire</div>,
       },
       {
-        path: 'login',
+        path: 'loginPage',
         element: <div>Se connecter</div>,
       },
     ]
@@ -55,9 +58,20 @@ function Root () {
     </div>
   </>
 }
-/*
 function App() {
-  return <RouterProvider router={router}/>
-}*/
+  return (
+    <Router>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
 
 export default App; 
