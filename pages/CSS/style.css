@@ -251,6 +251,7 @@ section {
 
 .containerP img {
   width: 33.3%;
+  border-radius: 50%;
 }
 
 .text-content {
