@@ -7,34 +7,14 @@ document.addEventListener("DOMContentLoaded", function() {
     openBtn.addEventListener("click", function(event) {
         event.stopPropagation(); // Empêche la propagation de l'événement de clic
         sidenav.classList.add("active");
+        openBtn.style.display = "none"; // Hide the open button when the menu is open
+        openBtn.style.visibility = "hidden"; // Hide the button completely
     });
 
     // Ajoute un gestionnaire d'événement pour fermer le menu burger
     closeBtn.addEventListener("click", function() {
         sidenav.classList.remove("active");
+        openBtn.style.display = "block"; // Show the open button when the menu is closed
+        openBtn.style.visibility = "visible"; // Make the button visible again
     });
 });
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Sélection des boutons
-    const accepterBtns = document.querySelectorAll('.accepter');
-    const refuserBtns = document.querySelectorAll('.refuser');
-
-    // Ajout d'un gestionnaire d'événement pour chaque bouton "Accepter"
-    accepterBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            // Code à exécuter lorsqu'on clique sur "Accepter"
-            console.log("Prestation acceptée");
-        });
-    });
-
-    // Ajout d'un gestionnaire d'événement pour chaque bouton "Refuser"
-    refuserBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            // Code à exécuter lorsqu'on clique sur "Refuser"
-            console.log("Prestation refusée");
-        });
-    });
-});
-
