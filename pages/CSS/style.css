@@ -94,6 +94,7 @@ section {
 }
 .section-home {
 	display: grid;
+	padding: 0;
 	background-image: url(/img/Acc.jpg);
 	background-size: cover;
 	text-align: center;
@@ -134,7 +135,6 @@ section {
 	justify-content: center;
 }
 .SlideContainer {
-
 	max-width: 1200px;
 	width: 98%;
 }
