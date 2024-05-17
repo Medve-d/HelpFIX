@@ -9,6 +9,11 @@ button {
 	border: transparent;
 	
 }
+
+.mySidenav {
+	justify-content: end;
+	align-items: end;
+}
 /* Sidenav menu */
 .sidenav {
 	height: 100%;
