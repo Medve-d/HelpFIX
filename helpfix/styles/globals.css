@@ -379,3 +379,16 @@ padding: 20px;
     padding-right: 20px;
   }
 }
+
+.sebastien-text {
+  display: flex;
+  justify-content: space-around;
+  font-size: larger;
+  margin-top: 100px;
+}
+
+.photo-sebastien {
+  height: auto;
+  width: auto;
+  border-radius: 50%;
+}

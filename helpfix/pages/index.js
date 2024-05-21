@@ -3,6 +3,14 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
+  const images = [
+    { src: '/photo_ville_paris.jpg', alt: 'Image Paris' },
+    { src: '/CatHome2.jpg', alt: 'categorie 2' },
+    { src: '/CatHome3.jpg', alt: 'categorie 3' },
+    { src: '/CatHome4.jpg', alt: 'categorie 4' },
+    { src: '/CatHome5.jpg', alt: 'categorie 5' },
+    { src: '/CatHome6.jpg', alt: 'categorie 6' },
+  ];
   return (
     <>
       <Head>
@@ -30,9 +38,9 @@ export default function Home() {
         </div>
         <section className="section section-categoHome">
           <div className="Acard-container">
-            {[1, 2, 3, 4, 5, 6].map((cat, index) => (
+            {images.map((image, index) => (
               <a href="#" className="Acard" key={index}>
-                <Image src="/CatHome.jpg" alt={`categorie ${cat}`} width={200} height={200} />
+                <Image src={image.src} alt={image.alt} width={300} height={400} />
               </a>
             ))}
           </div>
