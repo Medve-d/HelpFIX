@@ -36,7 +36,7 @@ function Navbar() {
           <Link href="/category">Nos services</Link>
         </li>
         <li>
-          <Link href="/blog">Blog</Link>
+          <Link href="blog">Blog</Link>
         </li>
         <li>
           <Link href="/contact">Contact</Link>

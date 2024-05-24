@@ -5,11 +5,11 @@ import Navbar from "@/components/Navbar";
 export default function Home() {
   const images = [
     { src: '/photo_ville_paris.jpg', alt: 'Image Paris' },
-    { src: '/CatHome2.jpg', alt: 'categorie 2' },
-    { src: '/CatHome3.jpg', alt: 'categorie 3' },
-    { src: '/CatHome4.jpg', alt: 'categorie 4' },
-    { src: '/CatHome5.jpg', alt: 'categorie 5' },
-    { src: '/CatHome6.jpg', alt: 'categorie 6' },
+    { src: '/photo_ville_marseille.jpg', alt: 'Image Marseille' },
+    { src: '/photo_ville_lyon.jpg', alt: 'Image Lyon' },
+    { src: '/photo_ville_lille.jpg', alt: 'image Lille' },
+    { src: '/photo_ville_bordeaux.jpg', alt: 'Image Bordeaux' },
+    { src: '/photo_ville_nice.jpg', alt: 'Image Nice' },
   ];
   return (
     <>
@@ -40,7 +40,7 @@ export default function Home() {
           <div className="Acard-container">
             {images.map((image, index) => (
               <a href="#" className="Acard" key={index}>
-                <Image src={image.src} alt={image.alt} width={300} height={400} />
+                <Image src={image.src} alt={image.alt} width={300} height={300} />
               </a>
             ))}
           </div>
