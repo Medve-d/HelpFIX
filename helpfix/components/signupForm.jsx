@@ -52,7 +52,7 @@ const SignupForm = () => {
           className={styles.input}
         />
         <input type="submit" value="S'inscrire" className={styles.submitButton} />
-        <a href="/login" className={styles.signInLink}>Connexion</a>
+        <a href="/loginPage" className={styles.signInLink}>Connexion</a>
       </form>
     </div>
   );

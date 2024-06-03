@@ -33,16 +33,16 @@ function Navbar() {
           <Link href="/">Accueil</Link>
         </li>
         <li>
-          <Link href="/category">Nos services</Link>
+          <Link href="category">Nos services</Link>
         </li>
         <li>
           <Link href="blog">Blog</Link>
         </li>
         <li>
-          <Link href="/contact">Contact</Link>
+          <Link href="contact">Contact</Link>
         </li>
         <li>
-          <Link href="/loginPage">Se connecter</Link>
+          <Link href="loginPage">Se connecter</Link>
         </li>
       </ul>
     </nav>

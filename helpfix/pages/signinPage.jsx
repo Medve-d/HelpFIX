@@ -2,7 +2,7 @@ import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import SignupForm from "@/components/signupForm";
 
-export default function Home() {
+export default function SigninForm() {
   return (
     <>
       <Head>
