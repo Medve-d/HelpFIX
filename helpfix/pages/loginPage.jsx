@@ -6,7 +6,7 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Blog</title>
+        <title>Blogg</title>
       </Head>
       <main>
         <Navbar />
