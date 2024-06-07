@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from '../styles/Form.module.css'; // Assurez-vous que ce chemin est correct
+import styles from '../styles/contactForm.module.css'; // Assurez-vous que ce chemin est correct
 
-const SignupForm = () => {
+const ContactForm = () => {
   return (
     <div className={styles.formLoginSignin}>
       <form className={styles.signinForm} action="/inscription" method="post">
-        <h2>S'inscrire</h2>
+        <h2>Vous faire appeler par un conseiller</h2>
         <label htmlFor="firstname">Prénom</label>
         <input
           type="text"
@@ -58,4 +58,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default ContactForm;
