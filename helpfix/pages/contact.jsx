@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import ContactForm from "@/components/contactForm";
+import Footer from "@/components/footComp";
 
 export default function Contact() {
   return (
@@ -15,6 +16,7 @@ export default function Contact() {
         <p>Une question ? Une demande ? Un litiges ? n'attendez plus pour nous contacter</p>
         <ContactForm />
       </main>
+      <Footer />
     </>
   );
 }

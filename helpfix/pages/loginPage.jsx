@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import LoginForm from "@/components/LoginPage";
+import Footer from "@/components/footComp";
+
 
 export default function LoginPage() {
   return (
@@ -12,6 +14,7 @@ export default function LoginPage() {
         <Navbar />
         <LoginForm />
       </main>
+      <Footer />
     </>
   );
 }

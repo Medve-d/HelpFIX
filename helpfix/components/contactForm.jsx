@@ -15,15 +15,6 @@ const ContactForm = () => {
           required
           className={styles.input}
         />
-        <label htmlFor="surname">Nom</label>
-        <input
-          type="text"
-          id="surname"
-          name="surname"
-          placeholder="Votre nom"
-          required
-          className={styles.input}
-        />
         <label htmlFor="email">E-mail</label>
         <input
           type="email"
@@ -33,26 +24,16 @@ const ContactForm = () => {
           required
           className={styles.input}
         />
-        <label htmlFor="confirm-email">Confirmer l'E-mail</label>
+        <label htmlFor="phoneNumber">Numéro de téléphone</label>
         <input
-          type="email"
-          id="confirm-email"
-          name="confirm-email"
-          placeholder="Confirmer votre e-mail"
+          type="phone"
+          id="phoneNumber"
+          name="phoneNumber"
+          placeholder="Numéro de contact"
           required
           className={styles.input}
         />
-        <label htmlFor="password">Mot de passe</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Votre mot de passe"
-          required
-          className={styles.input}
-        />
-        <input type="submit" value="S'inscrire" className={styles.submitButton} />
-        <a href="/loginPage" className={styles.signInLink}>Connexion</a>
+        <input type="submit" value="Être contacté" className={styles.submitButton} />
       </form>
     </div>
   );

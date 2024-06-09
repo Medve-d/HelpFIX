@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar";
 import styles from '../styles/City.module.css';
+import Footer from "@/components/footComp";
 
 const services = {
   paris: ["Plombier", "Électricien", "Monteur de meubles", "Agent d'entretien"],
@@ -66,6 +67,7 @@ export default function CityPage() {
           </ul>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

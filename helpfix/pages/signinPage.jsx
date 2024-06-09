@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import SignupForm from "@/components/signupForm";
+import Footer from "@/components/footComp";
 
 export default function SigninForm() {
   return (
@@ -12,6 +13,7 @@ export default function SigninForm() {
         <Navbar />
         <SignupForm />
       </main>
+      <Footer />
     </>
   );
 }

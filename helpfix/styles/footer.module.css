@@ -1,0 +1,40 @@
+/* src/styles/footer.module.css */
+
+.footer {
+    background-color: #c2c1c1c2; /* Couleur de fond du pied de page */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer p {
+    margin: 0;
+    color: #333; /* Couleur du texte */
+  }
+  
+  .links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .links li {
+    display: inline;
+  }
+  
+  .links a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .links a:hover {
+    text-decoration: underline;
+  }
+  
