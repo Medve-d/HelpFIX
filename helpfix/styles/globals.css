@@ -35,7 +35,6 @@ body {
 
 button {
 border: transparent;
-
 }
 
 .mySidenav {
@@ -295,6 +294,7 @@ button {
 margin: 5px;
 padding: 10px 20px;
 cursor: pointer;
+
 }
 
 .accepter {
