@@ -1,0 +1,44 @@
+.requestItem {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #7e5b57;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.requestInfo {
+  flex-grow: 1;
+}
+
+.requestInfo span {
+  display: block;
+}
+
+.requestActions {
+  display: flex;
+}
+
+.accept, .decline {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.acceptBtn {
+  background-color: green;
+}
+
+.declineBtn {
+  background-color: red;
+}
