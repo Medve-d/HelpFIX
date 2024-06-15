@@ -1,10 +1,15 @@
 import React from 'react';
-import styles from '../styles/contactForm.module.css'; // Assurez-vous que ce chemin est correct
+import styles from '../styles/contactForm.module.css'; 
 
 const ContactForm = () => {
+
+  const handleButtonClick = () => {
+    alert('Votre demande a été prise en compte!');
+  };
+
   return (
     <div className={styles.formLoginSignin}>
-      <form className={styles.signinForm} action="/inscription" method="post">
+      <form className={styles.signinForm} action="/contact" method="post">
         <h2>Vous faire appeler par un conseiller</h2>
         <label htmlFor="firstname">Prénom</label>
         <input
@@ -33,7 +38,7 @@ const ContactForm = () => {
           required
           className={styles.input}
         />
-        <input type="submit" value="Être contacté" className={styles.submitButton} />
+        <input type="submit" value="Être contacté" className={styles.submitButton} onClick={handleButtonClick} />
       </form>
     </div>
   );
