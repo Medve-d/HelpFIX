@@ -7,7 +7,7 @@ export default function SigninForm() {
   return (
     <>
       <Head>
-        <title>Blog</title>
+        <title>S'inscrire</title>
       </Head>
       <main>
         <Navbar />

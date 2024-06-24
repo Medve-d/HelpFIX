@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from '../styles/Form.module.css'; // Assurez-vous que ce chemin est correct
+import styles from '../styles/Form.module.css';
+import Link from 'next/link';
 
 const SignupForm = () => {
   return (
@@ -52,7 +53,7 @@ const SignupForm = () => {
           className={styles.input}
         />
         <input type="submit" value="S'inscrire" className={styles.submitButton} />
-        <a href="/loginPage" className={styles.signInLink}>Connexion</a>
+        <Link href="/loginPage" className={styles.input}>Se connecter</Link>
       </form>
     </div>
   );

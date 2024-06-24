@@ -8,7 +8,7 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Blogg</title>
+        <title>Se connecter</title>
       </Head>
       <main>
         <Navbar />

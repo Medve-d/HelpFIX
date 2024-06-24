@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/Form.module.css'; // Assurez-vous que ce chemin est correct
+import styles from '../styles/Form.module.css'; 
 import Link from 'next/link';
 
 const LoginForm = () => {

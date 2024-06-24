@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/Navbar.module.css';
-
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,12 +16,13 @@ function Navbar() {
           <Image
             src="/HELP-removebg-preview.png" 
             alt="HelpFIX Logo" 
-            width={150} 
-            height={50} 
+            width={100} 
+            height={100} 
             className={styles.logo}
           />
         </Link>
       </div>
+        <span className={styles.HelloPhrase}> Hello !</span>  {/*Ici dans ce composant faire une fonction loggedOn comme ça quand le client est connecté cela fait Hello {name}*/}
       <button className={styles.burger} onClick={toggleMenu}>
         <span className={styles.burgerLine}></span>
         <span className={styles.burgerLine}></span>

@@ -8,7 +8,7 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>Blog</title>
+        <title>Contact</title>
       </Head>
       <main>
         <Navbar />
