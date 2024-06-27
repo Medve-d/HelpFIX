@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import Head from "next/head";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import styles from '../styles/category.module.css'; // Assurez-vous que ce chemin est correct
+import styles from '../styles/category.module.css';
 
 const categories = [
-  { name: 'Plombier', src: '' },
-  { name: 'Électricien', image: '/images/electricien.jpg' },
-  { name: 'Monteur de meubles', image: '/images/monteur_de_meubles.jpg' },
-  { name: 'Agent d\'entretien', image: '/images/agent_d_entretien.jpg' },
-  { name: 'Mécano', image: '/images/agent_d_entretien.jpg' },
-  { name: 'Baby-sitter', image: '/images/agent_d_entretien.jpg' },
-  { name: 'Déménageur', image: '/images/agent_d_entretien.jpg' },
-  { name: 'Jardinier', image: '/images/agent_d_entretien.jpg' },
+  { name: 'Plombier', image: '/public/images/plombier.jpg' },
+  { name: 'Électricien', image: '/public/images/plombier.jpg' },
+  { name: 'Monteur de meubles', image: '/public/images/monteur_de_meubles.jpg' },
+  { name: 'Agent d\'entretien', image: '/public/images/agent_d_entretien.jpg' },
+  { name: 'Mécano', image: '/public/images/agent_d_entretien.jpg' },
+  { name: 'Baby-sitter', image: '/public/images/agent_d_entretien.jpg' },
+  { name: 'Déménageur', image: '/public/images/agent_d_entretien.jpg' },
+  { name: 'Jardinier', image: '/public/images/agent_d_entretien.jpg' },
 ];
 
 const cities = ['Paris', 'Marseille', 'Lyon', 'Lille', 'Bordeaux', 'Nice'];
@@ -27,7 +25,7 @@ export default function Category() {
           <div className={styles.categories}>
             {categories.map((category, index) => (
               <div className={styles.categoryCard} key={index}>
-                <Image src={category.image} alt={category.name} width={150} height={150} className={styles.categoryImage} />
+                <Image src={category.image} alt={category.name} width={250} height={250} className={styles.categoryImage} />
                 <h2 className={styles.categoryName}>{category.name}</h2>
               </div>
             ))}

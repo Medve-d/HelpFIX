@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/Loginform.module.css'; // Assurez-vous que ce chemin est correct
+import styles from '../styles/Loginform.module.css'; 
 import Link from 'next/link';
 
 const LoginForm = () => {

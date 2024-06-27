@@ -1,0 +1,45 @@
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .categoryCard {
+    text-align: center;
+  }
+  
+  .categoryImage {
+    border-radius: 50%;
+  }
+  
+  .categoryName {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .cityTitle {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .citySelect {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+  }
+  
