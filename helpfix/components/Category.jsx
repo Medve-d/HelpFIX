@@ -3,14 +3,15 @@ import Image from "next/image";
 import styles from '../styles/category.module.css';
 
 const categories = [
-  { name: 'Plombier', image: '/public/images/plombier.jpg' },
-  { name: 'Électricien', image: '/public/images/plombier.jpg' },
-  { name: 'Monteur de meubles', image: '/public/images/monteur_de_meubles.jpg' },
-  { name: 'Agent d\'entretien', image: '/public/images/agent_d_entretien.jpg' },
-  { name: 'Mécano', image: '/public/images/agent_d_entretien.jpg' },
-  { name: 'Baby-sitter', image: '/public/images/agent_d_entretien.jpg' },
-  { name: 'Déménageur', image: '/public/images/agent_d_entretien.jpg' },
-  { name: 'Jardinier', image: '/public/images/agent_d_entretien.jpg' },
+  { name: 'Plombier', src:"/images/plombier.jpg"},
+  { name: 'Électricien', src: '/images/electricien.jpg' },
+  { name: 'Monteur de meubles', src: '/images/monteur_meubles.jpg' },
+  { name: 'Agent d\'entretien', src: '/images/agent_entretien.jpg' },
+  { name: 'Mécano', src: '/images/mecano.jpg' },
+  { name: 'Baby-sitter', src: '/images/baby_sitter.jpg' },
+  { name: 'Déménageur', src: '/images/demenageur.jpg' },
+  { name: 'Jardinier', src: '/images/jardinier.jpg' },
+  { name: 'Informaticien', src: '/images/informaticien.jpg' },
 ];
 
 const cities = ['Paris', 'Marseille', 'Lyon', 'Lille', 'Bordeaux', 'Nice'];
@@ -25,7 +26,7 @@ export default function Category() {
           <div className={styles.categories}>
             {categories.map((category, index) => (
               <div className={styles.categoryCard} key={index}>
-                <Image src={category.image} alt={category.name} width={250} height={250} className={styles.categoryImage} />
+                <Image src={category.src} alt={category.name} width={250} height={250} className={styles.categoryImage} />
                 <h2 className={styles.categoryName}>{category.name}</h2>
               </div>
             ))}
@@ -42,6 +43,7 @@ export default function Category() {
             ))}
           </select>
         </div>
+
     </>
   );
 }
