@@ -34,7 +34,7 @@ export default function Home() {
           <div className="text content">
             <h1>Votre solution à tous vos besoins de services,</h1>
             <h2>c'est HelpFIX!</h2>
-            <a href="./category.html"><button className="comBtn">Commencer</button></a>
+            <a href="./loginPage"><button className="comBtn">Commencer</button></a>
           </div>
         </div>
         <section className="section section-categoHome">
