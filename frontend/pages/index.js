@@ -5,19 +5,19 @@ import Footer from "@/components/footComp";
 
 export default function Home() {
   const images = [
-    { src: '/photo_ville_paris.jpg', alt: 'Image Paris', name: 'Paris' },
-    { src: '/photo_ville_marseille.jpg', alt: 'Image Marseille', name: 'Marseille' },
-    { src: '/photo_ville_lyon.jpg', alt: 'Image Lyon', name:'Lyon' },
-    { src: '/photo_ville_lille.jpg', alt: 'image Lille', name:'Lille' },
-    { src: '/photo_ville_bordeaux.jpg', alt: 'Image Bordeaux', name:'Bordeaux' },
-    { src: '/photo_ville_nice.jpg', alt: 'Image Nice', name:'Nice' },
+    { src: '/images/photo_ville_paris.jpg', alt: 'Image Paris', name: 'Paris' },
+    { src: '/images/photo_ville_marseille.jpg', alt: 'Image Marseille', name: 'Marseille' },
+    { src: '/images/photo_ville_lyon.jpg', alt: 'Image Lyon', name:'Lyon' },
+    { src: '/images/photo_ville_lille.jpg', alt: 'image Lille', name:'Lille' },
+    { src: '/images/photo_ville_bordeaux.jpg', alt: 'Image Bordeaux', name:'Bordeaux' },
+    { src: '/images/photo_ville_nice.jpg', alt: 'Image Nice', name:'Nice' },
   ];
   return (
     <>
       <Head>
         <title>Bienvenue sur HelpFIX !</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/Help-logo.png" />
+        <link rel="icon" href="/images/Help-logo.png" />
       </Head>
       <main>
         <Navbar />
@@ -53,7 +53,7 @@ export default function Home() {
 </section>
         <section className="section promo-section">
             <div className="sebastien-text">
-            <Image className="photo-sebastien" src="/presta-sebastien.jpg" alt="avatar" width={150} height={150} />
+            <Image className="photo-sebastien" src="/images/presta-sebastien.jpg" alt="avatar" width={150} height={150} />
               <h2>Sébastien</h2>
               <p>
                 " Arrivé depuis peu, HelpFIX m'a permis de vivre à mon compte, je
