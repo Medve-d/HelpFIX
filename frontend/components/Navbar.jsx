@@ -14,7 +14,7 @@ function Navbar() {
       <div className={styles.logoContainer}>
         <Link href="/">
           <Image
-            src="/HELP-removebg-preview.png" 
+            src="/images/HELP-removebg-preview.png" 
             alt="HelpFIX Logo" 
             width={100} 
             height={100} 
