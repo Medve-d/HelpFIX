@@ -115,7 +115,6 @@ margin-right: 50px;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 section {
-padding-top: 500px;
 min-height: 70vh;
 width: 100%;
 }
@@ -160,6 +159,7 @@ background-color: rgba(165, 163, 163, 0.74);
 display: flex;
 justify-content: center;
 flex-wrap: wrap;
+padding-bottom: 90px;
 }
 
 .Acard {
@@ -392,10 +392,12 @@ padding: 20px;
   justify-content: space-around;
   font-size: larger;
   margin-top: 100px;
+  margin-right: 100px;
 }
 
 .photo-sebastien {
   height: 250px;
-  width: 250px;
+  width: 300px;
   border-radius: 50%;
+  margin-left: 100px;
 }
