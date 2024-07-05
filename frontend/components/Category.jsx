@@ -21,17 +21,7 @@ export default function Category() {
 
   return (
     <>
-        <div className={styles.container}>
-          <h1 className={styles.title}>Choisissez une catégorie</h1>
-          <div className={styles.categories}>
-            {categories.map((category, index) => (
-              <div className={styles.categoryCard} key={index}>
-                <Image src={category.src} alt={category.name} width={250} height={250} className={styles.categoryImage} />
-                <h2 className={styles.categoryName}>{category.name}</h2>
-              </div>
-            ))}
-          </div>
-          <h2 className={styles.cityTitle}>Choisissez votre ville</h2>
+    <h2 className={styles.cityTitle}>Choisissez votre ville</h2>
           <select 
             className={styles.citySelect} 
             value={selectedCity} 
@@ -42,6 +32,16 @@ export default function Category() {
               <option value={city} key={index}>{city}</option>
             ))}
           </select>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Choisissez une catégorie</h1>
+          <div className={styles.categories}>
+            {categories.map((category, index) => (
+              <div className={styles.categoryCard} key={index}>
+                <Image src={category.src} alt={category.name} width={250} height={250} className={styles.categoryImage} />
+                <h2 className={styles.categoryName}>{category.name}</h2>
+              </div>
+            ))}
+          </div>
         </div>
 
     </>
