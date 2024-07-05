@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
+const path = require('path'); // Node.js path module
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,7 +17,11 @@ mongoose.connect(process.env.MONG_URI)
   .catch(err => console.log('connection to database failed.    '  + err));
 
 
+
 app.use('/api', userRoutes);
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 
