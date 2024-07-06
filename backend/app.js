@@ -3,10 +3,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
-const path = require('path'); // Node.js path module
+const path = require('path');
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(express.json());
+
+const corsOptions = {
+  origin: 'http://localhost:3000', // Allow requests from this origin
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
 
 mongoose.connect(process.env.MONG_URI)
   .then(() => {
