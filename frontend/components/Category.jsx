@@ -33,7 +33,7 @@ export default function Category() {
             ))}
           </select>
         <div className={styles.container}>
-          <h1 className={styles.title}>Choisissez une catégorie</h1>
+          <h1 className={styles.title}>Voici les services disponibles :</h1>
           <div className={styles.categories}>
             {categories.map((category, index) => (
               <div className={styles.categoryCard} key={index}>
