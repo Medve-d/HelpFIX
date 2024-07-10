@@ -1,0 +1,60 @@
+.form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 90px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .form h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  .form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form .input,
+  .form .textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form .textarea {
+    resize: vertical;
+  }
+  
+  .form .button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0070f3;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form .button:hover {
+    background-color: #005bb5;
+  }
+  
+  .form .imagePreview {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .form .imagePreview img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  
