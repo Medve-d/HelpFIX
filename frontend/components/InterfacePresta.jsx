@@ -3,30 +3,30 @@ import styles from "../styles/InterfacePresta.module.css";
 
 export default function AddAnnouncementForm() {
   const [city, setCity] = useState("");
+  const [job, setJob] = useState("");
   const [description, setDescription] = useState("");
 
-  // Villes enregistrées
   const cities = ["Paris", "Marseille", "Lyon", "Lille", "Bordeaux", "Nice"];
+  const jobs = ["Plombier", "Electricien", "Monteur de meubles", "Agent d'entretien", "Mécano", "Baby-sitter", "Déménageur", "Jardinier", "Informaticien"];
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation des données
-    if (!city || !description) {
+    if (!city || !job || !description) {
       alert("Veuillez remplir tous les champs.");
       return;
     }
 
-    // Logique pour envoyer les données au backend ou les stocker dans l'état de l'application
     const announcement = {
       city,
+      job,
       description,
     };
 
     console.log("Annonce ajoutée:", announcement);
 
-    // Réinitialiser le formulaire après soumission
     setCity("");
+    setJob("");
     setDescription("");
   };
 
@@ -46,6 +46,22 @@ export default function AddAnnouncementForm() {
         {cities.map((city, index) => (
           <option key={index} value={city}>
             {city}
+          </option>
+        ))}
+      </select>
+
+      <label htmlFor="job">Métier</label>
+      <select
+        id="job"
+        value={job}
+        onChange={(e) => setJob(e.target.value)}
+        className={styles.input}
+        required
+      >
+        <option value="">Sélectionnez un service</option>
+        {jobs.map((job, index) => (
+          <option key={index} value={job}>
+            {job}
           </option>
         ))}
       </select>
