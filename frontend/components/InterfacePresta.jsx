@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/InterfacePresta.module.css";
 
-export default function AddAnnouncementForm() {
+export default function AddAnnouncementForm({ onAdd }) {
   const [city, setCity] = useState("");
   const [job, setJob] = useState("");
   const [description, setDescription] = useState("");
@@ -23,7 +23,7 @@ export default function AddAnnouncementForm() {
       description,
     };
 
-    console.log("Annonce ajoutée:", announcement);
+    onAdd(announcement);
 
     setCity("");
     setJob("");
