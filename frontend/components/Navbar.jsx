@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useLocation } from 'react-router-dom';
 import styles from '../styles/Navbar.module.css';
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ function Navbar() {
           />
         </Link>
       </div>
-        <span className={styles.HelloPhrase}> Hello !</span>  {/*Ici dans ce composant faire une fonction loggedOn comme ça quand le client est connecté cela fait Hello {name}*/}
+        <span className={styles.HelloPhrase}> Hello !</span>  {}
       <button className={styles.burger} onClick={toggleMenu}>
         <span className={styles.burgerLine}></span>
         <span className={styles.burgerLine}></span>

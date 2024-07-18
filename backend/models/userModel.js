@@ -1,22 +1,24 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema({
-  U_name: String,
-  nom: String,
-  prenom: String,
-  email: String,
-  password: String,
-  RoleType: String,
-  created_at: { type: Date, default: Date.now },
-  address: {
-    street: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String,
-  },
-  number: String,
-  last_log: { type: Date, default: Date.now },
+const userSchema = new Schema({
+    U_name: String,
+    firstName: String,
+    lastName: String,
+    email: String,
+    password: String,
+    RoleType: {
+        type: String,
+        enum: ['admin', 'client', 'prestataire'] // Example enum values
+    },
+    address: {
+        street: String,
+        city: String,
+        state: String,
+        zip: String,
+        country: String
+    },
+    number: String
 });
 
 const User = mongoose.model('User', userSchema);
