@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from "next/image";
 import styles from '../styles/category.module.css';
 
@@ -18,32 +19,43 @@ const cities = ['Paris', 'Marseille', 'Lyon', 'Lille', 'Bordeaux', 'Nice'];
 
 export default function Category() {
   const [selectedCity, setSelectedCity] = useState('');
+  const router = useRouter();
+
+  const handleApply = () => {
+    if (selectedCity) {
+      router.push(`/${selectedCity.toLowerCase()}`);
+    } else {
+      alert("Veuillez sélectionner une ville.");
+    }
+  };
 
   return (
     <>
-    <h2 className={styles.cityTitle}>Choisissez votre ville</h2>
-          <select 
-            className={styles.citySelect} 
-            value={selectedCity} 
-            onChange={(e) => setSelectedCity(e.target.value)}
-          >
-            <option value="">Sélectionnez une ville</option>
-            {cities.map((city, index) => (
-              <option value={city} key={index}>{city}</option>
-            ))}
-          </select>
-        <div className={styles.container}>
-          <h1 className={styles.title}>Voici les services disponibles :</h1>
-          <div className={styles.categories}>
-            {categories.map((category, index) => (
-              <div className={styles.categoryCard} key={index}>
-                <Image src={category.src} alt={category.name} width={250} height={250} className={styles.categoryImage} />
-                <h2 className={styles.categoryName}>{category.name}</h2>
-              </div>
-            ))}
-          </div>
+      <h2 className={styles.cityTitle}>Choisissez votre ville</h2>
+      <select 
+        className={styles.citySelect} 
+        value={selectedCity} 
+        onChange={(e) => setSelectedCity(e.target.value)}
+      >
+        <option value="">Sélectionnez une ville</option>
+        {cities.map((city, index) => (
+          <option value={city} key={index}>{city}</option>
+        ))}
+      </select>
+      <button className={styles.applyButton} onClick={handleApply}>
+        Appliquer
+      </button>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Voici les services disponibles :</h1>
+        <div className={styles.categories}>
+          {categories.map((category, index) => (
+            <div className={styles.categoryCard} key={index}>
+              <Image src={category.src} alt={category.name} width={250} height={250} className={styles.categoryImage} />
+              <h2 className={styles.categoryName}>{category.name}</h2>
+            </div>
+          ))}
         </div>
-
+      </div>
     </>
   );
 }

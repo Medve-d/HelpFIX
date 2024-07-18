@@ -5,9 +5,11 @@ import Footer from "@/components/footComp";
 import MenuService from "@/components/menuService";
 import styles from "../styles/CityService.module.css"
 
-export default function Contact() {
+export default function AnnonceParis() {
   return (
+    
     <>
+    
       <Head>
         <title>Service disponible à Paris</title>
       </Head>

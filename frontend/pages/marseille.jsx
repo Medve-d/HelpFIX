@@ -5,7 +5,7 @@ import Footer from "@/components/footComp";
 import MenuService from "@/components/menuService";
 import styles from "../styles/CityService.module.css"
 
-export default function Contact() {
+export default function AnnonceMarseille() {
   return (
     <>
       <Head>

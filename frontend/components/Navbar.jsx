@@ -43,6 +43,9 @@ function Navbar() {
           <Link href="/contact">Contact</Link>
         </li>
         <li>
+          <Link href="/profile">Profil</Link>
+        </li>
+        <li>
           <Link href="/loginPage">Se connecter</Link>
         </li>
       </ul>
