@@ -1,26 +1,64 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const validator = require('validator')
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    U_name: String,
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
-    RoleType: {
+    email: {
         type: String,
-        enum: ['admin', 'client', 'prestataire'] // Example enum values
+        require: true,
+        unique: true
     },
-    address: {
-        street: String,
-        city: String,
-        state: String,
-        zip: String,
-        country: String
-    },
-    number: String
+    password: {
+        type: String,
+        require: true
+    }
 });
 
-const User = mongoose.model('User', userSchema);
+userSchema.statics.signup = async function (email, password) {
+    //validation
+    if (!email || !password) {
+        throw Error('All fields must be filled');
+    }
+    if (!validator.isEmail(email)){
+        throw Error('Email is not valid')
+    }
+    if (!validator.isStrongPassword(password)) {
+        throw Error('Password not strong enough')
+    }
+    const exists = await this.findOne({ email });
+    if (exists) {
+        throw Error('email already in use')
+    }
 
-module.exports = User;
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    const user = await this.create({email, password: hash });
+    return user;
+
+
+}
+
+userSchema.statics.login = async function (email, password) {
+    if (!email || !password) {
+        throw Error('All fields must be filled');
+    }
+
+    const user = await this.findOne({ email });
+    if (!user) {
+        throw Error('incorect email');
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+        throw Error('incorrect password');
+    }
+
+    return user;
+}
+
+
+module.exports = mongoose.model('User', userSchema);
+

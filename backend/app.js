@@ -6,6 +6,8 @@ const cors = require('cors');
 const connectDB = require('./config/db'); // Import the database connection
 const signupRoute = require('./routes/signup');
 const loginRoute = require('./routes/login');
+const userRoutes = require('./routes/user');
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -27,5 +29,6 @@ connectDB().then(() => {
 
 app.use("/user", signupRoute);
 app.use("/auth", loginRoute);
+app.use("/api/user", userRoutes);
 
 app.use(express.static(path.join(__dirname, 'public')));
