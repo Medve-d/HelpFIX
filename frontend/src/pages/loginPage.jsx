@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Navbar from "@/components/Navbar";
-import LoginForm from "@/components/LoginPage";
-import Footer from "@/components/footComp";
+import Navbar from "@/src/components/Navbar";
+import LoginForm from "@/src/components/LoginPage";
+import Footer from "@/src/components/footComp";
 
 
 export default function LoginPage() {

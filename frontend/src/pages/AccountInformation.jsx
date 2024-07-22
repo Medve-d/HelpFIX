@@ -1,8 +1,8 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import MainContent from '../components/MainContent';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/footComp';
+import Navbar from '@/src/components/Navbar';
+import Footer from '@/src/components/footComp';
 
 function AccountInformation() {
   return (

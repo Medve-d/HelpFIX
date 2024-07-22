@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Navbar from "@/components/Navbar";
-import SignupForm from "@/components/signupForm";
-import Footer from "@/components/footComp";
+import Navbar from "@/src/components/Navbar";
+import SignupForm from "@/src/components/signupForm";
+import Footer from "@/src/components/footComp";
 
 export default function SigninForm() {
   return (

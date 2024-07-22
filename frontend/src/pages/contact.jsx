@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import ContactForm from "@/components/contactForm";
-import Footer from "@/components/footComp";
+import Navbar from "@/src/components/Navbar";
+import ContactForm from "@/src/components/contactForm";
+import Footer from "@/src/components/footComp";
 
 export default function Contact() {
   return (

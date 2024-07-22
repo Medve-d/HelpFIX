@@ -1,6 +1,6 @@
 import React from 'react';
 import RequestList from '../components/RequestList';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/src/components/Navbar';
 
 const ListRequest = () => {
   return (

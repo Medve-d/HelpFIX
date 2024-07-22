@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/footComp";
+import Navbar from "@/src/components/Navbar";
+import Footer from "@/src/components/footComp";
 import styles from "../styles/blog.module.css"
 
 export default function Blog() {
