@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/footComp";
-import MenuService from "@/components/menuService";
+import Navbar from "@/src/components/Navbar";
+import Footer from "@/src/components/footComp";
+import MenuService from "@/src/components/menuService";
 import styles from "../styles/CityService.module.css"
 
 export default function AnnonceNice() {

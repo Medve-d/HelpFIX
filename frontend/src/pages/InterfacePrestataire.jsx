@@ -1,6 +1,6 @@
-import AddAnnouncementForm from "@/components/InterfacePresta";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/footComp";
+import AddAnnouncementForm from "@/src/components/InterfacePresta";
+import Navbar from "@/src/components/Navbar";
+import Footer from "@/src/components/footComp";
 
 export default function AddAnnouncementPage() {
   return (

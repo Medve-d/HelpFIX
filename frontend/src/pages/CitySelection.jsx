@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/src/components/Navbar";
 import styles from '../styles/City.module.css';
-import Footer from "@/components/footComp";
+import Footer from "@/src/components/footComp";
 
 const services = {
   paris: ["Plombier", "Électricien", "Monteur de meubles", "Agent d'entretien"],
