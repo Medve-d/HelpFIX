@@ -5,11 +5,14 @@ const path = require('path');
 const cors = require('cors');
 const connectDB = require('./config/db'); // Import the database connection
 const userRoutes = require('./routes/user');
+const prestationRoutes = require('./routes/prestation');
 
 
 const app = express();
 app.use(bodyParser.json());
 app.use(express.json());
+
+
 
 const corsOptions = {
   origin: 'http://localhost:3000', // Allow requests from this origin
@@ -18,6 +21,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+
+
 // Connect to the database
 connectDB().then(() => {
   app.listen(process.env.PORT, () => {
@@ -25,6 +30,14 @@ connectDB().then(() => {
   });
 }).catch(err => console.error(err));
 
-app.use("/api/user", userRoutes);
+
+//middleware
+app.use(express.json());
+
+
+// routes
+app.use('/api/user', userRoutes);
+app.use('/api/prestation', prestationRoutes);
+
 
 app.use(express.static(path.join(__dirname, 'public')));

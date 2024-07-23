@@ -14,7 +14,7 @@ const userSchema = new Schema({
         type: String,
         require: true
     }
-});
+}, {timestamps: true });
 
 userSchema.statics.signup = async function (email, password) {
     //validation
