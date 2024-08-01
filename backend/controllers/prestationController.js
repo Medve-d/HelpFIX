@@ -28,7 +28,30 @@ const getPrestation = async (req, res) => {
 
 
 const createPrestation = async (req, res) => {
-    const { ville, job, description } = req.body;  
+    const { ville, job, description } = req.body;
+
+    // Trim the inputs to remove leading and trailing spaces
+    const sanitizedVille = ville.trim();
+    const sanitizedJob = job.trim();
+    const sanitizedDescription = description.trim();
+
+    let emptyFields = [];
+
+    // Check if the trimmed inputs are still empty (i.e., were only spaces or completely empty)
+    if (!sanitizedVille) {
+        emptyFields.push('ville');
+    }
+    if (!sanitizedJob) {
+        emptyFields.push('job');
+    }
+    if (!sanitizedDescription) {
+        emptyFields.push('description');
+    }
+
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all fields with valid data', emptyFields });
+    }
+
     try {
         const prestation = await Prestation.create({ ville, job, description });
         res.status(200).json(prestation);
