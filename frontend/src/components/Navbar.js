@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="logoContainer">
         <img
-          src="/images/Help-logo.png" 
+          src="/images/logo-helpfix.png" 
           alt="HelpFIX Logo" 
           width={100} 
           height={100} 
