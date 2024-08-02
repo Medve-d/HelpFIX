@@ -1,13 +1,25 @@
 import { usePrestationsContext } from '../hooks/usePrestationsContext';
+import { useAuthContext } from '../hooks/useAuthContext'
+
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { fr } from 'date-fns/locale'; 
 
 const PrestationDetails = ({ prestation }) => {
   const { dispatch } = usePrestationsContext();
+  const { user } = useAuthContext()
+
 
   const handleClick = async () => {
+    
+    if (!user) {
+      return
+    }
+    
     const response = await fetch('/api/prestation/' + prestation._id, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
     });
     const json = await response.json();
 

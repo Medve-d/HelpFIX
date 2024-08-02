@@ -6,8 +6,10 @@ const mongooose = require('mongoose')
 // get
 
 const getPrestations = async (req, res) => {
-    const prestations = await Prestation.find({}).sort({createdAt: -1});
 
+    const user_id = req.user._id
+
+    const prestations = await Prestation.find({user_id}).sort({createdAt: -1});
     res.status(200).json(prestations);
 }
 
@@ -30,7 +32,7 @@ const getPrestation = async (req, res) => {
 const createPrestation = async (req, res) => {
     const { ville, job, description } = req.body;
 
-    // Trim the inputs to remove leading and trailing spaces
+    // Trim  to remove leading and trailing spaces
     const sanitizedVille = ville.trim();
     const sanitizedJob = job.trim();
     const sanitizedDescription = description.trim();
@@ -51,9 +53,10 @@ const createPrestation = async (req, res) => {
     if (emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill in all fields with valid data', emptyFields });
     }
-
+    // add doc to db
     try {
-        const prestation = await Prestation.create({ ville, job, description });
+        const user_id = req.user._id 
+        const prestation = await Prestation.create({ ville, job, description, user_id });
         res.status(200).json(prestation);
     } catch (error) {
         res.status(400).json({ error: error.message });

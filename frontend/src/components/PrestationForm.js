@@ -1,11 +1,12 @@
 import { useState } from 'react'
-
 import { usePrestationsContext } from "../hooks/usePrestationsContext"
+import { useAuthContext } from '../hooks/useAuthContext'
 
 
 const PrestationForm = () => {
   
   const { dispatch } = usePrestationsContext()  
+  const { user } = useAuthContext()
 
   const [ville, setVille] = useState('')
   const [job, setJobe] = useState('')
@@ -15,6 +16,11 @@ const PrestationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    if (!user) {
+      setError('You must be logged in')
+      return
+    }
 
     const prestation = {ville, job, description}
     
@@ -22,7 +28,8 @@ const PrestationForm = () => {
       method: 'POST',
       body: JSON.stringify(prestation),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}` 
       }
     })
     const json = await response.json()

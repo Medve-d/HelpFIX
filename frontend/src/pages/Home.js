@@ -1,6 +1,7 @@
 import { useEffect } from "react"
-
 import { usePrestationsContext } from "../hooks/usePrestationsContext"
+import { useAuthContext } from "../hooks/useAuthContext"
+
 
 // components
 import PrestationDetails from "../components/PrestationDetails"
@@ -8,10 +9,13 @@ import PrestationForm from "../components/PrestationForm"
 
 const Home = () => {
   const { prestations, dispatch } = usePrestationsContext()
+  const {user} = useAuthContext()
 
   useEffect(() => {
     const fetchPrestations = async () => {
-      const response = await fetch('/api/prestation')
+      const response = await fetch('/api/prestation', {
+        headers: {'Authorization': `Bearer ${user.token}`}, 
+      }) 
       const json = await response.json()
 
       if (response.ok) {
@@ -19,8 +23,10 @@ const Home = () => {
       }
     }
 
-    fetchPrestations()
-  }, [dispatch])
+    if (user) {
+      fetchPrestations()
+    }
+  }, [dispatch, user])
 
   return (
     <div className="home">

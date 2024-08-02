@@ -14,6 +14,10 @@ const prestationSchema = new Schema({
     description: {  
         type: String,
         required: true
+    },
+    user_id: {
+        type: String,
+        require: true
     }
 }, {timestamps: true });
 

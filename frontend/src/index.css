@@ -163,6 +163,7 @@ input.error {
   border-radius: 10px;
 }
 
+
 @media (max-width: 768px) {
   .burger {
     display: flex; 
@@ -189,4 +190,39 @@ input.error {
   .navLinks li {
     margin: 20px 0;
   }
+}
+form.signup, form.login {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+}
+nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+}
+
+/* Additional CSS for signup link under the form */
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+.signup-link {
+  color: var(--primary);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-link:hover {
+  color: darken(var(--primary), 10%);
 }

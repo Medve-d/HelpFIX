@@ -1,17 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
+
 
 function Navbar() {
+
+  const { logout } = useLogout()
+  const { user } = useAuthContext()
+
+  const handleClick = () => {
+    logout()
+  }
+
+
   return (
     <nav className="navbar">
       <div className="logoContainer">
+        <Link to="/">
         <img
-          src="/images/logo-helpfix.png" 
+          src="/image/logo-helpfix.png" 
           alt="HelpFIX Logo" 
           width={100} 
           height={100} 
           className="logo"
-        />
+        /></Link>
       </div>
       <span className="HelloPhrase">
         Hello {}!
@@ -34,12 +47,18 @@ function Navbar() {
         <li>
           <Link to="/contact">Contact</Link>
         </li>
-        <li>
-          <Link to="/profile">Profil</Link>
-        </li>
-        <li>
-          <Link to="/loginPage">Se connecter</Link>
-        </li>
+          
+          {user && (
+            <li><Link to="/profile">profile</Link></li>
+          )}
+          {user && (
+              <button onClick={handleClick}>Log out</button>
+          )}
+          {!user && (
+              <li><Link to="/login">Login</Link></li>
+          )}
+
+
       </ul>
     </nav>
   );
