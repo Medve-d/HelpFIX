@@ -8,6 +8,7 @@ import PrestationDetails from "../components/PrestationDetails"
 import PrestationForm from "../components/PrestationForm"
 
 const Home = () => {
+  
   const { prestations, dispatch } = usePrestationsContext()
   const {user} = useAuthContext()
 

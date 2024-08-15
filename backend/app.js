@@ -6,6 +6,7 @@ const cors = require('cors');
 const connectDB = require('./config/db'); // Import the database connection
 const userRoutes = require('./routes/user');
 const prestationRoutes = require('./routes/prestation');
+const profileRoutes = require('./routes/userProfile');
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(express.json());
 // routes
 app.use('/api/user', userRoutes);
 app.use('/api/prestation', prestationRoutes);
+app.use('/api/user/profile', profileRoutes);
 
 
 app.use(express.static(path.join(__dirname, 'public')));
