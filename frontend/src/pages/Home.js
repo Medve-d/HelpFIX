@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { usePrestationsContext } from "../hooks/usePrestationsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import Homevid from "../components/videoHome";
 
 
 // components
@@ -8,7 +9,6 @@ import PrestationDetails from "../components/PrestationDetails"
 import PrestationForm from "../components/PrestationForm"
 
 const Home = () => {
-  
   const { prestations, dispatch } = usePrestationsContext()
   const {user} = useAuthContext()
 
@@ -32,13 +32,7 @@ const Home = () => {
   return (
     
     <div>
-    <div>
-      <div className="text content">
-            <h1>Votre solution à tous vos besoins de services,</h1>
-            <h2>c'est HelpFIX!</h2>
-            {!user && (<a href="./signup"><button className="comBtn">Commencer</button></a>)}
-          </div>
-    </div>
+    <Homevid />
      <div className="home">
       <div className="workouts">
         {prestations && prestations.map(prestation => (

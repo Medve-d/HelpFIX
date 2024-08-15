@@ -6,14 +6,17 @@
   --primary: #796060;
   --error: #e7195a;
 }
+
 body {
   background: #f1f1f1;
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
 }
+
 header {
   background: #fff;
 }
+
 header .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -22,11 +25,13 @@ header .container {
   align-items: center;
   justify-content: space-between;
 }
+
 header a {
   color: #333;
   text-decoration: none;
 }
-.pages{
+
+.pages {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
@@ -38,6 +43,7 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
+
 .workout-details {
   background: #fff;
   border-radius: 4px;
@@ -46,16 +52,19 @@ header a {
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
+
 .workout-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
 }
+
 .workout-details p {
   margin: 0;
   font-size: 0.9em;
   color: #555;
 }
+
 .workout-details span {
   position: absolute;
   top: 20px;
@@ -71,7 +80,8 @@ header a {
 label, input {
   display: block;
 }
-input  {
+
+input {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -80,15 +90,17 @@ input  {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 form button {
   background: var(--primary);
   border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   border-radius: 4px;
   cursor: pointer;
 }
+
 div.error {
   padding: 10px;
   background: #ffefef;
@@ -97,9 +109,11 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
+
 input.error {
   border: 1px solid var(--error);
 }
+
 /* Navbar.module.css */
 
 .navbar {
@@ -108,7 +122,6 @@ input.error {
   align-items: center;
   padding: 10px 20px;
   background-color: #D9D9D9;
-  ;
 }
 
 .logoContainer {
@@ -158,11 +171,10 @@ input.error {
 .burgerLine {
   align-items: end;
   width: 100%;
-  height: 30px;
+  height: 3px;
   background-color: #796060;
-  border-radius: 10px;
+  border-radius: 2px;
 }
-
 
 @media (max-width: 768px) {
   .burger {
@@ -191,6 +203,7 @@ input.error {
     margin: 20px 0;
   }
 }
+
 form.signup, form.login {
   max-width: 400px;
   margin: 40px auto;
@@ -198,13 +211,14 @@ form.signup, form.login {
   background: #fff;
   border-radius: 4px;
 }
+
 nav button {
   background: #fff;
   color: var(--primary);
   border: 2px solid var(--primary);
   padding: 6px 10px;
   border-radius: 4px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
   font-size: 1em;
 }
@@ -226,9 +240,11 @@ nav button {
 .signup-link:hover {
   color: darken(var(--primary), 10%);
 }
+
 h1, h2 {
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  box-shadow: #5a5858;
 }
 
 h1 {
@@ -277,3 +293,117 @@ h2 {
 .comBtn:hover {
   background: darken(var(--primary), 10%);
 }
+
+
+/* Style for Homevid component */
+.HomeVideo {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Ensure video is behind other content */
+}
+
+.HomeContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 2; /* Ensure content is above video and overlay */
+}
+
+.HomeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1; /* Ensure overlay is between video and content */
+}
+
+/* Ensure the container doesn’t cause reflows during scroll */
+.HomeVideo {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  /* Force GPU acceleration to reduce rendering issues */
+  transform: translateZ(0);
+}
+
+/* Ensure that the video and overlay are properly positioned */
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.HomeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.HomeContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 2;
+  transform: translateZ(0);
+}
+
+.HomeContent h1, .HomeContent h2 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.comBtn {
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.comBtn:hover {
+  background: darken(var(--primary), 10%);
+}
+
+
