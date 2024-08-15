@@ -29,13 +29,23 @@ const Home = () => {
   }, [dispatch, user])
 
   return (
-    <div className="home">
+    
+    <div>
+    <div>
+      <div className="text content">
+            <h1>Votre solution à tous vos besoins de services,</h1>
+            <h2>c'est HelpFIX!</h2>
+            {!user && (<a href="./signup"><button className="comBtn">Commencer</button></a>)}
+          </div>
+    </div>
+     <div className="home">
       <div className="workouts">
         {prestations && prestations.map(prestation => (
             <PrestationDetails prestation={prestation} key={prestation._id} />
         ))}
       </div>
-      <PrestationForm />
+      {user && (<PrestationForm />)}
+      </div>
     </div>
   )
 }

@@ -27,7 +27,7 @@ function Navbar() {
         /></Link>
       </div>
       <span className="HelloPhrase">
-        Hello {}!
+        Hello {user ?  user.name : 'Guest'}!
       </span>
       <button className="burger">
         <span className="burgerLine"></span>
@@ -57,7 +57,6 @@ function Navbar() {
           {!user && (
               <li><Link to="/login">Login</Link></li>
           )}
-
 
       </ul>
     </nav>
