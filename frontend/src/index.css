@@ -405,5 +405,32 @@ video {
 .comBtn:hover {
   background: darken(var(--primary), 10%);
 }
+/* Existing styles for input elements */
+input, select {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+}
+
+/* Additional styling for the dropdown (select) */
+select {
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23DDD' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 8px 10px;
+}
+
+select:focus {
+  border-color: var(--primary);
+}
+
 
 

@@ -6,6 +6,7 @@ const cors = require('cors');
 const connectDB = require('./config/db'); // Import the database connection
 const userRoutes = require('./routes/user');
 const prestationRoutes = require('./routes/prestation');
+const demandeRoutes = require('./routes/demande');
 const profileRoutes = require('./routes/userProfile');
 
 
@@ -16,8 +17,8 @@ app.use(express.json());
 
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // Allow requests from this origin
-  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+  origin: 'http://localhost:3000', //requests from this origin
+  optionsSuccessStatus: 200 // legacy browsers choke on 204
 };
 
 app.use(cors(corsOptions));
@@ -39,6 +40,7 @@ app.use(express.json());
 // routes
 app.use('/api/user', userRoutes);
 app.use('/api/prestation', prestationRoutes);
+app.use('/api/demande', demandeRoutes);
 app.use('/api/user/profile', profileRoutes);
 
 

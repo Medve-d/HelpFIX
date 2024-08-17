@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { usePrestationsContext } from "../hooks/usePrestationsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-import Homevid from "../components/videoHome";
+import Homevid from "../components/videoHome"
 
 
 // components
@@ -10,16 +10,18 @@ import PrestationForm from "../components/PrestationForm"
 
 const Home = () => {
   const { prestations, dispatch } = usePrestationsContext()
-  const {user} = useAuthContext()
+  const {user, role} = useAuthContext()
 
   useEffect(() => {
     const fetchPrestations = async () => {
-      const response = await fetch('/api/prestation', {
+      const endpoint = role === 'prestataire' ? '/api/prestation/myprestations' : '/api/prestation'
+
+      const response = await fetch(endpoint, {
         headers: {'Authorization': `Bearer ${user.token}`}, 
       }) 
-      const json = await response.json()
 
       if (response.ok) {
+        const json = await response.json()
         dispatch({type: 'SET_PRESTATIONS', payload: json})
       }
     }
@@ -39,7 +41,7 @@ const Home = () => {
             <PrestationDetails prestation={prestation} key={prestation._id} />
         ))}
       </div>
-      {user && (<PrestationForm />)}
+      {role === 'prestataire' && (<PrestationForm />)}
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 const express = require('express');
-const  { getPrestations, getPrestation, createPrestation, deletePrestation, updatePrestation } = require('../controllers/prestationController');
+const  { getAllPrestations ,getMyPrestations ,getPrestation, createPrestation, deletePrestation, updatePrestation } = require('../controllers/prestationController');
 const requireAuth = require('../middleware/requireAuth')
 
 
@@ -12,7 +12,8 @@ router.use(requireAuth)
 
 
 // get 
-router.get('/', getPrestations);
+router.get('/', getAllPrestations);
+router.get('/myprestations', getMyPrestations);
 router.get('/:id',getPrestation);
 
 

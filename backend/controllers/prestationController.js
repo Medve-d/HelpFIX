@@ -1,11 +1,11 @@
 const Prestation = require('../models/prestationModel');
-const mongooose = require('mongoose')
+const mongoose = require('mongoose')
 
 
 
 // get
 
-const getPrestations = async (req, res) => {
+const getMyPrestations = async (req, res) => {
 
     const user_id = req.user._id
 
@@ -13,9 +13,19 @@ const getPrestations = async (req, res) => {
     res.status(200).json(prestations);
 }
 
+const getAllPrestations = async (req, res) => {
+    try {
+      const prestations = await Prestation.find(); 
+      res.status(200).json(prestations);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+  
+
 const getPrestation = async (req, res) => {
     const {id} = req.params;
-    if (!mongooose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such prestation'});
     }
     const prestation = await Prestation.findById(id);
@@ -30,18 +40,22 @@ const getPrestation = async (req, res) => {
 
 
 const createPrestation = async (req, res) => {
-    const { ville, job, description } = req.body;
+    const { title, price, job, description, userName, ville } = req.body;
 
-    // Trim  to remove leading and trailing spaces
-    const sanitizedVille = ville.trim();
+    // Trim to remove leading and trailing spaces
+    const sanitizedTitle = title.trim();
+    const sanitizedPrice = price.trim();
     const sanitizedJob = job.trim();
     const sanitizedDescription = description.trim();
 
     let emptyFields = [];
 
     // Check if the trimmed inputs are still empty (i.e., were only spaces or completely empty)
-    if (!sanitizedVille) {
-        emptyFields.push('ville');
+    if (!sanitizedTitle) {
+        emptyFields.push('title');
+    }
+    if (!sanitizedPrice) {
+        emptyFields.push('price');
     }
     if (!sanitizedJob) {
         emptyFields.push('job');
@@ -53,15 +67,25 @@ const createPrestation = async (req, res) => {
     if (emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill in all fields with valid data', emptyFields });
     }
-    // add doc to db
+
+    // Add doc to db
     try {
-        const user_id = req.user._id 
-        const prestation = await Prestation.create({ ville, job, description, user_id });
+        const user_id = req.user._id; // Assuming user is authenticated and user ID is attached to the request
+        const prestation = await Prestation.create({
+            title: sanitizedTitle,
+            price: sanitizedPrice,
+            job: sanitizedJob,
+            description: sanitizedDescription,
+            userName,
+            ville,
+            user_id
+        });
         res.status(200).json(prestation);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
-}
+};
+
 
 
 
@@ -69,7 +93,7 @@ const createPrestation = async (req, res) => {
 
 const deletePrestation = async (req, res) => {
     const { id } = req.params;
-    if (!mongooose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such Prestation'});
     }
     
@@ -86,7 +110,7 @@ const deletePrestation = async (req, res) => {
 
 const updatePrestation = async (req, res) => {
     const { id } = req.params
-    if (!mongooose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such Prestation'});
     }
     
@@ -103,7 +127,8 @@ const updatePrestation = async (req, res) => {
 
 
 module.exports = {
-    getPrestations,
+    getMyPrestations,
+    getAllPrestations,
     getPrestation,
     createPrestation,
     deletePrestation,

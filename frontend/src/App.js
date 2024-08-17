@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/userProfile'
+import DemandePage from './pages/demandePage'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -36,6 +37,12 @@ function App() {
               path="/profile" 
               element= <Profile />
             />
+            <Route
+              path="/prestation/:id" 
+              element={<DemandePage />} 
+            /> 
+
+            
           </Routes>
         </div>
       </BrowserRouter>

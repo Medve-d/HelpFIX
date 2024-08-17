@@ -28,6 +28,11 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    ville: {
+        type: String,
+        enum: ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg'],
+        required: true
+    },
     birthday: {
         type: Date,
         required: true
@@ -35,15 +40,14 @@ const userSchema = new Schema({
     role: {
         type: String,
         enum: ['admin', 'client', 'prestataire'],
-        required: true,
         default: 'client'
     }
 }, { timestamps: true });
 
-userSchema.statics.signup = async function (email, password, number, birthday, name, familyName, role) {
+userSchema.statics.signup = async function (email, password, number, ville, birthday, name, familyName, role) {
     try {
         // Validation
-        if (!email || !password || !number || !birthday || !name || !familyName || !role) {
+        if (!email || !password || !number || !birthday || !name || !familyName ) {
             throw Error('All fields must be filled');
         }
         if (!validator.isEmail(email)) {
@@ -57,6 +61,10 @@ userSchema.statics.signup = async function (email, password, number, birthday, n
         }
         if (!isValidAge(birthday)) {
             throw new Error('You must be at least 18 years old');
+        }
+
+        if (!role) {
+            role = 'client';
         }
 
         if (!['admin', 'client', 'prestataire'].includes(role)) {
@@ -76,7 +84,7 @@ userSchema.statics.signup = async function (email, password, number, birthday, n
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
 
-        const user = await this.create({ email, password: hash, number, birthday, name, familyName, role });
+        const user = await this.create({ email, password: hash, number, ville, birthday, name, familyName, role });
         return user;
     } catch (error) {
         throw new Error(error.message);
