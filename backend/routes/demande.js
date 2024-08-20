@@ -1,5 +1,5 @@
 const express = require('express');
-const  { getMyDemandes ,getAllDemandes ,getDemande, createDemande, deleteDemande, updateDemande } = require('../controllers/demandeController');
+const  { getClientDemandes ,getPrestataireDemande ,getAllDemandes ,getDemande, createDemande, deleteDemande, updateDemande } = require('../controllers/demandeController');
 const requireAuth = require('../middleware/requireAuth')
 
 
@@ -13,7 +13,8 @@ router.use(requireAuth)
 
 // get 
 router.get('/', getAllDemandes);
-router.get('/mydemande', getMyDemandes);
+router.get('/clientdemande', getClientDemandes);
+router.get('/prestatairedemande', getPrestataireDemande);
 router.get('/:id',getDemande);
 
 

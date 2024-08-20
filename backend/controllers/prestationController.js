@@ -26,12 +26,12 @@ const getAllPrestations = async (req, res) => {
 const getPrestation = async (req, res) => {
     const {id} = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such prestation'});
+        return res.status(404).json({error: 'Aucune prestation trouvée'});
     }
     const prestation = await Prestation.findById(id);
 
     if (!prestation) {
-        return res.status(400).json({error: 'no such a prestation'});
+        return res.status(400).json({error: 'Aucune prestation trouvée'});
     }
     res.status(200).json(prestation);
 }
@@ -57,6 +57,9 @@ const createPrestation = async (req, res) => {
     if (!sanitizedPrice) {
         emptyFields.push('price');
     }
+    if (price<0) {
+        emptyFields.push('price');
+    }
     if (!sanitizedJob) {
         emptyFields.push('job');
     }
@@ -65,7 +68,7 @@ const createPrestation = async (req, res) => {
     }
 
     if (emptyFields.length > 0) {
-        return res.status(400).json({ error: 'Please fill in all fields with valid data', emptyFields });
+        return res.status(400).json({ error: 'Veuillez remplir tous les champs avec des données valides.', emptyFields });
     }
 
     // Add doc to db
@@ -94,13 +97,13 @@ const createPrestation = async (req, res) => {
 const deletePrestation = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such Prestation'});
+        return res.status(404).json({error: 'Aucune prestation trouvée'});
     }
     
     const prestation = await Prestation.findByIdAndDelete({_id: id})
 
     if (!prestation) {
-        return res.status(400).json({error: 'no such a Prestation'});
+        return res.status(400).json({error: 'Aucune prestation trouvée'});
     }
     res.status(200).json(prestation);
     
@@ -111,7 +114,7 @@ const deletePrestation = async (req, res) => {
 const updatePrestation = async (req, res) => {
     const { id } = req.params
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such Prestation'});
+        return res.status(404).json({error: 'Aucune prestation trouvée'});
     }
     
     const prestation = await Prestation.findOneAndUpdate({_id: id}, {
@@ -119,7 +122,7 @@ const updatePrestation = async (req, res) => {
     })
 
     if (!prestation) {
-        return res.status(400).json({error: 'no such a prestation'});
+        return res.status(400).json({error: 'Aucune prestation trouvée'});
     }
     res.status(200).json(prestation);
 }

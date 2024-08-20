@@ -2,12 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
 
 // pages & components
+import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/userProfile'
 import DemandePage from './pages/demandePage'
-import Navbar from './components/Navbar'
+import MesDemandes  from "./pages/mesDemandes";
 
 function App() {
 
@@ -40,9 +41,12 @@ function App() {
             <Route
               path="/prestation/:id" 
               element={<DemandePage />} 
+            />
+            <Route
+              path="/mesdemandes" 
+              element={<MesDemandes />} 
             /> 
 
-            
           </Routes>
         </div>
       </BrowserRouter>

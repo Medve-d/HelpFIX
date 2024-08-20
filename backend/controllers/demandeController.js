@@ -6,23 +6,47 @@ const mongoose = require('mongoose')
 
 // get
 
-const getMyDemandes = async (req, res) => {
+const getClientDemandes = async (req, res) => {
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ error: 'User not authenticated' });
+    }
+  
+    const client_id = req.user._id;
+  
+    try {
+      const demandes = await Demande.find({ client_id }).sort({ createdAt: -1 });
+      res.status(200).json(demandes);
+    } catch (error) {
+      res.status(500).json({ error: 'Server error' });
+    }
+  }
+  
+  const getPrestataireDemande = async (req, res) => {
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ error: 'User not authenticated' });
+    }
+  
+    const user_id = req.user._id;
+  
+    try {
+      const demandes = await Demande.find({ user_id }).sort({ createdAt: -1 });
+      res.status(200).json(demandes);
+    } catch (error) {
+      res.status(500).json({ error: 'Server error' });
+    }
+  }
+  
 
-    const client_id = req.user._id
-
-    const demandes = await Demande.find({user_id}).sort({createdAt: -1});
-    res.status(200).json(demandes);
-}
+// prestations without filtering by user_id
 
 const getAllDemandes = async (req, res) => {
     try {
-        // Fetch all prestations without filtering by user_id
         const demandes = await Demande.find().sort({ createdAt: -1 });
         
-        // Send the fetched prestations as a JSON response
+        
         res.status(200).json(demandes);
     } catch (error) {
-        // Handle any errors that occur during the fetch operation
+        
         res.status(500).json({ message: 'Server Error', error });
     }
 }
@@ -32,12 +56,12 @@ const getAllDemandes = async (req, res) => {
 const getDemande= async (req, res) => {
     const {id} = req.params;
     if (!mongooose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such demande'});
+        return res.status(404).json({error: 'Aucune demande trouvée'});
     }
     const demande = await Demande.findById(id);
 
     if (!demande) {
-        return res.status(400).json({error: 'no such a demande'});
+        return res.status(400).json({error: 'Aucune demande trouvée'});
     }
     res.status(200).json(demande);
 }
@@ -47,35 +71,56 @@ const getDemande= async (req, res) => {
 
 const createDemande = async (req, res) => {
     const { id, clientName, clientMessage, prestatDate, clientAdresse } = req.body;
-
-    // Fetch the related Prestation
+  
     const prestation = await Prestation.findById(id);
     if (!prestation) {
-        return res.status(404).json({ error: 'No such prestation' });
+      return res.status(404).json({ error: 'Aucune prestation trouvée' });
     }
+  
+    const today = new Date();
+    const selectedDate = new Date(prestatDate);
+    
+    const sanitizedClientMessage = clientMessage.trim();
+    const sanitizedClientAdresse = clientAdresse.trim();
 
-    // Add doc to db
-    try {
-        const client_id = req.user._id; // Assuming user is authenticated and user ID is attached to the request
-        const demande = await Demande.create({
-            title: prestation.title,
-            price: prestation.price,
-            job: prestation.job,
-            description: prestation.description,
-            userName: prestation.userName,
-            ville: prestation.ville,
-            user_id: prestation.user_id,
-            clientName,
-            client_id,
-            prestatDate,
-            clientMessage: clientMessage.trim(),
-            clientAdresse: clientAdresse.trim()
-        });
-        res.status(200).json(demande);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
+    let emptyFields = [];
+    
+    if (!sanitizedClientMessage) {
+        emptyFields.push('clientMessage');
     }
-};
+    if (!sanitizedClientAdresse) {
+        emptyFields.push('clientAdresse');
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Veuillez remplir tous les champs avec des données valides.', emptyFields });
+    }
+  
+    if (selectedDate <= today) {
+      return res.status(400).json({ error: 'La date de prestation doit être dans le futur.' });
+    }
+  
+    try {
+      const client_id = req.user._id;
+      const demande = await Demande.create({
+        title: prestation.title,
+        price: prestation.price,
+        job: prestation.job,
+        description: prestation.description,
+        userName: prestation.userName,
+        ville: prestation.ville,
+        user_id: prestation.user_id,
+        clientName,
+        client_id,
+        prestatDate,
+        clientMessage: sanitizedClientMessage,
+        clientAdresse: sanitizedClientAdresse
+      });
+      res.status(200).json(demande);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+  
 
 
 
@@ -86,13 +131,13 @@ const createDemande = async (req, res) => {
 const deleteDemande = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such Demande'});
+        return res.status(404).json({error: 'Aucune demande trouvée'});
     }
     
     const demande = await Demande.findByIdAndDelete({_id: id})
 
     if (!demande) {
-        return res.status(400).json({error: 'no such a Demande'});
+        return res.status(400).json({error: 'Aucune demande trouvée'});
     }
     res.status(200).json(demande);
     
@@ -103,7 +148,7 @@ const deleteDemande = async (req, res) => {
 const updateDemande = async (req, res) => {
     const { id } = req.params
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such Demande'});
+        return res.status(404).json({error: 'Aucune demande trouvée'});
     }
     
     const demande = await Demande.findOneAndUpdate({_id: id}, {
@@ -111,7 +156,7 @@ const updateDemande = async (req, res) => {
     })
 
     if (!demande) {
-        return res.status(400).json({error: 'no such a Demande'});
+        return res.status(400).json({error: 'Aucune demande trouvée'});
     }
     res.status(200).json(demande);
 }
@@ -119,7 +164,8 @@ const updateDemande = async (req, res) => {
 
 
 module.exports = {
-    getMyDemandes,
+    getPrestataireDemande,
+    getClientDemandes,
     getAllDemandes,
     getDemande,
     createDemande,

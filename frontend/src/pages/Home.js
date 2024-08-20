@@ -29,7 +29,7 @@ const Home = () => {
     if (user) {
       fetchPrestations()
     }
-  }, [dispatch, user])
+  }, [dispatch, user, role])
 
   return (
     

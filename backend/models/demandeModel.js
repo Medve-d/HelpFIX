@@ -42,8 +42,16 @@ const DemandeSchema = new Schema({
         require: true
     },
     prestatDate: {
-        type: String,
-        require: true
+      type: String,
+      required: true,
+      validate: {
+        validator: function(value) {
+          const today = new Date();
+          const selectedDate = new Date(value);
+          return selectedDate > today;
+        },
+        message: 'La date de prestation doit être dans le futur.'
+      }
     },
     clientMessage: {
         type: String,
