@@ -51,9 +51,14 @@ function Navbar() {
         <li>
           <Link to="/contact">Contact</Link>
         </li>
+          {user && (
+            <li><Link to="/mesdemandes">Mes demande</Link></li>
+            
+          )}
           
           {user && (
             <li><Link to="/profile">profile</Link></li>
+            
           )}
           {user && (
               <button onClick={handleClick}>Log out</button>

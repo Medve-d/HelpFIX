@@ -15,7 +15,21 @@ const getMyPrestations = async (req, res) => {
 
 const getAllPrestations = async (req, res) => {
     try {
-      const prestations = await Prestation.find(); 
+      const { search } = req.query;
+      let query = {};
+  
+      if (search) {
+        query = {
+          $or: [
+            { title: { $regex: search, $options: "i" } },
+            { job: { $regex: search, $options: "i" } },
+            { userName: { $regex: search, $options: "i" } },
+            { ville: { $regex: search, $options: "i" } },
+          ],
+        };
+      }
+  
+      const prestations = await Prestation.find(query);
       res.status(200).json(prestations);
     } catch (error) {
       res.status(500).json({ error: error.message });

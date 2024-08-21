@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { usePrestationsContext } from "../hooks/usePrestationsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 import Homevid from "../components/videoHome"
+import SearchBar from "../components/searchBar"
 
 
 // components
@@ -35,6 +36,7 @@ const Home = () => {
     
     <div>
     <Homevid />
+    { (role === 'client' || role === 'admin') && <SearchBar />}
      <div className="home">
       <div className="workouts">
         {prestations && prestations.map(prestation => (

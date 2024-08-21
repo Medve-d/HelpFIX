@@ -1,8 +1,6 @@
 import { useEffect } from "react"
 import { useDemandeContext } from "../hooks/useDemandeContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-import Homevid from "../components/videoHome"
-
 
 // components
 import DemandesDetails from "../components/demandesDetails"
@@ -35,7 +33,7 @@ const MesDemandes = () => {
     if (user) {
         fetchDemandes()
     }
-  }, [dispatch, user])
+  }, [dispatch, user, role])
 
   return (
     
