@@ -507,5 +507,42 @@ select:focus {
   cursor: pointer;
   z-index: 1000;
 }
+.mesbutton-container {
+  display: flex;
+  gap: 10px; 
+  margin-top: 10px; 
+}
+
+.mesbutton {
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition:  0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mesbutton.accept {
+  background: #28a745; /* Green background */
+  color: #fff; /* White text */
+}
+
+.mesbutton.accept:hover {
+  background: #218838; /* Darker green on hover */
+}
+
+/* Deny button styles */
+.mesbutton.deny {
+  background: #dc3546; /* Red background */
+  color: #fff; /* White text */
+}
+
+.mesbutton.deny:hover {
+  background: #c82333; /* Darker red on hover */
+}
 
 
