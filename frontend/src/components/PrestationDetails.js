@@ -43,10 +43,10 @@ const PrestationDetails = ({ prestation }) => {
       <p><strong>Description   : </strong> {prestation.description}</p>
       <p>{formatDistanceToNow(new Date(prestation.createdAt), { addSuffix: true, locale: fr })}</p>
       {role === 'prestataire' && (
-        <span className="material-symbols-outlined" onClick={handleClickdelete}>delete</span>
+        <span className="material-symbols-outlined" onClick={handleClickdelete} title='Supprimer'>delete</span>
       )}
       {role === 'client' && (
-        <span className="material-symbols-outlined" onClick={handleClickview}>add</span>
+        <span className="material-symbols-outlined" onClick={handleClickview} title='ouvrir'>add</span>
       )}
 
     </div>

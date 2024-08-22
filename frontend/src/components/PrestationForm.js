@@ -58,7 +58,7 @@ const PrestationForm = () => {
 
   return (
     <form className="create" onSubmit={handleSubmit}> 
-      <h3>Add a New Prestation</h3>
+      <h3>Ajouter une prestation</h3>
 
       <label>Title  :</label>
       <input 
@@ -92,7 +92,7 @@ const PrestationForm = () => {
         className={emptyFields.includes('description') ? 'error' : ''}
       />
 
-      <button>Add Prestation</button>
+      <button title='Ajouter'>Ajouter la prestation</button>
       {error && <div className="error">{error}</div>}
     </form>
   )

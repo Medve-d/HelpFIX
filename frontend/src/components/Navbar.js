@@ -57,7 +57,7 @@ function Navbar() {
           )}
           
           {user && (
-            <li><Link to="/profile">profile</Link></li>
+            <li><Link to="/profile"><span className="material-symbols-outlined">person</span></Link></li>
             
           )}
           {user && (

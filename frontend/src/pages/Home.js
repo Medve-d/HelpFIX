@@ -39,6 +39,8 @@ const Home = () => {
     { (role === 'client' || role === 'admin') && <SearchBar />}
      <div className="home">
       <div className="workouts">
+      
+      {role === 'prestataire' && <h3>Mes prestations</h3> }
         {prestations && prestations.map(prestation => (
             <PrestationDetails prestation={prestation} key={prestation._id} />
         ))}

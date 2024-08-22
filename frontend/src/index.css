@@ -192,7 +192,6 @@ input.error {
     align-items: center;
     justify-content: center;
     transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
   }
 
   .navLinksOpen {
@@ -287,7 +286,7 @@ h2 {
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
-  transition: background 0.3s ease;
+  transition:  0.3s ease;
 }
 
 .comBtn:hover {
@@ -398,7 +397,7 @@ video {
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
-  transition: background 0.3s ease;
+  transition:  0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
@@ -450,6 +449,8 @@ select:focus {
   color: #333; /* Couleur du texte */
 }
 
+/* side chat */
+
 .links {
   list-style: none;
   padding: 0;
@@ -470,6 +471,41 @@ select:focus {
 
 .links a:hover {
   text-decoration: underline;
+}
+.side-component {
+  position: fixed;
+  top: 0;
+  right: -400px; /* Hide the component by default */
+  width: 300px;
+  height: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  transition: right 0.3s ease;
+  z-index: 1001;
+  padding: 20px;
+}
+
+.side-component.open {
+  right: 0; 
+}
+
+.close-button {
+  background-color: #f4f4f4;
+  color:#796060;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.side-button {
+  position: fixed;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #796060;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
 }
 
 
