@@ -3,8 +3,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const prestationSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    userName: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
     ville: {
         type: String,
+        enum: ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg'],
         required: true
     },
     job: {

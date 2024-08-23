@@ -22,14 +22,15 @@ export const useLogin = () => {
       setError(json.error)
     }
     if (response.ok) {
-      // save the user to local storage
-      localStorage.setItem('user', JSON.stringify(json))
+        // Save the token and user data to local storage
+        localStorage.setItem('token', json.token);
+        localStorage.setItem('user', JSON.stringify(json));
 
-      // update the auth context
-      dispatch({type: 'LOGIN', payload: json})
+        // Update the auth context
+        dispatch({ type: 'LOGIN', payload: json });
 
-      // update loading state
-      setIsLoading(false)
+        // Update loading state
+        setIsLoading(false);
     }
   }
 

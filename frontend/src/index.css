@@ -97,7 +97,7 @@ form button {
   border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -122,7 +122,11 @@ input.error {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+<<<<<<< HEAD
   background-color: #d9d9d9;
+=======
+  background-color: #D9D9D9;
+>>>>>>> e48e78eabe9de83020bab9c392858bfa5241afa1
 }
 
 .logoContainer {
@@ -172,9 +176,9 @@ input.error {
 .burgerLine {
   align-items: end;
   width: 100%;
-  height: 30px;
+  height: 3px;
   background-color: #796060;
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 @media (max-width: 768px) {
@@ -198,7 +202,6 @@ input.error {
     align-items: center;
     justify-content: center;
     transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
   }
 
   .navLinksOpen {
@@ -215,6 +218,7 @@ input.error {
   }
 }
 
+<<<<<<< HEAD
 @media (max-width: 576px) {
   header .container,
   .pages {
@@ -233,6 +237,9 @@ input.error {
 
 form.signup,
 form.login {
+=======
+form.signup, form.login {
+>>>>>>> e48e78eabe9de83020bab9c392858bfa5241afa1
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
@@ -246,7 +253,7 @@ nav button {
   border: 2px solid var(--primary);
   padding: 6px 10px;
   border-radius: 4px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
   font-size: 1em;
 }
@@ -268,3 +275,313 @@ nav button {
 .signup-link:hover {
   color: darken(var(--primary), 10%);
 }
+<<<<<<< HEAD
+=======
+
+h1, h2 {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: #5a5858;
+}
+
+h1 {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+h2 {
+  font-weight: 400;
+  color: var(--primary);
+}
+
+/* Style for the .text.content div */
+.text.content {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.text.content h1 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.text.content h2 {
+  font-size: 1.4em;
+  margin-bottom: 20px;
+}
+
+.comBtn {
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition:  0.3s ease;
+}
+
+.comBtn:hover {
+  background: darken(var(--primary), 10%);
+}
+
+
+/* Style for Homevid component */
+.HomeVideo {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Ensure video is behind other content */
+}
+
+.HomeContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 2; /* Ensure content is above video and overlay */
+}
+
+.HomeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1; /* Ensure overlay is between video and content */
+}
+
+/* Ensure the container doesn’t cause reflows during scroll */
+.HomeVideo {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  /* Force GPU acceleration to reduce rendering issues */
+  transform: translateZ(0);
+}
+
+/* Ensure that the video and overlay are properly positioned */
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.HomeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.HomeContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 2;
+  transform: translateZ(0);
+}
+
+.HomeContent h1, .HomeContent h2 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.comBtn {
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition:  0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.comBtn:hover {
+  background: darken(var(--primary), 10%);
+}
+/* Existing styles for input elements */
+input, select {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+}
+
+/* Additional styling for the dropdown (select) */
+select {
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23DDD' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 8px 10px;
+}
+
+select:focus {
+  border-color: var(--primary);
+}
+.footer {
+  background-color: #c2c1c1c2; /* Couleur de fond du pied de page */
+  padding: 40px;
+  text-align: center;
+  width: 100%; /* S'assurer que le footer prend toute la largeur */
+  position: relative; /* Position relative pour l'alignement */
+  bottom: 0; /* Alignement en bas */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer p {
+  margin: 0;
+  color: #333; /* Couleur du texte */
+}
+
+/* side chat */
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.links li {
+  display: inline;
+}
+
+.links a {
+  color: #796060;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+.side-component {
+  position: fixed;
+  top: 0;
+  right: -400px; /* Hide the component by default */
+  width: 300px;
+  height: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  transition: right 0.3s ease;
+  z-index: 1001;
+  padding: 20px;
+}
+
+.side-component.open {
+  right: 0; 
+}
+
+.close-button {
+  background-color: #f4f4f4;
+  color:#796060;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.side-button {
+  position: fixed;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #796060;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+.mesbutton-container {
+  display: flex;
+  gap: 10px; 
+  margin-top: 10px; 
+}
+
+.mesbutton {
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition:  0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mesbutton.accept {
+  background: #28a745; /* Green background */
+  color: #fff; /* White text */
+}
+
+.mesbutton.accept:hover {
+  background: #218838; /* Darker green on hover */
+}
+
+/* Deny button styles */
+.mesbutton.deny {
+  background: #dc3546; /* Red background */
+  color: #fff; /* White text */
+}
+
+.mesbutton.deny:hover {
+  background: #c82333; /* Darker red on hover */
+}
+
+
+>>>>>>> e48e78eabe9de83020bab9c392858bfa5241afa1

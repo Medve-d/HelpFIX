@@ -8,7 +8,8 @@ const PrestationForm = () => {
   const { dispatch } = usePrestationsContext()  
   const { user } = useAuthContext()
 
-  const [ville, setVille] = useState('')
+  const [title, setTitle] = useState('')
+  const [price, setPrice] = useState('')
   const [job, setJobe] = useState('')
   const [description, setDescription] = useState('')
   const [error, setError] = useState(null)
@@ -21,8 +22,11 @@ const PrestationForm = () => {
       setError('You must be logged in')
       return
     }
+        
+    const userName = `${ user.name} ${ user.familyName}`;
+    const ville = `${user.ville}`
+    const prestation = { title, price, ville, userName, job, description }
 
-    const prestation = {ville, job, description}
     
     const response = await fetch('/api/prestation', {
       method: 'POST',
@@ -41,7 +45,8 @@ const PrestationForm = () => {
     if (response.ok) {
       setEmptyFields([])
       setError(null)
-      setVille('')
+      setTitle('')
+      setPrice('')
       setJobe('')
       setDescription('')
 
@@ -53,14 +58,22 @@ const PrestationForm = () => {
 
   return (
     <form className="create" onSubmit={handleSubmit}> 
-      <h3>Add a New Prestation</h3>
+      <h3>Ajouter une prestation</h3>
 
-      <label>Ville  :</label>
+      <label>Title  :</label>
       <input 
         type="text" 
-        onChange={(e) => setVille(e.target.value)} 
-        value={ville}
-        className={emptyFields.includes('ville') ? 'error' : ''}
+        onChange={(e) => setTitle(e.target.value)} 
+        value={title}
+        className={emptyFields.includes('title') ? 'error' : ''}
+      />
+
+      <label>Prix (€) :</label>
+      <input 
+        type="Number" 
+        onChange={(e) => setPrice(e.target.value)} 
+        value={price}
+        className={emptyFields.includes('price') ? 'error' : ''}
       />
 
       <label>Job  :</label>
@@ -79,7 +92,7 @@ const PrestationForm = () => {
         className={emptyFields.includes('description') ? 'error' : ''}
       />
 
-      <button>Add Prestation</button>
+      <button title='Ajouter'>Ajouter la prestation</button>
       {error && <div className="error">{error}</div>}
     </form>
   )
