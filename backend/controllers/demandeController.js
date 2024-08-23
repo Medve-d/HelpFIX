@@ -1,5 +1,5 @@
 const Prestation = require('../models/prestationModel');
-const Demande = require('../models/demandeModel');
+const Demande = require('../models/demande.model');
 const mongoose = require('mongoose')
 
 
@@ -55,7 +55,7 @@ const getAllDemandes = async (req, res) => {
 
 const getDemande= async (req, res) => {
     const {id} = req.params;
-    if (!mongooose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'Aucune demande trouvée'});
     }
     const demande = await Demande.findById(id);

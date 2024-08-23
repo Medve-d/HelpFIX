@@ -517,7 +517,7 @@ select:focus {
   background: var(--primary);
   border: none;
   color: #fff;
-  padding: 10px 20px;
+  padding: 6px 10px;
   font-family: "Poppins", sans-serif;
   border-radius: 4px;
   cursor: pointer;
