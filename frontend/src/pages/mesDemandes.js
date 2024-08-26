@@ -2,15 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useDemandeContext } from "../hooks/useDemandeContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import DemandesDetails from "../components/demandesDetails";
-import Chat from "../components/chat";
+import SideComponent from "../components/chatFO/SideComponent";
+import { useNavigate } from 'react-router-dom';
 
 const MesDemandes = () => {
   const { demandes, dispatch } = useDemandeContext();
   const { user, role } = useAuthContext();
   const [isSideComponentOpen, setSideComponentOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     const fetchDemandes = async () => {
       let endpoint;
 
@@ -35,7 +41,7 @@ const MesDemandes = () => {
     if (user) {
       fetchDemandes();
     }
-  }, [dispatch, user, role]);
+  }, [dispatch, user, role, navigate]);
 
   const toggleSideComponent = (room) => {
     setSelectedRoom(room);
@@ -49,14 +55,14 @@ const MesDemandes = () => {
           {demandes && demandes.map(demande => (
             <DemandesDetails
               demande={demande}
-              key={demande._id}
-              onAccept={() => toggleSideComponent(demande._id)} // Assuming room is demande._id
+              key={demande._id}// Assuming room is demande._id
             />
+            
           ))}
         </div>
       </div>
       {isSideComponentOpen && (
-        <Chat isOpen={isSideComponentOpen} closeSideComponent={() => setSideComponentOpen(false)} room={selectedRoom} />
+        <SideComponent isOpen={isSideComponentOpen} closeSideComponent={() => setSideComponentOpen(false)} room={selectedRoom} />
       )}
       <button className="side-button" onClick={() => toggleSideComponent(selectedRoom)} title="Ouvrez le chat">
         <span className="material-symbols-outlined">arrow_back_ios_new</span>

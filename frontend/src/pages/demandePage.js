@@ -68,10 +68,11 @@ const DemandePage = () => {
       navigate('/mesdemandes')
     }
   };
-  
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='workout-details'>
+      
+    <form  onSubmit={handleSubmit}>
       <h3>Créer une Nouvelle Demande  {clientName}</h3>
 
       <label>Message :</label>
@@ -102,6 +103,7 @@ const DemandePage = () => {
       
       {error && <div className="error">{error}</div>}
     </form>
+    </div>
   );
 };
 

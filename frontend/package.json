@@ -12,16 +12,14 @@
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-<<<<<<< HEAD
-    "react-router-dom": "^6.25.1",
-    "react-scripts": "^5.0.1",
-=======
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.3.0",
     "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.7.5",
->>>>>>> e48e78eabe9de83020bab9c392858bfa5241afa1
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.5.5"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -2,8 +2,6 @@ const Message = require('../models/message.model.js');
 const Conversation = require('../models/convoModel.js');
 const mongoose = require('mongoose')
 
-const { getReceiverSocketId, io } = require('../socket/socket.js');
-
 
 
 const sendMessage = async (req, res) => {
@@ -11,6 +9,8 @@ const sendMessage = async (req, res) => {
 		const { message } = req.body;
 		const { id: receiverId } = req.params;
 		const senderId = req.user._id;
+		const senderName = req.user.name;
+		console.log(senderName)
 
 		let conversation = await Conversation.findOne({
 			participants: { $all: [senderId, receiverId] },
@@ -26,6 +26,7 @@ const sendMessage = async (req, res) => {
 			senderId,
 			receiverId,
 			message,
+			senderName,
 		});
 
 		if (newMessage) {
@@ -69,8 +70,6 @@ const getMessages = async (req, res) => {
         }
 
         const messages = conversation.messages;
-
-        console.log("Fetched messages:", messages);
 
         res.status(200).json(messages);
     } catch (error) {

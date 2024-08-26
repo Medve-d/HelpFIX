@@ -122,11 +122,7 @@ input.error {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-<<<<<<< HEAD
-  background-color: #d9d9d9;
-=======
   background-color: #D9D9D9;
->>>>>>> e48e78eabe9de83020bab9c392858bfa5241afa1
 }
 
 .logoContainer {
@@ -218,28 +214,7 @@ input.error {
   }
 }
 
-<<<<<<< HEAD
-@media (max-width: 576px) {
-  header .container,
-  .pages {
-    padding: 10px;
-  }
-
-  form.signup,
-  form.login {
-    padding: 15px;
-  }
-
-  form button {
-    padding: 8px;
-  }
-}
-
-form.signup,
-form.login {
-=======
 form.signup, form.login {
->>>>>>> e48e78eabe9de83020bab9c392858bfa5241afa1
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
@@ -275,8 +250,6 @@ nav button {
 .signup-link:hover {
   color: darken(var(--primary), 10%);
 }
-<<<<<<< HEAD
-=======
 
 h1, h2 {
   margin: 0;
@@ -571,17 +544,53 @@ select:focus {
 
 .mesbutton.accept:hover {
   background: #218838; /* Darker green on hover */
+  transition:  0.3s ease;
 }
 
 /* Deny button styles */
 .mesbutton.deny {
-  background: #dc3546; /* Red background */
+  background: #796060; /* Red background */
   color: #fff; /* White text */
 }
 
 .mesbutton.deny:hover {
-  background: #c82333; /* Darker red on hover */
+  background: #867373; /* Darker red on hover */
+  transition:  0.3s ease;
+}
+.mesbutton.confirm {
+  margin: 6px;
+  padding: 9px;
+} 
+
+.confirmation-modal {
+  margin: 6px;
 }
 
+.mesbutton.confirm.no {
+  background: #dc3546; /* Red background */
+  color: #fff; /* White text */
+}
 
->>>>>>> e48e78eabe9de83020bab9c392858bfa5241afa1
+.mesbutton.confirm.no:hover {
+  background: #c82333; /* Darker red on hover */
+  transition:  0.3s ease;
+}
+
+.mesbutton.confirm.yes {
+  background: #28a745; /* Red background */
+  color: #fff; /* White text */
+}
+
+.mesbutton.confirm.yes:hover {
+  background: #218838; /* Darker red on hover */
+  transition:  0.3s ease;
+}
+.chat-lines {
+  background: #fff;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+.chat-lines:hover {
+  background: #86737341; 
+  transition:  0.3s ease;
+}

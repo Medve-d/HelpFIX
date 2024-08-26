@@ -10,7 +10,7 @@ const PrestationDetails = ({ prestation }) => {
   const navigate = useNavigate();
 
 
-  const handleClickdelete = async () => {
+  const handleClickDelete = async () => {
     
     if (!user) {
       return;
@@ -28,7 +28,7 @@ const PrestationDetails = ({ prestation }) => {
       dispatch({ type: 'DELETE_PRESTATION', payload: json });
     }
   };
-  const handleClickview = () => {
+  const handleClickView = () => {
     navigate(`/prestation/${prestation._id}`);
   };
   
@@ -43,10 +43,10 @@ const PrestationDetails = ({ prestation }) => {
       <p><strong>Description   : </strong> {prestation.description}</p>
       <p>{formatDistanceToNow(new Date(prestation.createdAt), { addSuffix: true, locale: fr })}</p>
       {role === 'prestataire' && (
-        <span className="material-symbols-outlined" onClick={handleClickdelete} title='Supprimer'>delete</span>
+        <span className="material-symbols-outlined" onClick={handleClickDelete} title='Supprimer'>delete</span>
       )}
       {role === 'client' && (
-        <span className="material-symbols-outlined" onClick={handleClickview} title='ouvrir'>add</span>
+        <span className="material-symbols-outlined" onClick={handleClickView} title='ouvrir'>add</span>
       )}
 
     </div>
