@@ -461,28 +461,6 @@ select:focus {
 }
 
 /* side chat */
-
-.links {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0 0;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.links li {
-  display: inline;
-}
-
-.links a {
-  color: #796060;
-  text-decoration: none;
-}
-
-.links a:hover {
-  text-decoration: underline;
-}
 .side-component {
   position: fixed;
   top: 0;
@@ -494,20 +472,38 @@ select:focus {
   transition: right 0.3s ease;
   z-index: 1001;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .side-component.open {
-  right: 0; 
+  right: 0;
 }
 
 .close-button {
   background-color: #f4f4f4;
-  color:#796060;
+  color: #796060;
   border: none;
   padding: 10px;
   cursor: pointer;
   margin-bottom: 20px;
 }
+
+.sideContent {
+  flex-grow: 1; /* This allows the container to expand and take available space */
+  overflow-y: auto; /* This enables vertical scrolling if the content overflows */
+  padding-bottom: 50px;
+  padding-right: 16px;
+}
+.sideContent::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+.sideContent {
+  -ms-overflow-style: none; /* Hides scrollbar for Internet Explorer and Edge */
+  overflow: -moz-scrollbars-none; /* Hides scrollbar for Firefox */
+}
+
 .side-button {
   position: fixed;
   right: 5px;
@@ -518,6 +514,7 @@ select:focus {
   cursor: pointer;
   z-index: 1000;
 }
+
 .mesbutton-container {
   display: flex;
   gap: 10px; 
@@ -593,4 +590,65 @@ select:focus {
 .chat-lines:hover {
   background: #86737341; 
   transition:  0.3s ease;
+}
+.chat-container {
+  position: fixed;
+  bottom: 0;
+  right:20px;
+  height: 400px;
+  width: 400px;
+  max-height: 600px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 1006;
+}
+
+.chat-header {
+  padding: 10px;
+  background-color: #867373;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-body {
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.chat-footer {
+  display: flex;
+  padding:  3px 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-footer input {
+  flex-grow: 1;
+  margin-right: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.close-chat-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.mesbutton.chat {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.mesbutton.chat:hover {
+  background: #796060a0; 
+  transition:  0.3s ease;
+}
+
+.material-symbols-outlined.send {
+  margin-top: 50%;
+  margin-bottom: 50%;
 }

@@ -3,6 +3,7 @@ import { useDemandeContext } from "../hooks/useDemandeContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import DemandesDetails from "../components/demandesDetails";
 import SideComponent from "../components/chatFO/SideComponent";
+import Chat from "../components/chatFO/chat"; 
 import { useNavigate } from 'react-router-dom';
 
 const MesDemandes = () => {
@@ -10,6 +11,7 @@ const MesDemandes = () => {
   const { user, role } = useAuthContext();
   const [isSideComponentOpen, setSideComponentOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const [isChatOpen, setChatOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,9 +45,13 @@ const MesDemandes = () => {
     }
   }, [dispatch, user, role, navigate]);
 
-  const toggleSideComponent = (room) => {
+  const handleChatLineSelect = (room) => {
     setSelectedRoom(room);
-    setSideComponentOpen(!isSideComponentOpen);
+    setChatOpen(true);
+  };
+
+  const closeChat = () => {
+    setChatOpen(false);
   };
 
   return (
@@ -55,16 +61,24 @@ const MesDemandes = () => {
           {demandes && demandes.map(demande => (
             <DemandesDetails
               demande={demande}
-              key={demande._id}// Assuming room is demande._id
+              key={demande._id}
             />
-            
           ))}
         </div>
       </div>
       {isSideComponentOpen && (
-        <SideComponent isOpen={isSideComponentOpen} closeSideComponent={() => setSideComponentOpen(false)} room={selectedRoom} />
+        <SideComponent 
+          isOpen={isSideComponentOpen} 
+          closeSideComponent={() => setSideComponentOpen(false)} 
+          onSelectChatLine={handleChatLineSelect} // Handle chat line selection
+        />
       )}
-      <button className="side-button" onClick={() => toggleSideComponent(selectedRoom)} title="Ouvrez le chat">
+      {isChatOpen && (
+        <Chat room={selectedRoom} onClose={closeChat} 
+          closeSideComponent={() => setSideComponentOpen(false)} 
+          onSelectChatLine={handleChatLineSelect} /> 
+      )}
+      <button className="side-button" onClick={() => setSideComponentOpen(!isSideComponentOpen)} title="Ouvrez le chat">
         <span className="material-symbols-outlined">arrow_back_ios_new</span>
       </button>
     </div>
