@@ -1,10 +1,10 @@
-require('dotenv').config();
+require('dotenv').config(); // Assurez-vous que c'est la première ligne
 
+const connectDB = require('./config/db');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const connectDB = require('./config/db'); // Import the database connection
 const userRoutes = require('./routes/user');
 const prestationRoutes = require('./routes/prestation');
 const demandeRoutes = require('./routes/demande');
