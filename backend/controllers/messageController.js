@@ -5,53 +5,25 @@ const mongoose = require('mongoose')
 
 
 const sendMessage = async (req, res) => {
+	const { id } = req.params; // Chat room ID
+	const { message } = req.body;
+  
 	try {
-		const { message } = req.body;
-		const { id: receiverId } = req.params;
-		const senderId = req.user._id;
-		const senderName = req.user.name;
-		console.log(senderName)
-
-		let conversation = await Conversation.findOne({
-			participants: { $all: [senderId, receiverId] },
-		});
-
-		if (!conversation) {
-			conversation = await Conversation.create({
-				participants: [senderId, receiverId],
-			});
-		}
-
-		const newMessage = new Message({
-			senderId,
-			receiverId,
-			message,
-			senderName,
-		});
-
-		if (newMessage) {
-			conversation.messages.push(newMessage._id);
-		}
-
-		// await conversation.save();
-		// await newMessage.save();
-
-		// this will run in parallel
-		await Promise.all([conversation.save(), newMessage.save()]);
-
-		// SOCKET IO FUNCTIONALITY WILL GO HERE
-		const receiverSocketId = getReceiverSocketId(receiverId);
-		if (receiverSocketId) {
-			// io.to(<socket_id>).emit() used to send events to specific client
-			io.to(receiverSocketId).emit("newMessage", newMessage);
-		}
-
-		res.status(201).json(newMessage);
+	  const newMessage = new Message({
+		room: id,
+		message,
+		sender: req.user._id // Assuming you have sender information in your request
+	  });
+	  await newMessage.save();
+  
+	  // Emit the message to the chat room
+	  io.to(id).emit('receive_message', { message });
+	  res.status(200).json({ message: 'Message envoyé' });
 	} catch (error) {
-		console.log("Error in sendMessage controller: ", error.message);
-		res.status(500).json({ error: "Internal server error" });
+	  res.status(500).json({ error: 'Erreur serveur' });
 	}
-};
+  };
+  
 
 const getMessages = async (req, res) => {
     try {

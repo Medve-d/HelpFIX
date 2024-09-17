@@ -39,7 +39,7 @@ const DemandePage = () => {
       return;
     }
   
-    const demandeData = { clientName, id, clientMessage, prestatDate, clientAdresse };
+    const demandeData = { id, clientName, clientMessage, prestatDate, clientAdresse };
   
     const response = await fetch('/api/demande', {
       method: 'POST',
@@ -54,7 +54,7 @@ const DemandePage = () => {
   
     if (!response.ok) {
       setError(json.error);
-      setEmptyFields(json.emptyFields)
+      setEmptyFields(json.emptyFields || []); 
     }
     if (response.ok) {
       setEmptyFields([])
@@ -73,7 +73,7 @@ const DemandePage = () => {
     <div className='workout-details'>
       
     <form  onSubmit={handleSubmit}>
-      <h3>Créer une Nouvelle Demande  {clientName}</h3>
+      <h3>Créer une Nouvelle Demande </h3>
 
       <label>Message :</label>
       <input 

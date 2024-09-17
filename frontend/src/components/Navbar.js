@@ -60,9 +60,10 @@ function Navbar() {
             <li><Link to="/profile"><span className="material-symbols-outlined">person</span></Link></li>
             
           )}
-          {user && (
-              <button onClick={handleClick}>Log out</button>
+          {user && ( 
+            <button className='logout' onClick={handleClick}>Log out</button>
           )}
+          
           {!user && (
               <li><Link to="/login">Login</Link></li>
           )}

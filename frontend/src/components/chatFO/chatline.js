@@ -4,30 +4,31 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { fr } from 'date-fns/locale';
 
 const Chatline = ({ demande, onClick }) => {
-  const { user, role } = useAuthContext();
-  if (!user) {
-    return null;
-  }
+    const { user, role } = useAuthContext();
 
-  return (
-    <div 
-      className="chat-lines" 
-      style={{ cursor: 'pointer', padding: '10px', borderBottom: '2px solid #ccc' }}
-      onClick={() => onClick(demande._id)} // Trigger the onClick function with demande._id
-    >
-      {role === 'prestataire' && (
-        <div>
-          <p><strong>{demande.clientName}</strong>&nbsp;{formatDistanceToNow(new Date(demande.createdAt), { addSuffix: true, locale: fr })}</p>
-        </div>
-      )}
+    if (!user) {
+        return null;
+    }
 
-      {role === 'client' && (
-        <div>
-          <p><strong>{demande.userName}</strong>&nbsp;{formatDistanceToNow(new Date(demande.createdAt), { locale: fr })}</p>
+    return (
+        <div
+            className='chat-lines'
+            style={{ cursor: 'pointer', padding: '10px', borderBottom: '2px solid #ccc' }}
+            onClick={() => onClick(demande._id)}
+        >
+            {role === 'prestataire' && (
+                <div>
+                    <p><strong>{demande.clientName}</strong>&nbsp;{formatDistanceToNow(new Date(demande.createdAt), { addSuffix: true, locale: fr })}</p>
+                </div>
+            )}
+            
+            {role === 'client' && (
+                <div>
+                    <p><strong>{demande.userName}</strong>&nbsp;{formatDistanceToNow(new Date(demande.createdAt), { locale: fr })}</p>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default Chatline;

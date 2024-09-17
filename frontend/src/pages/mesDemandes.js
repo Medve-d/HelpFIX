@@ -62,6 +62,7 @@ const MesDemandes = () => {
             <DemandesDetails
               demande={demande}
               key={demande._id}
+              onOpenChat={handleChatLineSelect}  
             />
           ))}
         </div>

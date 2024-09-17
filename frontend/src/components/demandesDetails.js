@@ -14,7 +14,7 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => (
   </div>
 );
 
-const DemandesDetails = ({ demande }) => {
+const DemandesDetails = ({ demande, onOpenChat }) => {
   
   const { dispatch } = useDemandeContext();
   const { user, role } = useAuthContext();
@@ -46,16 +46,41 @@ const DemandesDetails = ({ demande }) => {
       dispatch({ type: 'DELETE_DEMANDE', payload: json });
     }
   };
-
-  const handleDeny = () => {
-    // Handle deny logic
+  
+  const handleAccept = async () => {
+    if (!user) {
+      return;
+    }
+  
+    try {
+      const response = await fetch('/api/demande/acceptdemande', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        },
+        body: JSON.stringify({ demandId: demande._id, user_id: user._id })
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        console.log('Demande accepted and message sent:', result);
+        // Optionally, redirect to the chat page or update the UI
+      } else {
+        console.error('Failed to accept demande:', result.message);
+      }
+    } catch (error) {
+      console.error('Error accepting demande:', error);
+    }
   };
+  
+  const handleOpenChat = () => {
+    if (!user) return;
 
-  const handleAccept = () => {
-    // Handle accept and open chat logic
+    // Trigger onOpenChat with the current demande ID
+    onOpenChat(demande._id);
   };
-
-  const isPending = demande.status === 'pending'; // Example status check
 
   return (
     <div className="workout-details">
@@ -64,7 +89,7 @@ const DemandesDetails = ({ demande }) => {
         <p><strong>Client Name   : </strong> {demande.clientName}</p>
       )}
       {role === 'client' && (
-        <p><strong>Service Provider Name   : </strong> {demande.userName}</p>
+        <p><strong> Prestataire Nom   : </strong> {demande.userName}</p>
       )}
       <p><strong>Client Message   : </strong> {demande.clientMessage}</p>
       <p><strong>Address   : </strong> {demande.clientAdresse}</p>
@@ -72,13 +97,18 @@ const DemandesDetails = ({ demande }) => {
       <p>{formatDistanceToNow(new Date(demande.createdAt), { addSuffix: true, locale: fr })}</p>
       {role === 'client' && (
         <div className="mesbutton-container">
-          <button className="mesbutton deny" onClick={handleCancel} title='Refuser la demande'>Annuler la demande</button>
+          <button className="mesbutton deny" onClick={handleCancel} title='Annuler la demande'>Annuler la demande</button>
         </div>
       )}
-      {role === 'prestataire' && !isPending && (
+      {role === 'prestataire' && demande.status === 'pending' && (
         <div className="mesbutton-container">
           <button className="mesbutton accept" onClick={handleAccept} title='Accepter et discuter'>Accepter et discuter</button>
-          <button className="mesbutton deny" onClick={handleDeny} title='Refuser la demande'>Refuser la demande</button>
+          <button className="mesbutton deny" onClick={handleCancel} title='Refuser la demande'>Refuser la demande</button>
+        </div>
+      )}
+      { demande.status === 'accepted' && (
+        <div className="mesbutton-container">
+          <button className="mesbutton accept" onClick={handleOpenChat} title='Ouvrir le chat'>Open chat</button>
         </div>
       )}
       {showConfirm && (

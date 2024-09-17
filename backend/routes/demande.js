@@ -1,5 +1,5 @@
 const express = require('express');
-const  { getClientDemandes ,getPrestataireDemande ,getAllDemandes ,getDemande, createDemande, deleteDemande, updateDemande } = require('../controllers/demandeController');
+const  { getClientDemandes ,getPrestataireDemande ,getAllDemandes ,getDemande, createDemande , acceptDemande, deleteDemande, updateDemande } = require('../controllers/demandeController');
 const requireAuth = require('../middleware/requireAuth')
 
 
@@ -15,6 +15,7 @@ router.use(requireAuth)
 router.get('/', getAllDemandes);
 router.get('/clientdemande', getClientDemandes);
 router.get('/prestatairedemande', getPrestataireDemande);
+router.post('/acceptdemande', acceptDemande);
 router.get('/:id',getDemande);
 
 

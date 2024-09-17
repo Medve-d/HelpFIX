@@ -8,8 +8,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/userProfile'
 import DemandePage from './pages/demandePage'
-import MesDemandes  from "./pages/mesDemandes";
-import ChatPage from './pages/ChatPage';
+import MesDemandes  from "./pages/mesDemandes"; 
 import TextChat from './pages/testchat';
 
 function App() {
@@ -47,11 +46,7 @@ function App() {
             <Route
               path="/mesdemandes" 
               element={<MesDemandes />} 
-            />
-            <Route
-              path="/chatpage" 
-              element={<ChatPage />} 
-            />
+            /> 
             
             <Route
               path="/testchat" 

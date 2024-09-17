@@ -5,7 +5,6 @@ import Chatline from "./chatline";
 
 const SideComponent = ({ isOpen, closeSideComponent, onSelectChatLine }) => {
   const sideComponentRef = useRef(null);
-
   const { demandes, dispatch } = useDemandeContext();
   const { user, role } = useAuthContext();
 
@@ -59,16 +58,16 @@ const SideComponent = ({ isOpen, closeSideComponent, onSelectChatLine }) => {
         <strong><span className="material-symbols-outlined">arrow_forward_ios</span></strong>
       </button>
       <div className='sideContent'> 
-      <h4 className="close-button">Messagerie</h4>
-      <div className="chatLineContaner">
-        {demandes && demandes.map(demande => (
-          <Chatline
-            demande={demande}
-            key={demande._id}
-            onClick={onSelectChatLine} // Pass the handler function to Chatline
-          />
-        ))}
-      </div>
+        <h4 className="close-button">Messagerie</h4>
+        <div className="chatLineContaner">
+          {demandes && demandes.map(demande => (
+            <Chatline
+              demande={demande}
+              key={demande._id}
+              onClick={() => onSelectChatLine(demande._id)} // Trigger the onClick function with demande._id
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

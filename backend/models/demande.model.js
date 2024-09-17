@@ -60,8 +60,12 @@ const DemandeSchema = new Schema({
     clientAdresse: {
         type: String,
         require: true
+    },
+    status: {
+        type: String,
+        enum: ['accepted', 'pending'],
+        default: 'pending'
     }
-    
 }, {timestamps: true });
 
 module.exports = mongoose.model('Demande', DemandeSchema);

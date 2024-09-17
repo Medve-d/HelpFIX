@@ -232,6 +232,13 @@ nav button {
   cursor: pointer;
   font-size: 1em;
 }
+nav button:hover {
+  background: #c8233313; /* Darker red on hover */
+  color: #c82333a3;
+  border: 2px solid #c82333a3;
+  transition:  0.3s ease;
+  
+}
 
 /* Additional CSS for signup link under the form */
 .signup-text {
