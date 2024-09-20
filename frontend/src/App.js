@@ -10,6 +10,8 @@ import Profile from './pages/userProfile'
 import DemandePage from './pages/demandePage'
 import MesDemandes  from "./pages/mesDemandes"; 
 import TextChat from './pages/testchat';
+import Blog from './pages/about';
+import Categories from './pages/categories';
 
 function App() {
 
@@ -48,6 +50,16 @@ function App() {
               element={<MesDemandes />} 
             /> 
             
+            <Route
+              path="/aboutus" 
+              element={<Blog />} 
+            />
+
+            <Route
+              path="/categories" 
+              element={<Categories />} 
+            />
+
             <Route
               path="/testchat" 
               element={<TextChat />} 

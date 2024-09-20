@@ -8,7 +8,7 @@
 }
 
 body {
-  background: #f1f1f1;
+  background: #E5E5E5;
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
@@ -18,7 +18,7 @@ header {
 }
 
 header .container {
-  max-width: 1400px;
+  max-width: 2000px;
   margin: 0 auto;
   padding: 10px 20px;
   display: flex;
@@ -32,8 +32,8 @@ header a {
 }
 
 .pages {
-  max-width: 1400px;
-  padding: 20px;
+  max-width: 1500px;
+  padding: 127px 20px;
   margin: 0 auto;
 }
 
@@ -50,7 +50,10 @@ header a {
   margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.099);
+}
+.search-bar {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.099);
 }
 
 .workout-details h4 {
@@ -122,8 +125,15 @@ input.error {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #D9D9D9;
+  background-color: rgba(217, 217, 217, 0.8); 
+  z-index: 1001;
+  position: fixed; 
+  top: 0;
+  width: 100%; 
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
 }
+
 
 .logoContainer {
   display: flex;
@@ -138,7 +148,7 @@ input.error {
   list-style: none;
   display: flex;
   gap: 15px;
-  padding: 0;
+  padding: 0 50px;
   margin: 0;
 }
 
@@ -517,6 +527,7 @@ select:focus {
   top: 50%;
   transform: translateY(-50%);
   color: #796060;
+  background-color: #E5E5E5;
   border: none;
   cursor: pointer;
   z-index: 1000;
@@ -658,4 +669,49 @@ select:focus {
 .material-symbols-outlined.send {
   margin-top: 50%;
   margin-bottom: 50%;
+}
+.texteBlog {
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 5% 15% 10% 10%;
+  font-weight: bolder;
+  color: #796060;
+}
+.prestatireBlog {
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 5% 15% 10% 10%;
+  font-weight: bolder;
+  color: #c2adad;
+}
+
+
+.creditBlog {
+  background-color:#796060;
+  padding: 100px;
+  font-weight: bolder;
+  color:#E5E5E5;
+  text-align: center;
+}
+h1.about {
+  padding-top: 150px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bolder;
+  color: #796060;
+}
+p.blog {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bolder;
+  color: #d9d9d9;
+}
+p.prestatblog
+{
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bolder;
+  color: #796060;
 }

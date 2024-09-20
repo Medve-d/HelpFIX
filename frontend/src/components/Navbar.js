@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 function Navbar() {
 
   const { logout } = useLogout()
-  const { user, role } = useAuthContext()
+  const { user } = useAuthContext()
   const navigate = useNavigate()
 
   const handleClick = () => {
@@ -30,23 +30,15 @@ function Navbar() {
           className="logo"
         /></Link>
       </div>
-      <span className="HelloPhrase">
-        {role === 'admin' && "Status  : Admin "}
-        {role === 'client' && "Status  : client "}
-        {role === 'prestataire' && "Status  : prestataire "}
-        <br />
-        {user ? "Hello "+ user.name : ''}
-
-        </span>
       <ul className="navLinks">
         <li>
           <Link to="/">Accueil</Link>
         </li>
         <li>
-          <Link to="/nosServices">Nos services</Link>
+          <Link to="/categories">Nos services</Link>
         </li>
         <li>
-          <Link to="/about">À propos</Link>
+          <Link to="/aboutus">À propos</Link>
         </li>
         <li>
           <Link to="/contact">Contact</Link>
