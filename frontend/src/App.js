@@ -12,7 +12,7 @@ import MesDemandes  from "./pages/mesDemandes";
 import TextChat from './pages/testchat';
 import Blog from './pages/about';
 import CategoriesPage from './pages/CategoriesPage';
-import CatP from './pages/categories/catP';
+import CatP from './pages/categories/catP'
 import CatT from './pages/categories/catP'
 import CatJ from './pages/categories/catJ'
 import CatR from './pages/categories/catR'
@@ -22,9 +22,7 @@ import ContactUs from './pages/contactUs'
 
 function App() {
 
-
   const { user } = useAuthContext() 
-
   
   return (
     <div className="App">
@@ -56,7 +54,6 @@ function App() {
               path="/mesdemandes" 
               element={<MesDemandes />} 
             /> 
-            
             <Route
               path="/aboutus" 
               element={<Blog />} 
