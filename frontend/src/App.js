@@ -15,9 +15,7 @@ import Categories from './pages/categories';
 
 function App() {
 
-
   const { user } = useAuthContext() 
-
   
   return (
     <div className="App">
@@ -49,17 +47,14 @@ function App() {
               path="/mesdemandes" 
               element={<MesDemandes />} 
             /> 
-            
             <Route
               path="/aboutus" 
               element={<Blog />} 
             />
-
             <Route
               path="/categories" 
               element={<Categories />} 
             />
-
             <Route
               path="/testchat" 
               element={<TextChat />} 
