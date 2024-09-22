@@ -23,7 +23,7 @@ const MobileNavigation = ({ isMenuOpen, handleBurger }) => {
       </button>
       {/* Conditional rendering for mobile menu */}
       {isMenuOpen && (
-        <div className="mobile-menu">
+        <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
           <ul className='mobile-ul'>
           <li>
             <Link to="/">Accueil</Link>

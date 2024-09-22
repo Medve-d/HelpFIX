@@ -11,7 +11,14 @@ import DemandePage from './pages/demandePage'
 import MesDemandes  from "./pages/mesDemandes"; 
 import TextChat from './pages/testchat';
 import Blog from './pages/about';
-import Categories from './pages/categories';
+import CategoriesPage from './pages/CategoriesPage';
+import CatP from './pages/categories/catP';
+import CatT from './pages/categories/catP'
+import CatJ from './pages/categories/catJ'
+import CatR from './pages/categories/catR'
+import CatN from './pages/categories/catN'
+import CatD from './pages/categories/catD'
+import ContactUs from './pages/contactUs'
 
 function App() {
 
@@ -53,13 +60,41 @@ function App() {
             <Route
               path="/aboutus" 
               element={<Blog />} 
+            /> 
+            
+            <Route
+              path="/contactus" 
+              element={<ContactUs />} 
             />
-
+            
             <Route
               path="/categories" 
-              element={<Categories />} 
+              element={<CategoriesPage />} 
             />
-
+            <Route
+              path="/categories/plumbers" 
+              element={<CatP />} 
+            />
+            <Route
+              path="/categories/menage" 
+              element={<CatN />} 
+            />
+            <Route
+              path="/categories/reparation" 
+              element={<CatR />} 
+            />
+            <Route
+              path="/categories/jardinage" 
+              element={<CatJ />} 
+            />
+            <Route
+              path="/categories/demenagment" 
+              element={<CatD />} 
+            />
+            <Route
+              path="/categories/tuto" 
+              element={<CatT />} 
+            />
             <Route
               path="/testchat" 
               element={<TextChat />} 

@@ -3,6 +3,7 @@ import { usePrestationsContext } from "../hooks/usePrestationsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 import Homevid from "../components/videoHome"
 import SearchBar from "../components/searchBar"
+import Categories from "../components/Categories"
 
 
 // components
@@ -47,6 +48,8 @@ const Home = () => {
       </div>
       {role === 'prestataire' && (<PrestationForm />)}
       </div>
+    <h2 className="h2 about" >Nos Catégories</h2>  
+    <Categories/>
     </div>
   )
 }
