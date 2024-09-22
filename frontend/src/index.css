@@ -118,7 +118,7 @@ input.error {
   border: 1px solid var(--error);
 }
 
-/* Navbar.module.css */
+/* Navbar  */
 
 .navbar {
   display: flex;
@@ -160,55 +160,90 @@ input.error {
   text-decoration: none;
   color: #796060;
   font-weight: bold;
+  transition: 0.3s ease;
 }
 
-.navLinks a:hover {
-  color: #796060;
+
+.navLinks a:hover { 
+  color: #fff;
 }
 
-.burger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 25px;
-  height: 21px;
-  background: transparent;
-  border: none;
+
+nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
-  padding: 0;
-  border: 1px solid red;
+  font-size: 1em;
+}
+nav button:hover {
+  background: #c8233313; /* Darker red on hover */
+  color: #c82333a3;
+  border: 2px solid #c82333a3;
+  transition:  0.3s ease;
+  
+}
+.mobile-nav {
+  display: none;
 }
 
-.burgerLine {
-  align-items: end;
-  width: 100%;
-  height: 3px;
-  background-color: #796060;
-  border-radius: 2px;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 835px) {
   .home {
     grid-template-columns: 1fr;
     gap: 50px;
   }
 
-  .burger {
-    display: flex;
+  .nav-container {
+    display: none;
   }
-
-  .navLinks {
-    position: absolute;
-    top: 60px;
+  .mobile-nav {
+    display: flex;
+    padding-right: 40px;
+  }
+  .navLinks li {
+    list-style: none;
+    text-decoration: none;
+  }
+  .mobile-ul {
     right: 0;
     width: 100%;
-    height: calc(100vh - 60px);
     flex-direction: column;
-    background-color: #fff;
     align-items: center;
     justify-content: center;
-    transform: translateX(100%);
+    transition: 1.5s ease;
+    list-style-type: none;
   }
+  .mobile-ul a {
+    color: #796060;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 6px;  
+    transition: 0.3s ease;
+    box-shadow: #0a0a0a;
+  }
+  .mobile-ul li {
+    border-bottom: 1px solid #79606027;
+    padding: 10px 0; 
+  }
+  .mobile-ul li:last-child {
+    border-bottom: none; /* Removes the line after the last item */
+  }
+
+  .mobile-ul a:hover { 
+    color: #fff;
+  }
+  .mobile-nav {
+    transition: 1.5s ease;
+  }
+  .burger-button {
+    height: 60px;
+    width: 60px;
+    margin: auto;
+  }
+  
 
   .navLinksOpen {
     transform: translateX(0);
@@ -230,24 +265,6 @@ form.signup, form.login {
   padding: 20px;
   background: #fff;
   border-radius: 4px;
-}
-
-nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-family: "Poppins", sans-serif;
-  cursor: pointer;
-  font-size: 1em;
-}
-nav button:hover {
-  background: #c8233313; /* Darker red on hover */
-  color: #c82333a3;
-  border: 2px solid #c82333a3;
-  transition:  0.3s ease;
-  
 }
 
 /* Additional CSS for signup link under the form */
