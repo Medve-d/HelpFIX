@@ -14,7 +14,7 @@ const requireAuth = async (req, res, next) => {
       const decodedToken = jwt.verify(token, process.env.SECRET);
 
       req.user = await User.findOne({ _id: decodedToken._id }).select('_id role');
-      req.role = decodedToken.role; // role to the request object
+      req.role = decodedToken.role; 
       
       next();
   } catch (error) {

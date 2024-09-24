@@ -4,6 +4,7 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import Homevid from "../components/videoHome"
 import SearchBar from "../components/searchBar"
 import Categories from "../components/Categories"
+import PrestationFilter from "../components/PrestationFilter"
 
 
 // components
@@ -11,45 +12,52 @@ import PrestationDetails from "../components/PrestationDetails"
 import PrestationForm from "../components/PrestationForm"
 
 const Home = () => {
-  const { prestations, dispatch } = usePrestationsContext()
-  const {user, role} = useAuthContext()
+  const { prestations, dispatch } = usePrestationsContext();
+  const { user, role } = useAuthContext();
 
   useEffect(() => {
     const fetchPrestations = async () => {
-      const endpoint = role === 'prestataire' ? '/api/prestation/myprestations' : '/api/prestation'
+      let endpoint = '/api/prestation';
 
-      const response = await fetch(endpoint, {
-        headers: {'Authorization': `Bearer ${user.token}`}, 
-      }) 
+      if (user && role === 'prestataire') {
+        endpoint = '/api/prestation/myprestations';
+      }
+
+      const options = user
+        ? { headers: { 'Authorization': `Bearer ${user.token}` } } 
+        : {}; 
+
+      const response = await fetch(endpoint, options);
 
       if (response.ok) {
-        const json = await response.json()
-        dispatch({type: 'SET_PRESTATIONS', payload: json})
+        const json = await response.json();
+        dispatch({ type: 'SET_PRESTATIONS', payload: json });
       }
-    }
+    };
 
-    if (user) {
-      fetchPrestations()
-    }
-  }, [dispatch, user, role])
-
+    fetchPrestations();
+  }, [dispatch, user, role]);
   return (
     
     <div>
     <Homevid />
-    { (role === 'client' || role === 'admin') && <SearchBar />}
+    {role === 'prestataire' ? (<h2 className="hometitles" >Vos Prestations</h2>  ) : (<h2 className="hometitles" >Nos Prestations</h2>  )}
+    <SearchBar />
      <div className="home">
+     {role !== 'prestataire' && (<PrestationFilter />) }
       <div className="workouts">
-      
-      {role === 'prestataire' && <h3>Mes prestations</h3> }
         {prestations && prestations.map(prestation => (
             <PrestationDetails prestation={prestation} key={prestation._id} />
         ))}
       </div>
-      {role === 'prestataire' && (<PrestationForm />)}
+      {role === 'prestataire' && (<PrestationForm />) }
       </div>
-    <h2 className="h2 about" >Nos Catégories</h2>  
-    <Categories/>
+      {role !== 'prestataire' && (
+        <>
+          <h2 className="hometitles">Nos Catégories</h2>
+          <Categories />
+        </>
+      )}
     </div>
   )
 }

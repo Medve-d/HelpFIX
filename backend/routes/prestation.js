@@ -7,12 +7,14 @@ const router = express.Router();
 
 
 // require auth for all workout routes
-router.use(requireAuth)
+
 
 
 
 // get 
 router.get('/', getAllPrestations);
+
+router.use(requireAuth)
 router.get('/myprestations', getMyPrestations);
 router.get('/:id',getPrestation);
 

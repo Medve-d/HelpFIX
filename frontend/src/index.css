@@ -36,15 +36,24 @@ header a {
 
 .pages {
   max-width: 1500px;
-  padding: 127px 20px 0 20px;
+  padding: 123px  20px 0 20px;
   margin: 0 auto;
+  min-height: 790px;
 }
 
 /* homepage */
 .home {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr 2fr ;
   gap: 100px;
+}
+.hometitles {
+  margin-top: 120px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: #796060;
 }
 
 .workout-details {
@@ -56,6 +65,7 @@ header a {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.099);
 }
 .search-bar {
+  margin-top: 30px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.099);
 }
 
@@ -80,6 +90,29 @@ header a {
   padding: 6px;
   border-radius: 50%;
   color: #333;
+}
+
+.sideFilter {
+  height: 440px;
+  background: #fff;
+  width:70%;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0)
+}
+.side-filter-container {
+  margin: 15px;
+}
+
+.sideFilter label {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+select, option {
+  color: #7f7171bd;
 }
 
 /* new workout form */
@@ -412,23 +445,10 @@ select {
 select:focus {
   border-color: var(--primary);
 }
-.footer {
-  background-color: #c2c1c1c2; /* Couleur de fond du pied de page */
-  padding: 40px;
-  text-align: center;
-  width: 100%; /* S'assurer que le footer prend toute la largeur */
-  position: relative; /* Position relative pour l'alignement */
-  bottom: 0; /* Alignement en bas */
-}
-
 .container {
   max-width: 100%;
 }
 
-.footer p {
-  margin: 0;
-  color: #333; /* Couleur du texte */
-}
 
 /* side chat */
 .side-component {
@@ -1006,8 +1026,90 @@ p.prestatblog
   height: 20px;
   margin: 0 5px;
 }
+/*footer*/
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  margin-top: 170px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.footer-brand {
+  color: #ffffff;
+  margin-right: 20%;
+  font-size: 2rem; 
+}
+.links-footer-container {
+  margin: 10px 10%;
+  DISPLAY: GRID;
+  JUSTIFY-ITEMS: CENTER;
+}
+.links-footer-container a:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background-color: black; /* Line color */
+}
+.footer-cr {
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.footer-links {
+  display: flex;
+  justify-content: center; 
+  margin: 15px 20px 40px 20px;
+}
+
+.footer-links a {
+  display: grid;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  margin: 10px 0px;
+}
+
+.footer-links a:hover {
+  color: #7f7171;
+}
 
 
+
+
+
+
+
+/*responsive*/
+@media(max-width: 767px){
+
+  .footer-links {
+    display: grid;
+  }
+  .footer-brand {
+    color: #ffffff;
+    margin: 25px 50px 55px 50px;
+    font-size: 2rem; 
+  }
+}
 
 
 

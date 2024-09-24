@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
 
 
-const Signup = () => {
+const SignupPrstatire = () => {
   const [email, setEmail] = useState('')
   const [number, setNumber] = useState('')
   const [ville, setVille] = useState('')
@@ -12,7 +12,7 @@ const Signup = () => {
   const [birthday, setBirthDate] = useState('')
   const [name, setName] = useState('')
   const [familyName, setfamilyName] = useState('')
-  const [role] = useState('client')
+  const [role] = useState('prestataire')
   
   const {signup, error, isLoading} = useSignup()
 
@@ -26,16 +26,12 @@ const Signup = () => {
   const handleLoginNavigation = () => {
     navigate('/Login')
   }
-  const handleSingUpProNavigation = () => {
-    navigate('/singuppro')
-  }
-  
 
   return (
     <div className="phone-input-container">
         
     <form className="signup" onSubmit={handleSubmit}>
-      <h3>Sign Up client</h3>
+      <h3>Sign Up Prestataire</h3>
 
       <label>Name</label>
       <input 
@@ -99,12 +95,9 @@ const Signup = () => {
       
     <p className="signup-text">
     You have an account? <span onClick={handleLoginNavigation} className="signup-link">Log In</span>
-    </p>      
-    <p className="signup-text">
-    Travailler pour nous! <span onClick={handleSingUpProNavigation} className="signup-link">SING UP PRO</span>
     </p>
     </div>
   )
 }
 
-export default Signup
+export default SignupPrstatire
