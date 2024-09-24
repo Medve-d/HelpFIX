@@ -73,7 +73,7 @@ const DemandePage = () => {
     <div className='workout-details'>
       
     <form  onSubmit={handleSubmit}>
-      <h3>Créer une Nouvelle Demande </h3>
+      <h3>Créer Une Demande </h3>
 
       <label>Message :</label>
       <input 
@@ -104,6 +104,7 @@ const DemandePage = () => {
       {error && <div className="error">{error}</div>}
     </form>
     </div>
+    
   );
 };
 

@@ -16,9 +16,9 @@ const getMyPrestations = async (req, res) => {
     }
   };
 
-const getAllPrestations = async (req, res) => {
+  const getAllPrestations = async (req, res) => {
     try {
-      const { search } = req.query;
+      const { search, category } = req.query;
       let query = {};
   
       if (search) {
@@ -31,6 +31,10 @@ const getAllPrestations = async (req, res) => {
             { category: { $regex: search, $options: "i" } },
           ],
         };
+      }
+  
+      if (category) {
+        query = { ...query, category };
       }
   
       const prestations = await Prestation.find(query);
