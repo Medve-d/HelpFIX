@@ -19,7 +19,7 @@ const Home = () => {
     const fetchPrestations = async () => {
       let endpoint = '/api/prestation';
 
-      if (user && role === 'prestataire') {
+      if (role === 'prestataire') {
         endpoint = '/api/prestation/myprestations';
       }
 
