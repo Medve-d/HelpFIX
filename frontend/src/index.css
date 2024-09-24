@@ -844,6 +844,7 @@ p.prestatblog
 
 .background {
   display: flex;
+  padding-top: 150px;
 }
 
 .container {
@@ -1027,72 +1028,51 @@ p.prestatblog
   height: 20px;
   margin: 0 5px;
 }
-/*footer*/
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
 
 .footer {
-  background-color: #333;
-  color: white;
-  padding: 20px 0;
+  background-color: #c2c1c1c2; 
+  padding: 40px;
   text-align: center;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  margin-top: 170px;
+  position: relative; 
+  bottom: 0;
+  margin-top: 150px;
 }
 
-.footer-container {
+.container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
 }
-.footer-brand {
-  color: #ffffff;
-  margin-right: 20%;
-  font-size: 2rem; 
+
+.footer p {
+  margin: 0;
+  color: #333; /* Couleur du texte */
 }
-.links-footer-container {
-  margin: 10px 10%;
-  DISPLAY: GRID;
-  JUSTIFY-ITEMS: CENTER;
-}
-.links-footer-container a:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 1px;
-  background-color: black; /* Line color */
-}
-.footer-cr {
-  font-size: 14px;
-  color: #ffffff;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-.footer-links {
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
   display: flex;
-  justify-content: center; 
-  margin: 15px 20px 40px 20px;
+  justify-content: center;
+  gap: 15px;
 }
 
-.footer-links a {
-  display: grid;
-  color: white;
+.links li {
+  display: inline;
+}
+
+.links a {
+  color: #796060;
   text-decoration: none;
-  font-size: 1rem;
-  transition: 0.3s ease;
-  margin: 10px 0px;
 }
 
-.footer-links a:hover {
-  color: #7f7171;
+.links a:hover {
+  text-decoration: underline;
 }
 
+
+
+/*no data comonent*/
 .nodata-container{
   display: grid;
   justify-content: center;
@@ -1185,8 +1165,6 @@ body {
     width: 60px;
     margin: auto;
   }
-  
-
   .navLinksOpen {
     transform: translateX(0);
   }
