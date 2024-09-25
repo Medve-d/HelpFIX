@@ -22,7 +22,7 @@ import CatN from './pages/categories/catN';
 import CatD from './pages/categories/catD';
 import ContactUs from './pages/contactUs';
 import Memberships from './pages/memberships';
-import MembershipsPaiment from './pages/membershipsPaiment';
+import MembershipsPaiment from './pages/memberships';
 import MembershipWrapper from './HOC/membershipWrapper';
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
             />
             <Route 
               path="/" 
-              element={
+                element={
                 <MembershipWrapper>
                   <Home />
                 </MembershipWrapper>

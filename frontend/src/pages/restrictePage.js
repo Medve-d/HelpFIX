@@ -17,7 +17,7 @@ const viewMemberships = () => {
             width={600}  
             className="restricted-image"
             />
-          <p className="nodata-text">Vous n'avez pas de souscription active.<br/> Pour accéder à cette page, veuillez souscrire à l'une de nos offres d'abonnement.</p>
+          <p className="nodata-text">Vous n'avez pas de souscription active.<br/>Pour utiliser notre plateforme, vous devez choisir l'une de nos options d'abonnement.</p>
           <button onClick={viewMemberships} className="restricted-button">Choisir une offre</button>
       </div> 
     </div> 
