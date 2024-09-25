@@ -19,6 +19,7 @@ import CatR from './pages/categories/catR'
 import CatN from './pages/categories/catN'
 import CatD from './pages/categories/catD'
 import ContactUs from './pages/contactUs'
+import SubscriptionOptions from './components/abonnement'
 
 function App() {
 
@@ -95,6 +96,10 @@ function App() {
             <Route
               path="/testchat" 
               element={<TextChat />} 
+            />
+            <Route
+            path="/abonnement" 
+            element={<SubscriptionOptions />} 
             />
             
 

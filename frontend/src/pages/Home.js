@@ -34,8 +34,8 @@ const Home = () => {
   }, [dispatch, user, role])
 
   return (
-    
     <div>
+      <title>Bienvenue sur Helpfix !</title>
     <Homevid />
     { (role === 'client' || role === 'admin') && <SearchBar />}
      <div className="home">
