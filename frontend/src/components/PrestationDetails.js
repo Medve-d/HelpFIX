@@ -29,6 +29,9 @@ const PrestationDetails = ({ prestation }) => {
     }
   };
   const handleClickView = () => {
+    if (!user) {
+      return;
+    }
     navigate(`/prestation/${prestation._id}`);
   };
   

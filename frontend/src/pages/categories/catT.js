@@ -1,41 +1,49 @@
+import { useEffect } from "react";
+import { usePrestationsContext } from "../../hooks/usePrestationsContext";
+import CategoriesDtails from "../../components/categoriesDtails";
+import Nodata from "../../components/nodataPhoto";
+
 const CatT = () => {
-    return (
-      <div>
-        <h1 className="h1 about" >Tutorat et Cours Particuliers</h1>
-      <div className="ag-format-container">
-        <div className="ag-courses_box">
-          <div className="ag-courses_item">
-            <a href="" className="ag-courses-item_link">
-              <div className="ag-courses-item_bg"></div>
-              <div className="ag-courses-item_title">examplaire de prestation</div>
-              <div className="ag-courses-item_date-box">
-              description
+  const {prestations, dispatch } = usePrestationsContext();
+  const category = "Tutorat et Cours Particuliers"; // You can dynamically set this if needed.
+
+  useEffect(() => {
+    const fetchPrestations = async () => {
+      const response = await fetch(`/api/prestation?category=${category}`, {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : ''}`,
+        },
+      });
+
+      if (response.ok) {
+        const prestations = await response.json();
+        dispatch({ type: 'SET_PRESTATIONS', payload: prestations });
+      }
+    };
+
+    fetchPrestations();
+  }, [dispatch, category]);
+
+  return (
+          <div>
+            <h1 className="h1 about">Tutorat et Cours Particuliers</h1>
+            <div className="ag-format-container">
+              <div className="ag-courses_box">
+                {prestations && prestations.length > 0 ? (
+                  prestations.map(prestation => (
+                    <CategoriesDtails prestation={prestation} key={prestation._id} />
+                  ))
+                ) : null}
               </div>
-            </a>
-          </div>
-          <div className="ag-courses_item">
-            <a href="" className="ag-courses-item_link">
-              <div className="ag-courses-item_bg"></div>
-              <div className="ag-courses-item_title">examplaire de prestation</div>
-              <div className="ag-courses-item_date-box">
-              description
+            </div>
+            {prestations && prestations.length === 0 && (
+              <div className="nodata-container">
+                <Nodata/>
               </div>
-            </a>
+            )}
           </div>
-          <div className="ag-courses_item">
-            <a href="" className="ag-courses-item_link">
-              <div className="ag-courses-item_bg"></div>
-              <div className="ag-courses-item_title">examplaire de prestation</div>
-              <div className="ag-courses-item_date-box">
-              description
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      </div>
-    );
-  };
-  
-  export default CatT;
-  
+      );
+    };
+
+
+export default CatT;

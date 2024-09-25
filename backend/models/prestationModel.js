@@ -31,6 +31,11 @@ const prestationSchema = new Schema({
     user_id: {
         type: String,
         require: true
+    },
+    category: {
+        type: String,
+        enum: ['Plomberie', 'Services de Nettoyage', "Réparation d'Appareils Électroménagers", 'Jardinage et Entretien Extérieur', 'Tutorat et Cours Particuliers', 'Déménagement et Transport'],
+        required: true
     }
 }, {timestamps: true });
 

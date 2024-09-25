@@ -6,16 +6,19 @@ const mongoose = require('mongoose')
 // get
 
 const getMyPrestations = async (req, res) => {
+    const user_id = req.user._id;
+  
+    if (req.user.role === 'prestataire') {
+      const prestations = await Prestation.find({ user_id }).sort({ createdAt: -1 });
+      res.status(200).json(prestations);
+    } else {
+      res.status(403).json({ error: 'Unauthorized access' });
+    }
+  };
 
-    const user_id = req.user._id
-
-    const prestations = await Prestation.find({user_id}).sort({createdAt: -1});
-    res.status(200).json(prestations);
-}
-
-const getAllPrestations = async (req, res) => {
+  const getAllPrestations = async (req, res) => {
     try {
-      const { search } = req.query;
+      const { search, category } = req.query;
       let query = {};
   
       if (search) {
@@ -25,8 +28,13 @@ const getAllPrestations = async (req, res) => {
             { job: { $regex: search, $options: "i" } },
             { userName: { $regex: search, $options: "i" } },
             { ville: { $regex: search, $options: "i" } },
+            { category: { $regex: search, $options: "i" } },
           ],
         };
+      }
+  
+      if (category) {
+        query = { ...query, category };
       }
   
       const prestations = await Prestation.find(query);
@@ -54,7 +62,7 @@ const getPrestation = async (req, res) => {
 
 
 const createPrestation = async (req, res) => {
-    const { title, price, job, description, userName, ville } = req.body;
+    const { title, price, job, description, userName, ville, category } = req.body;
 
     // Trim to remove leading and trailing spaces
     const sanitizedTitle = title.trim();
@@ -80,6 +88,10 @@ const createPrestation = async (req, res) => {
     if (!sanitizedDescription) {
         emptyFields.push('description');
     }
+    
+    if (!category) {
+        emptyFields.push('category');
+    }
 
     if (emptyFields.length > 0) {
         return res.status(400).json({ error: 'Veuillez remplir tous les champs avec des données valides.', emptyFields });
@@ -95,7 +107,8 @@ const createPrestation = async (req, res) => {
             description: sanitizedDescription,
             userName,
             ville,
-            user_id
+            user_id,
+            category
         });
         res.status(200).json(prestation);
     } catch (error) {
