@@ -1086,7 +1086,136 @@ p.prestatblog
   font-size: 24px;
 } 
 
+/*restrict*/
 
+.restricted-container{
+  display: grid;
+  justify-content: center;
+  width: 100%;
+}
+.restricted {
+  justify-items: center;
+} 
+.restricted-button {
+  background: #796060;
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.2s ease;
+} 
+.restricted-button:hover {
+  background-color: #544545d8;
+}
+.restricted-image, .restricted-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero {
+  display: inline-block;
+  position: relative;
+  background-color: #ffffff75;
+  width: 400px;
+  min-width: 400px;
+  height: 600px;
+  border-radius: 30px;
+  overflow:hidden;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+  margin: 30px;
+}
+
+.hero-profile-img {
+  height: 70%;
+}
+
+.hero-description-bk {
+  background-image: linear-gradient(0deg, #796060, #D3D3D3);
+  border-radius: 30px;
+  position: absolute;
+  top: 60%;
+  left: -15px;
+  height: 60%;
+  width: 120%;
+  transform: skew(20deg, -9deg);
+}
+
+.second .hero-description-bk {
+  background-image: linear-gradient(-20deg , #0f0f0f, #796060)
+}
+.third .hero-description-bk {
+  background-image: linear-gradient(-20deg , #2b220a, #fcca00)
+}
+
+.hero-logo {
+  height: 80px;
+  width: 80px;
+  border-radius: 6px;
+  background-color: rgba(217, 217, 217, 0.8);;
+  position: absolute;
+  bottom: 27%;
+  left: 30px;
+  overflow:hidden;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.7);
+}
+
+.hero-logo img {
+  height: 100%;
+}
+
+.hero-description {
+  position: absolute;
+  color: #fff;
+  font-weight: 900;
+  left: 150px;
+  bottom: 27%;
+}
+
+.hero-btn {
+  position: absolute;
+  color: #fff;
+  right: 30px;
+  bottom: 10%;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+}
+
+.hero-btn a {
+  color: #fff;
+}
+
+.hero-date {
+  position: absolute;
+  color: #fff;
+  left: 30px;
+  bottom: 10%;
+}
+
+.member-title {
+  margin: 15px;
+}
+
+.titles-texts {
+  margin-top: 70px;
+}
+
+
+
+.memberships-cards-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-top: 50px;
+}
 
 
 /*responsive*/

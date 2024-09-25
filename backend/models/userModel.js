@@ -41,10 +41,15 @@ const userSchema = new Schema({
         type: String,
         enum: ['admin', 'client', 'prestataire'],
         default: 'client'
+    },
+    membershipStatus : {
+        type: String,
+        enum: ['notPrestatire', 'none', 'freeTrial', 'monthly', 'annual'],
+        required: true
     }
 }, { timestamps: true });
 
-userSchema.statics.signup = async function (email, password, number, ville, birthday, name, familyName, role) {
+userSchema.statics.signup = async function (email, password, number, ville, birthday, name, familyName, role, membershipStatus) {
     try {
         // Validation
         if (!email || !password || !number || !birthday || !name || !familyName ) {
@@ -62,10 +67,14 @@ userSchema.statics.signup = async function (email, password, number, ville, birt
         if (!isValidAge(birthday)) {
             throw new Error('You must be at least 18 years old');
         }
-
         if (!role) {
             role = 'client';
         }
+
+        if (!membershipStatus) {
+            throw new Error('Mebreship problem');
+        }
+
 
         if (!['admin', 'client', 'prestataire'].includes(role)) {
             throw new Error('Invalid role');
@@ -84,7 +93,7 @@ userSchema.statics.signup = async function (email, password, number, ville, birt
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
 
-        const user = await this.create({ email, password: hash, number, ville, birthday, name, familyName, role });
+        const user = await this.create({ email, password: hash, number, ville, birthday, name, familyName, role, membershipStatus });
         return user;
     } catch (error) {
         throw new Error(error.message);

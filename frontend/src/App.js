@@ -21,6 +21,9 @@ import CatR from './pages/categories/catR';
 import CatN from './pages/categories/catN';
 import CatD from './pages/categories/catD';
 import ContactUs from './pages/contactUs';
+import Memberships from './pages/memberships';
+import MembershipsPaiment from './pages/membershipsPaiment';
+import MembershipWrapper from './HOC/membershipWrapper';
 
 function App() {
   const { user } = useAuthContext();
@@ -31,13 +34,44 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
             <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
             <Route path="/singuppro" element={!user ? <SignupPrstatire /> : <Navigate to="/" />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/prestation/:id" element={<DemandePage />} />
-            <Route path="/mesdemandes" element={<MesDemandes />} />
+
+            <Route 
+              path="/profile" 
+              element={
+                <MembershipWrapper>
+                  <Profile />
+                </MembershipWrapper>
+              } 
+            />
+            <Route 
+              path="/" 
+              element={
+                <MembershipWrapper>
+                  <Home />
+                </MembershipWrapper>
+              } 
+            />
+            <Route 
+              path="/prestation/:id" 
+              element={
+                <MembershipWrapper>
+                  <DemandePage />
+                </MembershipWrapper>
+              } 
+            />
+            <Route 
+              path="/mesdemandes" 
+              element={
+                <MembershipWrapper>
+                  <MesDemandes />
+                </MembershipWrapper>
+              } 
+            />
+
+            {/* Other routes */}
             <Route path="/aboutus" element={<Blog />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/categories" element={<CategoriesPage />} />
@@ -48,6 +82,8 @@ function App() {
             <Route path="/categories/demenagment" element={<CatD />} />
             <Route path="/categories/tuto" element={<CatT />} />
             <Route path="/testchat" element={<TextChat />} />
+            <Route path="/memberships" element={<Memberships />} />
+            <Route path="/membershipspaiment" element={<MembershipsPaiment />} />
           </Routes>
         </div>
         <Footer />

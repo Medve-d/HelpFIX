@@ -13,6 +13,7 @@ const SignupPrstatire = () => {
   const [name, setName] = useState('')
   const [familyName, setfamilyName] = useState('')
   const [role] = useState('prestataire')
+  const [membershipStatus] = useState('none')
   
   const {signup, error, isLoading} = useSignup()
 
@@ -21,7 +22,7 @@ const SignupPrstatire = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await signup(email, password, number, ville, birthday, name, familyName, role)
+    await signup(email, password, number, ville, birthday, name, familyName, role, membershipStatus)
   }
   const handleLoginNavigation = () => {
     navigate('/Login')
@@ -33,13 +34,13 @@ const SignupPrstatire = () => {
     <form className="signup" onSubmit={handleSubmit}>
       <h3>Sign Up Prestataire</h3>
 
-      <label>Name</label>
+      <label>Prénom</label>
       <input 
         type="text" 
         onChange={(e) => setName(e.target.value)} 
         value={name} 
       />
-      <label>Family Name</label>
+      <label>Nom</label>
       <input 
         type="text" 
         onChange={(e) => setfamilyName(e.target.value)} 
@@ -81,7 +82,7 @@ const SignupPrstatire = () => {
         onChange={(value) => setNumber(value)}
        />
        
-      <label>Birthday</label>
+      <label>Date de naissance</label>
       <input 
         type="date" 
         onChange={(e) => setBirthDate(e.target.value)} 

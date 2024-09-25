@@ -16,6 +16,13 @@ export const demandesReducer = (state, action) => {
         return { 
           demandes: state.demandes.filter(w => w._id !== action.payload._id)  
         }
+      case 'UPDATE_DEMANDE_STATUS':
+        return {
+            ...state,
+            demandes: state.demandes.map(demande =>
+                demande._id === action.payload._id ? { ...demande, status: action.payload.status } : demande
+            )
+    };
     default:
       return state
   }

@@ -13,6 +13,7 @@ const Signup = () => {
   const [name, setName] = useState('')
   const [familyName, setfamilyName] = useState('')
   const [role] = useState('client')
+  const [membershipStatus] = useState('notPrestatire')
   
   const {signup, error, isLoading} = useSignup()
 
@@ -21,7 +22,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await signup(email, password, number, ville, birthday, name, familyName, role)
+    await signup(email, password, number, ville, birthday, name, familyName, role, membershipStatus)
   }
   const handleLoginNavigation = () => {
     navigate('/Login')
@@ -37,13 +38,13 @@ const Signup = () => {
     <form className="signup" onSubmit={handleSubmit}>
       <h3>Sign Up client</h3>
 
-      <label>Name</label>
+      <label>Prénom</label>
       <input 
         type="text" 
         onChange={(e) => setName(e.target.value)} 
         value={name} 
       />
-      <label>Family Name</label>
+      <label>Nom</label>
       <input 
         type="text" 
         onChange={(e) => setfamilyName(e.target.value)} 
@@ -85,7 +86,7 @@ const Signup = () => {
         onChange={(value) => setNumber(value)}
        />
        
-      <label>Birthday</label>
+      <label>Date de naissance</label>
       <input 
         type="date" 
         onChange={(e) => setBirthDate(e.target.value)} 
@@ -98,7 +99,7 @@ const Signup = () => {
     
       
     <p className="signup-text">
-    You have an account? <span onClick={handleLoginNavigation} className="signup-link">Log In</span>
+    Vous avez pas une compt ? <span onClick={handleLoginNavigation} className="signup-link">Log In</span>
     </p>      
     <p className="signup-text">
     Travailler pour nous! <span onClick={handleSingUpProNavigation} className="signup-link">SING UP PRO</span>

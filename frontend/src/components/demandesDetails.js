@@ -51,29 +51,30 @@ const DemandesDetails = ({ demande, onOpenChat }) => {
     if (!user) {
       return;
     }
-  
+
     try {
-      const response = await fetch('/api/demande/acceptdemande', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}`
-        },
-        body: JSON.stringify({ demandId: demande._id, user_id: user._id })
-      });
-  
-      const result = await response.json();
-  
-      if (response.ok) {
-        console.log('Demande accepted and message sent:', result);
-        // Optionally, redirect to the chat page or update the UI
-      } else {
-        console.error('Failed to accept demande:', result.message);
-      }
+        const response = await fetch('/api/demande/acceptdemande', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({ demandId: demande._id, user_id: user._id })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            console.log('Demande accepted and message sent:', result);
+            dispatch({ type: 'UPDATE_DEMANDE_STATUS', payload: { _id: demande._id, status: 'accepted' } });
+        } else {
+            console.error('Failed to accept demande:', result.message);
+        }
     } catch (error) {
-      console.error('Error accepting demande:', error);
+        console.error('Error accepting demande:', error);
     }
-  };
+};
+
   
   const handleOpenChat = () => {
     if (!user) return;
