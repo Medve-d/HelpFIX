@@ -36,24 +36,15 @@ header a {
 
 .pages {
   max-width: 1500px;
-  padding: 123px  20px 0 20px;
+  padding: 127px 20px 0 20px;
   margin: 0 auto;
-  min-height: 790px;
 }
 
 /* homepage */
 .home {
   display: grid;
-  grid-template-columns: 1fr 2fr ;
+  grid-template-columns: 3fr 1fr;
   gap: 100px;
-}
-.hometitles {
-  margin-top: 120px;
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 40px;
-  font-weight: bold;
-  color: #796060;
 }
 
 .workout-details {
@@ -65,7 +56,6 @@ header a {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.099);
 }
 .search-bar {
-  margin-top: 30px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.099);
 }
 
@@ -90,29 +80,6 @@ header a {
   padding: 6px;
   border-radius: 50%;
   color: #333;
-}
-
-.sideFilter {
-  height: 440px;
-  background: #fff;
-  width:70%;
-  border-radius: 4px;
-  margin: 20px auto;
-  padding: 20px;
-  position: relative;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0)
-}
-.side-filter-container {
-  margin: 15px;
-}
-
-.sideFilter label {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  color: var(--primary);
-}
-select, option {
-  color: #7f7171bd;
 }
 
 /* new workout form */
@@ -445,10 +412,23 @@ select {
 select:focus {
   border-color: var(--primary);
 }
+.footer {
+  background-color: #c2c1c1c2; /* Couleur de fond du pied de page */
+  padding: 40px;
+  text-align: center;
+  width: 100%; /* S'assurer que le footer prend toute la largeur */
+  position: relative; /* Position relative pour l'alignement */
+  bottom: 0; /* Alignement en bas */
+}
+
 .container {
   max-width: 100%;
 }
 
+.footer p {
+  margin: 0;
+  color: #333; /* Couleur du texte */
+}
 
 /* side chat */
 .side-component {
@@ -715,7 +695,7 @@ p.prestatblog
   align-items: flex-start;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding-top: 50px;
+  padding: 50px 0;
   
 }
 
@@ -730,7 +710,6 @@ p.prestatblog
   border-radius: 28px;
 }
 .ag-courses-item_link {
-  cursor: pointer;
   min-height: 230px;
   display: block;
   padding: 30px 20px;
@@ -769,13 +748,13 @@ p.prestatblog
   bottom: 20px; 
   left: 20px; 
   right: 20px;
-  font-size: 17px;
+  font-size: 20px;
   color: #FFF;
   z-index: 2;
 }
 .ag-courses-item_date {
   color: #f9b234;
-  margin-top: 15px;
+
   -webkit-transition: color .5s ease;
   -o-transition: color .5s ease;
   transition: color .5s ease
@@ -844,7 +823,6 @@ p.prestatblog
 
 .background {
   display: flex;
-  padding-top: 150px;
 }
 
 .container {
@@ -1029,78 +1007,7 @@ p.prestatblog
   margin: 0 5px;
 }
 
-.footer {
-  background-color: #c2c1c1c2; 
-  padding: 40px;
-  text-align: center;
-  position: relative; 
-  bottom: 0;
-  margin-top: 150px;
-}
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer p {
-  margin: 0;
-  color: #333; /* Couleur du texte */
-}
-
-.links {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0 0;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.links li {
-  display: inline;
-}
-
-.links a {
-  color: #796060;
-  text-decoration: none;
-}
-
-.links a:hover {
-  text-decoration: underline;
-}
-
-
-
-/*no data comonent*/
-.nodata-container{
-  display: grid;
-  justify-content: center;
-  width: 100%;
-}
-.nodate {
-  justify-items: center;
-} 
-.nodata-text {
-  text-align: center;
-  font-size: 24px;
-} 
-
-
-
-
-/*responsive*/
-@media(max-width: 767px){
-
-  .footer-links {
-    display: grid;
-  }
-  .footer-brand {
-    color: #ffffff;
-    margin: 25px 50px 55px 50px;
-    font-size: 2rem; 
-  }
-}
 
 
 
@@ -1165,6 +1072,8 @@ p.prestatblog
     width: 60px;
     margin: auto;
   }
+  
+
   .navLinksOpen {
     transform: translateX(0);
   }
@@ -1182,51 +1091,4 @@ p.prestatblog
   .ag-courses_box {
     display: block;
   }
-}
-.pricing-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 40px;
-}
-
-.card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 300px;
-  text-align: center;
-}
-
-.card h2 {
-  font-size: 2.5rem;
-  color: inherit;
-}
-
-.card h3 {
-  font-size: 1.5rem;
-  color: inherit;
-  margin: 10px 0;
-}
-
-.card p {
-  font-size: 1rem;
-  color: inherit;
-  margin: 10px 0;
-}
-
-.card button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.card button:hover {
-  background-color: #555;
 }
