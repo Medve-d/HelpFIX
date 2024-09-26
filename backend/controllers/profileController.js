@@ -114,6 +114,28 @@ const updateProfile = async (req, res) => {
 };
 
 
+const updateMembershipStatus = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+      // Find the user by ID and update the membershipStatus to 'freeTrial'
+      const updatedUser = await User.findByIdAndUpdate(
+          userId,
+          { membershipStatus: 'freeTrial' },
+          { new: true }
+      );
+
+      if (!updatedUser) {
+          return res.status(404).json({ error: "User not found" });
+      }
+
+      res.status(200).json(updatedUser);
+  } catch (error) {
+      res.status(400).json({ error: error.message });
+  }
+};
+
+
 module.exports = {
   getUserProfile,
   getProfiles,
@@ -121,5 +143,6 @@ module.exports = {
   getProfilesByRole,
   getUserByEmail,
   deleteProfile,
-  updateProfile
+  updateProfile,
+  updateMembershipStatus 
 };

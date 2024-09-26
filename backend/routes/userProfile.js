@@ -1,6 +1,6 @@
 // routes/userProfile.js
 const express = require('express');
-const { getUserProfile, getProfile, getProfilesByRole, getUserByEmail, deleteProfile, updateProfile } = require('../controllers/profileController');
+const { getUserProfile, getProfile, getProfilesByRole, getUserByEmail, deleteProfile, updateProfile, updateMembershipStatus } = require('../controllers/profileController');
 const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
@@ -26,5 +26,7 @@ router.delete('/:id', deleteProfile);
 
 // UPDATE profile
 router.patch('/:id', updateProfile);
+
+router.patch('/updateMembership/:userId', updateMembershipStatus);
 
 module.exports = router;

@@ -1218,6 +1218,65 @@ p.prestatblog
 }
 
 
+.inputs-paiment-holder {
+  margin: 15px;
+}
+
+.membership-hero {
+  margin: auto;
+  position: relative;
+  background-color: #ffffff75;
+  width: 1000px;
+  min-width: 400px;
+  height: 900px;
+  border-radius: 30px;
+  overflow:hidden;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+}
+.membership-hero .payment-area { 
+  display: grid;
+  grid-template-columns: 1fr 1.3fr ;
+
+
+}
+.membership-hero .hero-description-bk {
+  top: 80%;
+  border-radius: 100px;
+  left: -9px;
+  height: 50%;
+  width: 115%;
+}
+.membership-hero .hero-logo ,.membership-hero .hero-description {
+  bottom: 10%;
+  text-shadow: rgba(12, 12, 12, 0.597) 1px 0 10px;
+}
+
+.paiment-container {
+  padding-top: 150px;
+}
+
+.payment-area-2 input {
+  width: 90%;
+}
+
+.fromstitles {
+  text-align: center;
+  font-size: 30px;
+  color: #796060;
+  margin: 100px auto 22px auto;
+}
+.payment-area-1, .payment-area-2 {
+  margin: 50px;
+} 
+.fromstexts {
+  margin-top: 0;
+  font-size: 20px;
+  color: #796060;
+}
+
+
+
+
 /*responsive*/
 @media(max-width: 767px){
 

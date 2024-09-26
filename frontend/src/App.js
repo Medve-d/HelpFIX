@@ -22,7 +22,7 @@ import CatN from './pages/categories/catN';
 import CatD from './pages/categories/catD';
 import ContactUs from './pages/contactUs';
 import Memberships from './pages/memberships';
-import MembershipsPaiment from './pages/memberships';
+import MembershipsPaiment from './pages/membershipsPaiment';
 import MembershipWrapper from './HOC/membershipWrapper';
 
 function App() {
@@ -38,14 +38,6 @@ function App() {
             <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
             <Route path="/singuppro" element={!user ? <SignupPrstatire /> : <Navigate to="/" />} />
 
-            <Route 
-              path="/profile" 
-              element={
-                <MembershipWrapper>
-                  <Profile />
-                </MembershipWrapper>
-              } 
-            />
             <Route 
               path="/" 
                 element={
@@ -83,6 +75,7 @@ function App() {
             <Route path="/categories/tuto" element={<CatT />} />
             <Route path="/testchat" element={<TextChat />} />
             <Route path="/memberships" element={<Memberships />} />
+            <Route path="/profile" element={<Profile />}/>
             <Route path="/membershipspaiment" element={<MembershipsPaiment />} />
           </Routes>
         </div>

@@ -95,7 +95,7 @@ const PrestationForm = () => {
         className={emptyFields.includes('description') ? 'error' : ''}
       />
       
-      <label><strong>Catégories :</strong></label>
+      <label>Catégories :</label>
       <select
         onChange={(e) => setCategory(e.target.value)}  
         value={category}                            
