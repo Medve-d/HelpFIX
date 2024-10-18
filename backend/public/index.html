@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin CRUD Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="tel"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        box-sizing: border-box;
+      }
+      input[type="submit"],
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button {
+        background-color: #f44336;
+        margin-left: 10px;
+      }
+      .result,
+      .user-list {
+        margin-top: 20px;
+      }
+      .user-list ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .user-list li {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .user-list button {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 5px 10px;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>User CRUD Test</h2>
+
+    <form id="userForm">
+      <label for="U_name">Username:</label>
+      <input type="text" id="U_name" name="U_name" required /><br />
+
+      <label for="nom">Last Name:</label>
+      <input type="text" id="nom" name="nom" required /><br />
+
+      <label for="prenom">First Name:</label>
+      <input type="text" id="prenom" name="prenom" required /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required /><br />
+
+      <label for="RoleType">Role Type:</label>
+      <select id="RoleType" name="RoleType" required>
+        <option value="admin">Admin</option>
+        <option value="prestataire">Prestataire</option>
+        <option value="client">Client</option></select
+      ><br />
+
+      <label for="street">Street:</label>
+      <input type="text" id="street" name="address[street]" required /><br />
+
+      <label for="city">City:</label>
+      <input type="text" id="city" name="address[city]" required /><br />
+
+      <label for="state">State:</label>
+      <input type="text" id="state" name="address[state]" required /><br />
+
+      <label for="zip">Zip Code:</label>
+      <input type="text" id="zip" name="address[zip]" required /><br />
+
+      <label for="country">Country:</label>
+      <input type="text" id="country" name="address[country]" required /><br />
+
+      <label for="number">Phone Number:</label>
+      <input type="tel" id="number" name="number" required /><br />
+
+      <button type="submit">Create User</button>
+      <button type="button" id="fetchUsers">Fetch Users</button>
+    </form>
+
+    <div class="result">
+      <h3>Result:</h3>
+      <pre id="resultData"></pre>
+    </div>
+
+    <div class="user-list">
+      <h3>User List:</h3>
+      <ul id="userList"></ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const form = document.getElementById("userForm");
+      const resultData = document.getElementById("resultData");
+      const userList = document.getElementById("userList");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const userData = {};
+        formData.forEach((value, key) => {
+          if (key.includes("address")) {
+            const [addressKey, subKey] = key
+              .split("[")
+              .map((item) => item.replace("]", ""));
+            if (!userData[addressKey]) {
+              userData[addressKey] = {};
+            }
+            userData[addressKey][subKey] = value;
+          } else {
+            userData[key] = value;
+          }
+        });
+
+        axios
+          .post("/api/users", userData)
+          .then((response) => {
+            resultData.textContent = JSON.stringify(response.data, null, 2);
+            window.location.reload(); // Reload page after creating user
+          })
+          .catch((error) => {
+            resultData.textContent = JSON.stringify(
+              error.response.data,
+              null,
+              2
+            );
+          });
+      });
+
+      document
+        .getElementById("fetchUsers")
+        .addEventListener("click", fetchUsers);
+
+      function fetchUsers() {
+        axios
+          .get("/api/users")
+          .then((response) => {
+            const users = response.data;
+            userList.innerHTML = "";
+            users.forEach((user) => {
+              const li = document.createElement("li");
+              li.textContent = `${user.U_name} (${user.email}) (${user.RoleType})`;
+              const deleteButton = document.createElement("button");
+              deleteButton.textContent = "Delete";
+              deleteButton.addEventListener("click", () =>
+                deleteUser(user._id)
+              );
+              li.appendChild(deleteButton);
+              userList.appendChild(li);
+            });
+          })
+          .catch((error) => {
+            resultData.textContent = JSON.stringify(
+              error.response.data,
+              null,
+              2
+            );
+          });
+      }
+
+      function deleteUser(userId) {
+        axios
+          .delete(`/api/users/${userId}`)
+          .then((response) => {
+            resultData.textContent = JSON.stringify(response.data, null, 2);
+            window.location.reload(); // Reload page after deleting user
+          })
+          .catch((error) => {
+            resultData.textContent = JSON.stringify(
+              error.response.data,
+              null,
+              2
+            );
+          });
+      }
+
+      // Fetch users initially
+      fetchUsers();
+    </script>
+  </body>
+</html>
