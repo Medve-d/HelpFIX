@@ -13,8 +13,6 @@ const MembershipsPaiment = ({ userId }) => {
             [e.target.name]: e.target.value,
         });
     };
-
-    // Function to handle updating membership status
     const handleUpdateMembership = async () => {
         try {
             const response = await fetch(`/api/user/profile/updateMembership/${userId}`, {

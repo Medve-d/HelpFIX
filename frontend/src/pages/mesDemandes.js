@@ -55,7 +55,7 @@ const MesDemandes = () => {
   };
 
   return (
-    <div>
+    <div className="mesDemande-container">
       <div className="home">
         <div className="workouts">
           {demandes && demandes.map(demande => (

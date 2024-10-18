@@ -29,7 +29,6 @@ const Categories = () => {
               <div className="ag-courses-item_bg"></div>
               <div className="ag-courses-item_title">Réparation d'Appareils Électroménagers</div>
               <div className="ag-courses-item_date-box">
-                <span className="ag-courses-item_date">Réparation de lave-linge</span><br /><br />
                 <span className="ag-courses-item_date">Maintenance de réfrigérateurs</span><br /><br />
                 <span className="ag-courses-item_date">Services de dépannage</span>
               </div>

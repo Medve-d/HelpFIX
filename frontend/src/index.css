@@ -610,6 +610,25 @@ select:focus {
   overflow-y: auto;
   flex-grow: 1;
 }
+.message {
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.sent {
+  background-color: #796060;
+  align-self: flex-end; /* Align sent messages to the right */
+  text-align: right;
+}
+
+.received {
+  background-color: #f5f5f5;
+  align-self: flex-start; /* Align received messages to the left */
+  text-align: left;
+}
 
 .chat-footer {
   display: flex;
@@ -1274,8 +1293,63 @@ p.prestatblog
   color: #796060;
 }
 
+.mesDemande-container .home {
+  grid-template-columns: 2.5fr 1fr;
+}
 
+/* ProfilePage.css */
 
+.profile-container {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 2rem;
+  background-color: #79606060;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+}
+
+.info-item {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.info-item strong {
+  color: #333;
+}
+.info-item strong {
+  color: #796060;
+}
+.burger-button {
+  font-size: 25px;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-top: 2rem;
+}
 
 /*responsive*/
 @media(max-width: 767px){

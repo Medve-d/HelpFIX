@@ -16,16 +16,19 @@ const Chat = ({ room, onClose }) => {
   const sendMessage = () => {
     if (message) {
       socket.emit("send_message", { message, room });
+      setMessages((prevMessages) => [...prevMessages, { message, fromSelf: true }]); // Mark message as sent
       setMessage(""); // Clear the input field
     }
   };
+  
 
   useEffect(() => {
     joinRoom();
 
     socket.on("receive_message", (data) => {
-      setMessages((prevMessages) => [...prevMessages, data.message]);
+      setMessages((prevMessages) => [...prevMessages, { message: data.message, fromSelf: false }]);
     });
+    
 
     return () => {
       socket.off("receive_message");
@@ -44,9 +47,12 @@ const Chat = ({ room, onClose }) => {
       </div>
       <div className="chat-body">
         {messages.map((msg, index) => (
-          <div key={index}>{msg}</div>
+          <div key={index} className={`message ${msg.fromSelf ? 'sent' : 'received'}`}>
+            {msg.message}
+          </div>
         ))}
       </div>
+
       <div className="chat-footer">
         <input
           className='chatInput'

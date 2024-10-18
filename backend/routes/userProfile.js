@@ -5,6 +5,7 @@ const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 
+router.patch('/updateMembership/:userId', updateMembershipStatus);
 router.use(requireAuth)
 
 router.get('/', getUserProfile);
@@ -27,6 +28,5 @@ router.delete('/:id', deleteProfile);
 // UPDATE profile
 router.patch('/:id', updateProfile);
 
-router.patch('/updateMembership/:userId', updateMembershipStatus);
 
 module.exports = router;
