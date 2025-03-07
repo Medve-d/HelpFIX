@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { usePrestationsContext } from "../hooks/usePrestationsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-import Homevid from "../components/videoHome"
+import HomeDiapo from "../components/HomeDiapo"
 import SearchBar from "../components/searchBar"
 import Categories from "../components/Categories"
 import PrestationFilter from "../components/PrestationFilter"
@@ -40,7 +40,7 @@ const Home = () => {
   return (
     <div>
       <title>Bienvenue sur Helpfix !</title>
-    <Homevid />
+    <HomeDiapo />
     {role === 'prestataire' ? (<h2 className="hometitles" >Vos Prestations</h2>  ) : (<h2 className="hometitles" >Nos Prestations</h2>  )}
     <SearchBar />
      <div className="home">

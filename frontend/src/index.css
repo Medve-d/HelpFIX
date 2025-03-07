@@ -1,7 +1,7 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
+/* ----------------------layout-------------------------- */
 * {
   text-decoration: none;
 }
@@ -95,13 +95,15 @@ header a {
 .sideFilter {
   height: 440px;
   background: #fff;
-  width:70%;
+  width: 70%;
+  position: sticky;
+  top: 150px;
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
-  position: relative;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0)
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0);
 }
+
 .side-filter-container {
   margin: 15px;
 }
@@ -111,6 +113,7 @@ header a {
   font-size: 1.2em;
   color: var(--primary);
 }
+
 select, option {
   color: #7f7171bd;
 }
@@ -129,6 +132,16 @@ input {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
+}
+input:focus {
+  border-color: #796060;
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0px 0px 10px rgba(121, 96, 96, 0.3);
+}
+
+input:hover {
+  border-color: #A76B6B;
 }
 
 form button {
@@ -310,13 +323,13 @@ h2 {
 
 
 /* Style for Homevid component */
-.HomeVideo {
+.HomeDiapo {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
 }
-
+/*
 video {
   width: 100%;
   height: 100%;
@@ -324,8 +337,8 @@ video {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1; /* Ensure video is behind other content */
-}
+  z-index: 1; 
+} */
 
 .HomeContent {
   position: absolute;
@@ -339,7 +352,7 @@ video {
   align-items: center;
   color: white;
   text-align: center;
-  z-index: 2; /* Ensure content is above video and overlay */
+  z-index: 2; 
 }
 
 .HomeOverlay {
@@ -350,37 +363,6 @@ video {
   height: 100%;
   background-color: rgba(0,0,0,0.4);
   z-index: 1; /* Ensure overlay is between video and content */
-}
-
-/* Ensure the container doesn’t cause reflows during scroll */
-.HomeVideo {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  /* Force GPU acceleration to reduce rendering issues */
-  transform: translateZ(0);
-}
-
-/* Ensure that the video and overlay are properly positioned */
-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.HomeOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  z-index: 1;
 }
 
 .HomeContent {
@@ -798,7 +780,7 @@ p.prestatblog
   -webkit-transition: color .5s ease;
   -o-transition: color .5s ease;
   transition: color .5s ease
-}
+} 
 .ag-courses-item_bg {
   height: 128px;
   width: 128px;
@@ -1364,15 +1346,6 @@ p.prestatblog
   }
 }
 
-
-
-
-
-
-
-
-
-
 @media (max-width: 835px) {
   .home {
     grid-template-columns: 1fr;
@@ -1413,7 +1386,7 @@ p.prestatblog
     padding: 10px 0; 
   }
   .mobile-ul li:last-child {
-    border-bottom: none; /* Removes the line after the last item */
+    border-bottom: none;
   }
 
   .mobile-ul a:hover { 
@@ -1444,4 +1417,8 @@ p.prestatblog
   .ag-courses_box {
     display: block;
   }
+}
+
+.titreAccueil {
+  text-align: center;
 }

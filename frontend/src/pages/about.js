@@ -16,12 +16,12 @@ const Blog = () => {
         </div>
         <div className="creditBlog">
           <p className='p blog'>
-            HelpFIX est une plateforme web créée par Nikolai ZLODEYEV, Anas EL MALIKI, et Ryad OTMANI conçue pour mettre en relation les utilisateurs avec des prestataires de services pour divers besoins...
+            HelpFIX est une plateforme web créée par Nikolai ZLODEYEV, Anas EL MALIKI, et Maxime STAJSZCZYK conçue pour mettre en relation les utilisateurs avec des prestataires de services pour divers besoins...
           </p>
         </div> 
         <div className="prestatireBlog">
           <p className='p prestatblog'>
-            HelpFIX est une plateforme web créée par Nikolai ZLODEYEV, Anas EL MALIKI, et Ryad OTMANI conçue pour mettre en relation les utilisateurs avec des prestataires de services pour divers besoins...
+            HelpFIX est une plateforme web créée par Nikolai ZLODEYEV, Anas EL MALIKI, et Maxime STAJSZCZYK conçue pour mettre en relation les utilisateurs avec des prestataires de services pour divers besoins...
           </p>
         </div> 
       </main>

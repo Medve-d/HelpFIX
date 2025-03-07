@@ -1,0 +1,35 @@
+.gsap-box {
+    position: relative;
+    background-color: #6b4f4f;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .gsap-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .gsap-box::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #f9c74f;
+    border-radius: 50%;
+    top: -20px;
+    left: -20px;
+  }
+  
+  .gsap-box:nth-child(2)::before {
+    background-color: #f08080;
+  }
+  
+  .gsap-box:nth-child(3)::before {
+    background-color: #90e0ef;
+  }
+  
