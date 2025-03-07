@@ -39,7 +39,6 @@ const Home = () => {
   }, [dispatch, user, role]);
   return (
     <div>
-      <title>Bienvenue sur Helpfix !</title>
     <HomeDiapo />
     {role === 'prestataire' ? (<h2 className="hometitles" >Vos Prestations</h2>  ) : (<h2 className="hometitles" >Nos Prestations</h2>  )}
     <SearchBar />
@@ -53,10 +52,10 @@ const Home = () => {
       {role === 'prestataire' && (<PrestationForm />) }
       </div>
       {role !== 'prestataire' && (
-        <>
+        <div>
           <h2 className="hometitles">Nos Catégories</h2>
           <Categories />
-        </>
+        </div>
       )}
     </div>
   )
