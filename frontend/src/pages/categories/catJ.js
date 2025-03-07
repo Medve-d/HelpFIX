@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { usePrestationsContext } from "../../hooks/usePrestationsContext";
 import CategoriesDtails from "../../components/categoriesDtails";
 import Nodata from "../../components/nodataPhoto";
+import ImageCategorie from "../../components/imageCategorie";
 
 const CatJ = () => {
   const {prestations, dispatch } = usePrestationsContext();
@@ -26,6 +27,10 @@ const CatJ = () => {
 
   return (
     <div>
+      <img
+        src={`${process.env.PUBLIC_URL}/image/jardinierDiapo.jpg`}
+        alt="diaporama"
+        className="categorie-image"></img>
       <h1 className="h1 about">Jardinage et Entretien Extérieur</h1>
       <div className="ag-format-container">
         <div className="ag-courses_box">
