@@ -1,7 +1,7 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* ----------------------layout-------------------------- */
+/* layout */
 * {
   text-decoration: none;
 }
@@ -67,6 +67,7 @@ header a {
 .search-bar {
   margin-top: 30px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.099);
+  width: 30%;
 }
 
 .workout-details h4 {
@@ -95,16 +96,13 @@ header a {
 .sideFilter {
   height: 440px;
   background: #fff;
-  width: 70%;
-  position: sticky;
-  top: 150px;
+  width:70%;
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0);
-  margin-top: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0)
 }
-
 .side-filter-container {
   margin: 15px;
 }
@@ -114,7 +112,6 @@ header a {
   font-size: 1.2em;
   color: var(--primary);
 }
-
 select, option {
   color: #7f7171bd;
 }
@@ -133,16 +130,6 @@ input {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-}
-input:focus {
-  border-color: #796060;
-  background-color: #ffffff;
-  outline: none;
-  box-shadow: 0px 0px 10px rgba(121, 96, 96, 0.3);
-}
-
-input:hover {
-  border-color: #A76B6B;
 }
 
 form button {
@@ -324,25 +311,37 @@ h2 {
 
 
 /* Style for Homevid component */
-  .HomeVideo {
+.HomeVideo {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-}  
+}
 
-.Home-image {
-  width: 100%;
-  height: 100%;
+video {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
+  z-index: -1; 
+}
+
+.HomeOverlay {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 1; 
-} 
+  pointer-events: none; 
+}
 
 .HomeContent {
   position: absolute;
+  font-size: large;
   top: 0;
   left: 0;
   width: 100%;
@@ -354,39 +353,15 @@ h2 {
   color: white;
   text-align: center;
   z-index: 2; 
-}
-
-.HomeOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  z-index: 1; /* Ensure overlay is between video and content */
-}
-
-.HomeContent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-  z-index: 2;
   transform: translateZ(0);
 }
+
 
 .HomeContent h1, .HomeContent h2 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.comBtn {
+.comBtnHome {
   background: var(--primary);
   border: none;
   color: #fff;
@@ -396,6 +371,7 @@ h2 {
   cursor: pointer;
   font-size: 1em;
   transition:  0.3s ease;
+  z-index: 3;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
@@ -781,7 +757,7 @@ p.prestatblog
   -webkit-transition: color .5s ease;
   -o-transition: color .5s ease;
   transition: color .5s ease
-} 
+}
 .ag-courses-item_bg {
   height: 128px;
   width: 128px;
@@ -1347,6 +1323,15 @@ p.prestatblog
   }
 }
 
+
+
+
+
+
+
+
+
+
 @media (max-width: 835px) {
   .home {
     grid-template-columns: 1fr;
@@ -1387,7 +1372,7 @@ p.prestatblog
     padding: 10px 0; 
   }
   .mobile-ul li:last-child {
-    border-bottom: none;
+    border-bottom: none; /* Removes the line after the last item */
   }
 
   .mobile-ul a:hover { 
@@ -1418,8 +1403,4 @@ p.prestatblog
   .ag-courses_box {
     display: block;
   }
-}
-
-.titreAccueil {
-  text-align: center;
 }
