@@ -1,0 +1,14 @@
+{
+    "name": "HelpFIX",
+    "version": "1.0.0",
+    "description": "Mon projet combinant ReactJS et Node.js",
+    "scripts": {
+      "start": "node server/app.js",
+      "build": "cd client && npm install && npm run build",
+      "install": "cd client && npm install && cd ../server && npm install",
+      "client": "cd client && npm start",
+      "server": "cd server && npm start"
+    },
+    "dependencies": {}
+  }
+  

@@ -1,6 +1,6 @@
 require('dotenv').config(); // Assurez-vous que c'est la première ligne
 
-const connectDB = require('./config/db');
+const connectDB = require('./config/db.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
