@@ -1,9 +1,10 @@
-require('dotenv').config(); // Assurez-vous que c'est la première ligne
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+
 
 const connectDB = require('./config/db.js');
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
 const cors = require('cors');
 const userRoutes = require('./routes/user');
 const prestationRoutes = require('./routes/prestation');
