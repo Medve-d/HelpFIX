@@ -1,33 +1,30 @@
 const express = require('express');
-const  { getAllPrestations ,getMyPrestations ,getPrestation, createPrestation, deletePrestation, updatePrestation } = require('../controllers/prestationController');
-const requireAuth = require('../middleware/requireAuth')
-
+const {
+  getAllPrestations,
+  getMyPrestations,
+  getPrestation,
+  createPrestation,
+  deletePrestation,
+  updatePrestation
+} = require('../controllers/prestationController');
+const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 
+// Middleware d'authentification pour toutes les routes
+router.use(requireAuth);
 
-// require auth for all workout routes
+// Routes GET
+router.route('/')
+  .get(getAllPrestations) // GET /api/prestations
+  .post(createPrestation); // POST /api/prestations
 
+router.route('/myprestations')
+  .get(getMyPrestations); // GET /api/prestations/myprestations
 
-
-
-// get 
-router.get('/', getAllPrestations);
-
-router.use(requireAuth)
-router.get('/myprestations', getMyPrestations);
-router.get('/:id',getPrestation);
-
-
-// post
-router.post('/', createPrestation);
-
-
-
-// delete
-router.delete('/:id', deletePrestation);
-
-router.patch('/:id', updatePrestation);
-
+router.route('/:id')
+  .get(getPrestation) // GET /api/prestations/:id
+  .delete(deletePrestation) // DELETE /api/prestations/:id
+  .patch(updatePrestation); // PATCH /api/prestations/:id
 
 module.exports = router;

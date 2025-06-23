@@ -1,7 +1,7 @@
 {
     "name": "HelpFIX",
     "version": "1.0.0",
-    "description": "Mon projet combinant ReactJS et Node.js",
+    "description": "HelpFIX combinant ReactJS et Node.js",
     "scripts": {
   "start": "node server/app.js",
   "dev": "concurrently \"npm run server\" \"npm run client\"",

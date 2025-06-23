@@ -8,58 +8,63 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
     },
     familyName: {
         type: String,
-        require: true,
+        required: true,
     },
     email: {
         type: String,
-        require: true,
-        unique: true
+        required: true,
+        unique: true,
     },
     password: {
         type: String,
-        require: true
+        required: true,
     },
     number: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     ville: {
         type: String,
         enum: ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg'],
-        required: true
+        required: true,
     },
     birthday: {
         type: Date,
-        required: true
+        required: true,
     },
     role: {
         type: String,
         enum: ['admin', 'client', 'prestataire'],
-        default: 'client'
+        default: 'client',
     },
-    membershipStatus : {
+    membershipStatus: {
         type: String,
         enum: ['notPrestatire', 'none', 'freeTrial', 'monthly', 'annual'],
-        required: true
-    }
+        default: 'none',
+    },
 }, { timestamps: true });
 
+// Méthode pour l'inscription
 userSchema.statics.signup = async function (email, password, number, ville, birthday, name, familyName, role, membershipStatus) {
     try {
-        // Validation
-        if (!email || !password || !number || !birthday || !name || !familyName ) {
-            throw Error('Tous les champs doivent être remplis');
+        console.log('Signup method called with:', { email, password, number, ville, birthday, name, familyName, role, membershipStatus });
+
+        // Validation des champs requis
+        if (!email || !password || !number || !birthday || !name || !familyName) {
+            throw new Error('Tous les champs doivent être remplis');
         }
+
+        // Validation des formats
         if (!validator.isEmail(email)) {
-            throw Error("L'email n'est pas valide");
+            throw new Error("L'email n'est pas valide");
         }
         if (!validator.isStrongPassword(password)) {
-            throw Error('Mot de passe pas assez sécurisé');
+            throw new Error('Mot de passe pas assez sécurisé');
         }
         if (!isValidPhoneNumber(number)) {
             throw new Error('Format de numéro de téléphone invalide');
@@ -67,55 +72,65 @@ userSchema.statics.signup = async function (email, password, number, ville, birt
         if (!isValidAge(birthday)) {
             throw new Error('Vous devez avoir au moins 18 ans');
         }
-        if (!role) {
-            role = 'client';
-        }
 
-        if (!membershipStatus) {
-            throw new Error('Problème d\'abonnement');
-        }
-
+        // Validation des valeurs par défaut
+        role = role || 'client';
+        membershipStatus = membershipStatus || 'none';
 
         if (!['admin', 'client', 'prestataire'].includes(role)) {
-            throw new Error('Invalid role');
+            throw new Error('Role invalide');
         }
 
+        // Vérification des doublons
         const emailExists = await this.findOne({ email });
         if (emailExists) {
-            throw Error('Email déjà utilisé');
+            throw new Error('Email déjà utilisé');
         }
 
         const numberExists = await this.findOne({ number });
         if (numberExists) {
-            throw Error('Numéro de téléphone déjà utilisé');
+            throw new Error('Numéro de téléphone déjà utilisé');
         }
 
+        // Hashage du mot de passe
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
 
+        // Création de l'utilisateur
         const user = await this.create({ email, password: hash, number, ville, birthday, name, familyName, role, membershipStatus });
+        console.log('User created:', user);
         return user;
     } catch (error) {
+        console.error('Error in signup method:', error.message);
         throw new Error(error.message);
-    } 
+    }
 };
 
+// Méthode pour la connexion
 userSchema.statics.login = async function (email, password) {
-    if (!email || !password) {
-        throw Error('Tous les champs doivent être remplis');
-    }
+    try {
+        console.log('Login method called with:', { email, password });
 
-    const user = await this.findOne({ email });
-    if (!user) {
-        throw Error('Email incorrect');
-    }
+        if (!email || !password) {
+            throw new Error('Tous les champs doivent être remplis');
+        }
 
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) {
-        throw Error('Mot de passe incorrect');
-    }
+        const user = await this.findOne({ email });
+        if (!user) {
+            throw new Error('Email incorrect');
+        }
 
-    return user;
-}
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+            throw new Error('Mot de passe incorrect');
+        }
+
+        console.log('User logged in:', user);
+        return user;
+    } catch (error) {
+        console.error('Error in login method:', error.message);
+        throw new Error(error.message);
+    }
+};
 
 module.exports = mongoose.model('User', userSchema);
