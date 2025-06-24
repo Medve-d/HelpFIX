@@ -1,92 +1,108 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
-const MembershipsPaiment = ({ userId }) => {
-    const [formData, setFormData] = useState({
-        cardNumber: '',
-        expirationDate: '',
-        cvc: '',
-    });
+const MembershipsPaiment = () => {
+    const { user } = useAuthContext();
+    const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState(null);
+    const [userId, setUserId] = useState(null);
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
-    const handleUpdateMembership = async () => {
+    useEffect(() => {
+        if (user && user._id) {
+            setUserId(user._id);
+        }
+    }, [user]);
+
+    const handleUpdateMembership = async (e) => {
+        e.preventDefault();
+        
+        if (!userId) {
+            setMessage({ text: 'Utilisateur non identifié', isError: true });
+            return;
+        }
+
+        setIsLoading(true);
+        setMessage(null);
+
         try {
             const response = await fetch(`/api/user/profile/updateMembership/${userId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 },
+                body: JSON.stringify({ membershipStatus: 'freeTrial' })
             });
             
             const data = await response.json();
+            
             if (response.ok) {
-                alert('Membership updated to Free Trial');
+                setMessage({ 
+                    text: 'Votre essai gratuit a été activé avec succès!', 
+                    isError: false 
+                });
             } else {
-                alert(`Error: ${data.error}`);
+                setMessage({ 
+                    text: data.error || 'Erreur lors de l\'activation', 
+                    isError: true 
+                });
             }
         } catch (error) {
-            alert('An error occurred while updating membership');
+            setMessage({ 
+                text: 'Erreur de connexion au serveur', 
+                isError: true 
+            });
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div className="paiment-container">
             <div className="membership-hero">
-                <h3 className='fromstitles'>Checkout</h3>
+                <h3 className='fromstitles'>Essai Gratuit</h3>
                 <div className="payment-area">
                     <div className='payment-area-1'>
-                        <h3 className='fromstexts'>Essai Gratuit</h3>
-                        <p className='titles-texts-p'>Profitez de 3 utilisations gratuites pour découvrir notre service avant de souscrire à un abonnement.</p>
-                        <p><strong>Gratuit</strong></p>
+                        <h3 className='fromstexts'>Découvrez notre service</h3>
+                        <p className='titles-texts-p'>
+                            Profitez de 3 utilisations gratuites pour tester toutes les fonctionnalités.
+                        </p>
+                        <ul className="benefits-list">
+                            <li>✓ Accès complet à la plateforme</li>
+                            <li>✓ 3 prestations gratuites</li>
+                            <li>✓ Sans engagement</li>
+                        </ul>
                     </div>
-                    <form className="payment-area-2">
-                        <label htmlFor="cardNumber">Numéro de carte :</label>
-                        <input
-                            type="text"
-                            id="cardNumber"
-                            name="cardNumber"
-                            placeholder="1234 5678 9012 3456"
-                            value={formData.cardNumber}
-                            onChange={handleChange}
-                            required
-                        />
-                        <label htmlFor="expirationDate">Date d'expiration :</label>
-                        <input
-                            type="text"
-                            id="expirationDate"
-                            name="expirationDate"
-                            placeholder="MM/AA"
-                            value={formData.expirationDate}
-                            onChange={handleChange}
-                            required
-                        />
-                        <label htmlFor="cvc">CVC :</label>
-                        <input
-                            type="text"
-                            id="cvc"
-                            name="cvc"
-                            placeholder="123"
-                            value={formData.cvc}
-                            onChange={handleChange}
-                            required
-                        />
-                        <button onClick={handleUpdateMembership}>Start Free Trial</button>
-                    </form>
+                    <div className="free-trial-section">
+                        <div className="trial-card">
+                            <h4>Commencez dès maintenant</h4>
+                            <p>Aucune carte bancaire requise</p>
+                            <button 
+                                onClick={handleUpdateMembership}
+                                disabled={isLoading || (user && user.membershipStatus === 'freeTrial')}
+                                className="free-trial-button"
+                            >
+                                {isLoading ? 'Chargement...' : 
+                                 user?.membershipStatus === 'freeTrial' ? 'Essai déjà activé' : 'Essayez gratuitement'}
+                            </button>
+                            {message && (
+                                <p className={`message ${message.isError ? 'error' : 'success'}`}>
+                                    {message.text}
+                                </p>
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <div className="hero-description-bk"></div>
                 <div className="hero-logo">
                     <img
                         src={`${process.env.PUBLIC_URL}/image/logo-helpfix.png`}
-                        alt="membership"
+                        alt="HelpFix"
                         className="hero-profile-img"
                     />
                 </div>
                 <div className="hero-description">
-                    <p>Essayez notre service gratuitement 3 fois.</p>
+                    <p>Testez notre service sans engagement</p>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import CategoriesDtails from "../../components/categoriesDtails";
 import Nodata from "../../components/nodataPhoto";
 
 const CatD = () => {
-  const {prestations, dispatch } = usePrestationsContext();
+  const { prestations, dispatch } = usePrestationsContext();
   const category = "Déménagement et Transport"; 
 
   useEffect(() => {
@@ -16,7 +16,9 @@ const CatD = () => {
       });
 
       if (response.ok) {
-        const prestations = await response.json();
+        let prestations = await response.json();
+        // Filtrer les prestations pour ne garder que celles avec le job "déménageur"
+        prestations = prestations.filter(prestation => prestation.job === "Déménageur");
         dispatch({ type: 'SET_PRESTATIONS', payload: prestations });
       }
     };

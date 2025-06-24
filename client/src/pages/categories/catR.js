@@ -24,19 +24,22 @@ const CatR = () => {
     fetchPrestations();
   }, [dispatch, category]);
 
+  // Filtrer les prestations pour ne garder que celles avec le job "Réparation"
+  const filteredPrestations = prestations?.filter(prestation => prestation.job === "Réparation");
+
   return (
     <div>
       <h1 className="h1 about">Réparation d'Appareils Électroménagers</h1>
       <div className="ag-format-container">
         <div className="ag-courses_box">
-          {prestations && prestations.length > 0 ? (
-            prestations.map(prestation => (
+          {filteredPrestations && filteredPrestations.length > 0 ? (
+            filteredPrestations.map(prestation => (
               <CategoriesDtails prestation={prestation} key={prestation._id} />
             ))
           ) : null}
         </div>
       </div>
-      {prestations && prestations.length === 0 && (
+      {filteredPrestations && filteredPrestations.length === 0 && (
         <div className="nodata-container">
           <Nodata/>
         </div>

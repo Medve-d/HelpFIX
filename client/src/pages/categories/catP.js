@@ -4,7 +4,7 @@ import CategoriesDtails from "../../components/categoriesDtails";
 import Nodata from "../../components/nodataPhoto";
 
 const CatP = () => {
-  const {prestations, dispatch } = usePrestationsContext();
+  const { prestations, dispatch } = usePrestationsContext();
   const category = "Plomberie"; // You can dynamically set this if needed.
 
   useEffect(() => {
@@ -16,7 +16,9 @@ const CatP = () => {
       });
 
       if (response.ok) {
-        const prestations = await response.json();
+        let prestations = await response.json();
+        // Filtrer les prestations pour ne garder que celles avec le job "Plombier"
+        prestations = prestations.filter(prestation => prestation.job === "Plombier");
         dispatch({ type: 'SET_PRESTATIONS', payload: prestations });
       }
     };
@@ -38,7 +40,7 @@ const CatP = () => {
       </div>
       {prestations && prestations.length === 0 && (
         <div className="nodata-container">
-          <Nodata/>
+          <Nodata />
         </div>
       )}
     </div>
