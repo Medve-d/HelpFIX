@@ -1,53 +1,58 @@
-const PrestationFilter = () => {
-  
+import React, { useState } from 'react';
 
+const PrestationFilter = ({ onFilter }) => {
+  const [filters, setFilters] = useState({
+    category: '',
+    ville: '',
+    priceRange: ''
+  });
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    const newFilters = { ...filters, [name]: value };
+    setFilters(newFilters);
+    if (onFilter) {
+      onFilter(newFilters);
+    }
+  };
 
   return (
-    <form className="sideFilter"> 
-    <div className='side-filter-container'>
-      <label><strong>Catégories :</strong></label>
-      <select>
-        <option value="0">Choisi une catégorie</option>
-        <option value="1">Plomberie</option>
-        <option value="2">Services de Nettoyage</option>
-        <option value="3">Réparation d'Appareils Électroménagers</option>
-        <option value="4">Jardinage et Entretien Extérieur</option>
-        <option value="5">Tutorat et Cours Particuliers</option>
-        <option value="6">Déménagement et Transport</option>
-      </select>
-      <label><strong>Ville :</strong></label>
-      <select>
-        <option value="0">Choisi une ville</option>
-        <option value="1">Paris</option>
-        <option value="2">Marseille</option>
-        <option value="3">Lyon</option>
-        <option value="4">Toulouse</option>
-        <option value="5">Nice</option>
-        <option value="6">Nantes</option>
-        <option value="7">Strasbourg</option>
-      </select>
-      
-      <label><strong>Prix :</strong></label>
-      <select>
-        <option value="0">Choisi un prix</option>
-        <option value="1">0-20</option>
-        <option value="2">20-50</option>
-        <option value="3">50-100</option>
-        <option value="3">&lt;100</option>
-      </select>
-      <label><strong>Les avis :</strong></label>
-      <select>
-        <option value="0">sélectionner une avis</option>
-        <option value="1">★☆☆☆☆</option>
-        <option value="2">★★☆☆☆</option>
-        <option value="3">★★★☆☆</option>
-        <option value="4">★★★★☆</option>
-      </select>
-    </div>
+    <form className="sideFilter">
+      <div className='side-filter-container'>
+        <label><strong>Catégories :</strong></label>
+        <select name="category" value={filters.category} onChange={handleFilterChange}>
+          <option value="">Toutes les catégories</option>
+          <option value="Plomberie">Plomberie</option>
+          <option value="Services de Nettoyage">Services de Nettoyage</option>
+          <option value="Réparation d'Appareils Électroménagers">Réparation d'Appareils Électroménagers</option>
+          <option value="Jardinage et Entretien Extérieur">Jardinage et Entretien Extérieur</option>
+          <option value="Tutorat et Cours Particuliers">Tutorat et Cours Particuliers</option>
+          <option value="Déménagement et Transport">Déménagement et Transport</option>
+        </select>
 
-   
+        <label><strong>Ville :</strong></label>
+        <select name="ville" value={filters.ville} onChange={handleFilterChange}>
+          <option value="">Toutes les villes</option>
+          <option value="Paris">Paris</option>
+          <option value="Marseille">Marseille</option>
+          <option value="Lyon">Lyon</option>
+          <option value="Toulouse">Toulouse</option>
+          <option value="Nice">Nice</option>
+          <option value="Nantes">Nantes</option>
+          <option value="Strasbourg">Strasbourg</option>
+        </select>
+
+        <label><strong>Prix :</strong></label>
+        <select name="priceRange" value={filters.priceRange} onChange={handleFilterChange}>
+          <option value="">Toutes les fourchettes de prix</option>
+          <option value="0-20">0-20 €</option>
+          <option value="20-50">20-50 €</option>
+          <option value="50-100">50-100 €</option>
+          <option value="100+">Plus de 100 €</option>
+        </select>
+      </div>
     </form>
-  )
-}
+  );
+};
 
-export default PrestationFilter
+export default PrestationFilter;
