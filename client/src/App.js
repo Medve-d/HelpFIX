@@ -25,6 +25,7 @@ import Memberships from './pages/memberships';
 import MembershipsPaiment from './pages/membershipsPaiment';
 import MembershipWrapper from './HOC/membershipWrapper';
 import ChatWidget from '../src/components/chatWidget';
+import PrestataireDashboard from '../src/pages/mesPrestations';
 
 function App() {
   const { user } = useAuthContext();
@@ -38,7 +39,6 @@ function App() {
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
             <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
             <Route path="/singuppro" element={!user ? <SignupPrstatire /> : <Navigate to="/" />} />
-            
 
             <Route 
               path="/" 
@@ -79,6 +79,7 @@ function App() {
             <Route path="/memberships" element={<Memberships />} />
             <Route path="/profile" element={<Profile />}/>
             <Route path="/membershipspaiment" element={<MembershipsPaiment />} />
+            <Route path="/mesprestations" element={<PrestataireDashboard />} />
           </Routes>
         </div>
         <Footer />

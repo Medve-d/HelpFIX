@@ -1,5 +1,8 @@
+import PrestationFilter from "./PrestationFilter";
+
 const Categories = () => {
     return (
+
       <div className="ag-format-container">
         <div className="ag-courses_box">
           <div className="ag-courses_item">
