@@ -26,6 +26,8 @@ import MembershipsPaiment from './pages/membershipsPaiment';
 import MembershipWrapper from './HOC/membershipWrapper';
 import ChatWidget from '../src/components/chatWidget';
 import PrestataireDashboard from '../src/pages/mesPrestations';
+import TermsAndConditions from '../src/pages/terms';
+import PrivacyPolicy from '../src/pages/privacy';
 
 function App() {
   const { user } = useAuthContext();
@@ -66,6 +68,8 @@ function App() {
             />
 
             {/* Other routes */}
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/aboutus" element={<Blog />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/categories" element={<CategoriesPage />} />

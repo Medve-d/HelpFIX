@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="container">
         <p>&copy; {new Date().getFullYear()} HelpFIX Tous droits réservés.</p>
         <ul className="links">
-          <li><a href="/privacy">Politique de confidentialité</a></li>
-          <li><a href="/terms">Conditions d'utilisation</a></li>
-          <li><a href="/contactus">Contactez-nous</a></li>
+          <li><Link to="/privacy">Politique de confidentialité</Link></li>
+          <li><Link to="/terms">Conditions d'utilisation</Link></li>
+          <li><Link to="/contactus">Contactez-nous</Link></li>
         </ul>
       </div>
     </footer>
@@ -17,5 +17,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-

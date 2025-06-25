@@ -30,9 +30,16 @@ const Home = () => {
       const response = await fetch(endpoint, options);
 
       if (response.ok) {
-        const json = await response.json();
-        dispatch({ type: 'SET_PRESTATIONS', payload: json });
-        setFilteredPrestations(json);
+        let json = await response.json();
+
+        // Triez les prestations par date décroissante pour obtenir les plus récentes
+        json.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        // Limitez le nombre de prestations à 5
+        const recentPrestations = json.slice(0, 5);
+
+        dispatch({ type: 'SET_PRESTATIONS', payload: recentPrestations });
+        setFilteredPrestations(recentPrestations);
       }
     };
 
