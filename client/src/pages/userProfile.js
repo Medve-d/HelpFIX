@@ -42,7 +42,7 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-container">
-      <h1 className="profile-title">Profile Page</h1>
+      <h1 className="profile-title">Profil</h1>
       {user ? (
         <div className="profile-card">
           <div className="profile-info">

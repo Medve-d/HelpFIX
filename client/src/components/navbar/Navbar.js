@@ -53,7 +53,6 @@ const Navbar = () => {
             <>
               {user.role === 'prestataire' ? (
                 <>
-                  <li><Link to="/mesprestations">Mes prestations</Link></li>
                   <li><Link to="/historique">Historique</Link></li>
                   <li><Link to="/profile">Profil</Link></li>
                 </>

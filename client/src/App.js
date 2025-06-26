@@ -25,7 +25,6 @@ import Memberships from './pages/memberships';
 import MembershipsPaiment from './pages/membershipsPaiment';
 import MembershipWrapper from './HOC/membershipWrapper';
 import ChatWidget from '../src/components/chatWidget';
-import PrestataireDashboard from '../src/pages/mesPrestations';
 import TermsAndConditions from '../src/pages/terms';
 import PrivacyPolicy from '../src/pages/privacy';
 
@@ -83,7 +82,6 @@ function App() {
             <Route path="/memberships" element={<Memberships />} />
             <Route path="/profile" element={<Profile />}/>
             <Route path="/membershipspaiment" element={<MembershipsPaiment />} />
-            <Route path="/mesprestations" element={<PrestataireDashboard />} />
           </Routes>
         </div>
         <Footer />

@@ -1,57 +1,131 @@
-const Message = require('../models/message.model.js');  
-const Conversation = require('../models/convoModel.js');
-const mongoose = require('mongoose')
+const Message = require('../models/message.model');
+const User = require('../models/userModel');
+const mongoose = require('mongoose');
 
-
-
+// Envoyer un message
 const sendMessage = async (req, res) => {
-	const { id } = req.params; // Chat room ID
-	const { message } = req.body;
-  
-	try {
-	  const newMessage = new Message({
-		room: id,
-		message,
-		sender: req.user._id // Assuming you have sender information in your request
-	  });
-	  await newMessage.save();
-  
-	  // Emit the message to the chat room
-	  io.to(id).emit('receive_message', { message });
-	  res.status(200).json({ message: 'Message envoyé' });
-	} catch (error) {
-	  res.status(500).json({ error: 'Erreur serveur' });
-	}
-  };
-  
+    const { receiverId, content } = req.body;
+    const senderId = req.user._id;
 
-const getMessages = async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(receiverId)) {
+        return res.status(400).json({ error: 'ID destinataire invalide' });
+    }
+
     try {
-        const { id: userToChatId } = req.params;
-        const senderId = req.user._id;
+        const [sender, receiver] = await Promise.all([
+            User.findById(senderId),
+            User.findById(receiverId)
+        ]);
 
-        console.log("Fetching messages between:", senderId, "and", userToChatId);
-
-        const conversation = await Conversation.findOne({
-            participants: { $all: [senderId, userToChatId] },
-        }).populate("messages");
-
-        if (!conversation) {
-            console.log("No conversation found.");
-            return res.status(200).json([]);
+        if (!receiver) {
+            return res.status(404).json({ error: 'Destinataire non trouvé' });
         }
 
-        const messages = conversation.messages;
+        const newMessage = new Message({
+            senderId,
+            receiverId,
+            content,
+            senderName: `${sender.name} ${sender.familyName}`,
+            isRead: false
+        });
 
-        res.status(200).json(messages);
+        const savedMessage = await newMessage.save();
+        return res.status(201).json(savedMessage);
+
     } catch (error) {
-        console.log("Error in getMessages controller: ", error.message);
-        res.status(500).json({ error: "Internal server error" });
+        console.error('Erreur sendMessage:', error);
+        return res.status(500).json({
+            error: 'Erreur serveur',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
     }
 };
 
+// Récupérer l'historique des messages
+const getMessages = async (req, res) => {
+    const { userId } = req.params;
+    const currentUserId = req.user._id;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ error: 'ID utilisateur invalide' });
+    }
+
+    try {
+        const messages = await Message.aggregate([
+            {
+                $match: {
+                    $or: [
+                        { senderId: new mongoose.Types.ObjectId(currentUserId), receiverId: new mongoose.Types.ObjectId(userId) },
+                        { senderId: new mongoose.Types.ObjectId(userId), receiverId: new mongoose.Types.ObjectId(currentUserId) }
+                    ]
+                }
+            },
+            { $sort: { createdAt: 1 } },
+            { $limit: 100 },
+            {
+                $project: {
+                    _id: 1,
+                    content: 1,
+                    senderId: 1,
+                    receiverId: 1,
+                    senderName: 1,
+                    isRead: 1,
+                    createdAt: {
+                        $dateToString: {
+                            format: "%Y-%m-%d %H:%M:%S",
+                            date: "$createdAt"
+                        }
+                    }
+                }
+            }
+        ]);
+
+        return res.status(200).json(messages);
+
+    } catch (error) {
+        console.error('Erreur getMessages:', error);
+        return res.status(500).json({
+            error: 'Erreur lors de la récupération des messages',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+    }
+};
+
+// Marquer les messages comme lus
+const markMessagesAsRead = async (req, res) => {
+    const { senderId } = req.params;
+    const receiverId = req.user._id;
+
+    if (!mongoose.Types.ObjectId.isValid(senderId)) {
+        return res.status(400).json({ error: 'ID expéditeur invalide' });
+    }
+
+    try {
+        const result = await Message.updateMany(
+            {
+                senderId: new mongoose.Types.ObjectId(senderId),
+                receiverId: new mongoose.Types.ObjectId(receiverId),
+                isRead: false
+            },
+            { $set: { isRead: true } }
+        );
+
+        return res.status(200).json({
+            success: true,
+            markedAsRead: result.modifiedCount
+        });
+
+    } catch (error) {
+        console.error('Erreur markMessagesAsRead:', error);
+        return res.status(500).json({
+            error: 'Erreur lors du marquage des messages',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+    }
+};
 
 module.exports = {
     sendMessage,
-    getMessages
-}
+    getMessages,
+    markMessagesAsRead
+};

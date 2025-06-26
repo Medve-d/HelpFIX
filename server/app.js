@@ -1,7 +1,6 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
-
 const connectDB = require('./config/db.js');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -12,7 +11,6 @@ const demandeRoutes = require('./routes/demande');
 const profileRoutes = require('./routes/userProfile');
 const messageRoutes = require('./routes/message.js');
 const http = require('http');
-const { Server } = require('socket.io');
 
 const app = express();
 
@@ -27,25 +25,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
-
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-
-  socket.on("join_room", (data) => {
-    socket.join(data);
-  });
-
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-  });
-});
 
 // Connect to the database and start the server
 connectDB().then(() => {
@@ -63,7 +42,6 @@ app.use('/api/messages', messageRoutes);
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // Error handling middleware (optional but recommended)
 app.use((err, req, res, next) => {

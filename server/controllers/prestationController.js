@@ -13,37 +13,16 @@ const buildSearchQuery = (search) => ({
 });
 
 // GET toutes les prestations
-// Dans prestationController.js
 const getAllPrestations = async (req, res) => {
-    try {
-      // Debug 1: Vérifiez la base de données connectée
-      const dbName = mongoose.connection.db.databaseName;
-      console.log('Base de données connectée:', dbName);
-  
-      // Debug 2: Liste des collections
-      const collections = await mongoose.connection.db.listCollections().toArray();
-      console.log('Collections:', collections.map(c => c.name));
-  
-      // Debug 3: Requête brute
-      const count = await mongoose.connection.db.collection('prestations').countDocuments();
-      console.log('Nombre de prestations (requête brute):', count);
-  
-      // Votre requête originale
-      const prestations = await Prestation.find({})
-        .sort({ createdAt: -1 })
-        .lean();
-  
-      console.log('Première prestation trouvée:', prestations[0] || 'Aucun résultat');
-      
-      res.status(200).json(prestations);
-    } catch (error) {
-      console.error('Erreur complète:', error);
-      res.status(500).json({ 
-        error: 'Erreur serveur',
-        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
-      });
-    }
-  };
+  try {
+    const prestations = await Prestation.find({})
+      .sort({ createdAt: -1 })
+      .lean();
+    res.status(200).json(prestations);
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+};
 
 // GET mes prestations (pour prestataire)
 const getMyPrestations = async (req, res) => {
@@ -58,7 +37,6 @@ const getMyPrestations = async (req, res) => {
 
     res.status(200).json(prestations);
   } catch (error) {
-    console.error('Erreur dans getMyPrestations:', error);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 };
@@ -67,7 +45,6 @@ const getMyPrestations = async (req, res) => {
 const createPrestation = async (req, res) => {
   const { title, price, job, description, userName, ville, category } = req.body;
 
-  // Validation
   const errors = [];
   if (!title?.trim()) errors.push('title');
   if (!job?.trim()) errors.push('job');
@@ -97,11 +74,7 @@ const createPrestation = async (req, res) => {
 
     res.status(201).json(prestation);
   } catch (error) {
-    console.error('Erreur lors de la création:', error);
-    res.status(400).json({ 
-      error: 'Erreur de création',
-      details: error.message 
-    });
+    res.status(400).json({ error: 'Erreur de création' });
   }
 };
 
@@ -109,7 +82,7 @@ const createPrestation = async (req, res) => {
 const getPrestation = async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ error: 'Format ID invalide' });
     }
@@ -122,7 +95,6 @@ const getPrestation = async (req, res) => {
 
     res.status(200).json(prestation);
   } catch (error) {
-    console.error('Erreur dans getPrestation:', error);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 };
@@ -144,7 +116,6 @@ const deletePrestation = async (req, res) => {
 
     res.status(200).json(prestation);
   } catch (error) {
-    console.error('Erreur dans deletePrestation:', error);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 };
@@ -170,11 +141,7 @@ const updatePrestation = async (req, res) => {
 
     res.status(200).json(prestation);
   } catch (error) {
-    console.error('Erreur dans updatePrestation:', error);
-    res.status(400).json({ 
-      error: 'Erreur de mise à jour',
-      details: error.message 
-    });
+    res.status(400).json({ error: 'Erreur de mise à jour' });
   }
 };
 

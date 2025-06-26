@@ -1,13 +1,14 @@
 const express = require('express');
-const  { getMessages ,sendMessage } = require('../controllers/messageController');
-const requireAuth = require('../middleware/requireAuth')
-
 const router = express.Router();
+const messageController = require('../controllers/messageController');
 
+// Route pour envoyer un message
+router.post('/', messageController.sendMessage);
 
-router.use(requireAuth)
+// Route pour récupérer les messages entre deux utilisateurs
+router.get('/:userId', messageController.getMessages);
 
-router.get("/:id", getMessages);
-router.post("/send/:id", sendMessage);
+// Route pour marquer les messages comme lus
+router.put('/:senderId/mark-read', messageController.markMessagesAsRead);
 
 module.exports = router;
