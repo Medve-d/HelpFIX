@@ -2,115 +2,174 @@ import { useState } from 'react'
 import { usePrestationsContext } from "../hooks/usePrestationsContext"
 import { useAuthContext } from '../hooks/useAuthContext'
 
-
 const PrestationForm = () => {
-  
   const { dispatch } = usePrestationsContext()  
   const { user } = useAuthContext()
 
-  const [title, setTitle] = useState('')
-  const [price, setPrice] = useState('')
-  const [job, setJobe] = useState('')
-  const [description, setDescription] = useState('')
-  const [category, setCategory] = useState('')
+  const villes = [
+    "Paris",
+    "Marseille",
+    "Lyon",
+    "Toulouse",
+    "Nice",
+    "Nantes",
+    "Strasbourg"
+  ]
+
+  const [formData, setFormData] = useState({
+    title: '',
+    price: '',
+    job: '',
+    description: '',
+    category: '',
+    ville: user?.ville || '' // Initialise avec la ville de l'utilisateur si disponible
+  })
+  
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     
     if (!user) {
-      setError('You must be logged in')
+      setError('Vous devez être connecté')
       return
     }
         
-    const userName = `${ user.name} ${ user.familyName}`;
-    const ville = `${user.ville}`
-    const prestation = { title, price, ville, userName, job, description, category }
+    const prestation = {
+      ...formData,
+      userName: `${user.name} ${user.familyName}`,
+      price: Number(formData.price),
+      user_id: user._id
+    }
 
-    
-    const response = await fetch('/api/prestation', {
-      method: 'POST',
-      body: JSON.stringify(prestation),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}` 
+    try {
+      const response = await fetch('/api/prestation', {
+        method: 'POST',
+        body: JSON.stringify(prestation),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}` 
+        }
+      })
+      
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || 'Erreur lors de la création')
+        setEmptyFields(data.missingFields || [])
+        return
       }
-    })
-    const json = await response.json()
-
-    if (!response.ok) {
-      setError(json.error)
-      setEmptyFields(json.emptyFields || []) // Default to an empty array if undefined
-    }
-    
-    if (response.ok) {
-      setEmptyFields([])
+      
+      // Réinitialisation du formulaire (sauf la ville)
+      setFormData(prev => ({
+        title: '',
+        price: '',
+        job: '',
+        description: '',
+        category: '',
+        ville: prev.ville // Garde la ville sélectionnée
+      }))
       setError(null)
-      setTitle('')
-      setPrice('')
-      setJobe('')
-      setDescription('')
-      setCategory('')
+      setEmptyFields([])
 
-      console.log('new prestation added:', json)
-      dispatch({type: 'CREATE_PRESTATION', payload: json})
+      dispatch({ type: 'CREATE_PRESTATION', payload: data })
+      
+    } catch (err) {
+      setError('Erreur réseau ou serveur')
+      console.error('Erreur:', err)
     }
-
   }
 
   return (
     <form className="create" onSubmit={handleSubmit}> 
       <h3>Ajouter une prestation</h3>
 
-      <label>Title  :</label>
+      <label>Titre :</label>
       <input 
         type="text" 
-        onChange={(e) => setTitle(e.target.value)} 
-        value={title}
+        name="title"
+        onChange={handleChange} 
+        value={formData.title}
         className={emptyFields.includes('title') ? 'error' : ''}
+        required
       />
 
       <label>Prix (€) :</label>
       <input 
-        type="Number" 
-        onChange={(e) => setPrice(e.target.value)} 
-        value={price}
+        type="number" 
+        name="price"
+        onChange={handleChange} 
+        value={formData.price}
         className={emptyFields.includes('price') ? 'error' : ''}
+        min="0"
+        step="0.01"
+        required
       />
 
-      <label>Job  :</label>
+      <label>Ville :</label>
+      <select
+        name="ville"
+        onChange={handleChange}  
+        value={formData.ville}
+        className={emptyFields.includes('ville') ? 'error' : ''}
+        required
+      >
+        <option value="">Sélectionnez une ville</option>
+        {villes.map((ville) => (
+          <option key={ville} value={ville}>{ville}</option>
+        ))}
+      </select>
+
+      <label>Métier :</label>
       <input 
         type="text" 
-        onChange={(e) => setJobe(e.target.value)} 
-        value={job}
+        name="job"
+        onChange={handleChange} 
+        value={formData.job}
         className={emptyFields.includes('job') ? 'error' : ''}
+        required
       />
 
       <label>Description :</label>
-      <input 
-        type="text" 
-        onChange={(e) => setDescription(e.target.value)} 
-        value={description} 
+      <textarea 
+        name="description"
+        onChange={handleChange} 
+        value={formData.description}
         className={emptyFields.includes('description') ? 'error' : ''}
+        rows="4"
+        required
       />
       
-      <label>Catégories :</label>
+      <label>Catégorie :</label>
       <select
-        onChange={(e) => setCategory(e.target.value)}  
-        value={category}                            
-        className={emptyFields.includes('category') ? 'error' : ''} 
+        name="category"
+        onChange={handleChange}  
+        value={formData.category}
+        className={emptyFields.includes('category') ? 'error' : ''}
+        required
       >
-        <option value="">Choisi une catégorie</option>
+        <option value="">Choisissez une catégorie</option>
         <option value="Plomberie">Plomberie</option>
         <option value="Services de Nettoyage">Services de Nettoyage</option>
-        <option value="Réparation d'Appareils Électroménagers">Réparation d'Appareils Électroménagers</option>
-        <option value="Jardinage et Entretien Extérieur">Jardinage et Entretien Extérieur</option>
-        <option value="Tutorat et Cours Particuliers">Tutorat et Cours Particuliers</option>
-        <option value="Déménagement et Transport">Déménagement et Transport</option>
+        <option value="Réparation d'Appareils Électroménagers">Réparation d'électroménager</option>
+        <option value="Jardinage et Entretien Extérieur">Jardinage</option>
+        <option value="Tutorat et Cours Particuliers">Cours particuliers</option>
+        <option value="Déménagement et Transport">Déménagement</option>
       </select>
 
-      <button title='Ajouter'>Ajouter la prestation</button>
+      <button type="submit" title="Ajouter">
+        Ajouter la prestation
+      </button>
+      
       {error && <div className="error">{error}</div>}
     </form>
   )
