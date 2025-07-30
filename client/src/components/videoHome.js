@@ -1,73 +1,97 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import '../index.css'; // Assurez-vous d'importer le fichier CSS
 
 const videos = [
-    `${process.env.PUBLIC_URL}/videos/video1.mp4`,
-    `${process.env.PUBLIC_URL}/videos/video2.mp4`,
-    `${process.env.PUBLIC_URL}/videos/video3.mp4`,
-    `${process.env.PUBLIC_URL}/videos/video4.mp4`,
-    `${process.env.PUBLIC_URL}/videos/video5.mp4`
+    '/videos/video1.mp4',
+    '/videos/video2.mp4',
+    '/videos/video3.mp4',
+    '/videos/video4.mp4',
+    '/videos/video5.mp4'
 ];
 
 const Homevid = () => {
     const { user } = useAuthContext();
-    const [currentVideo, setCurrentVideo] = useState(0);
-    const [nextVideo, setNextVideo] = useState(1);
-    const [isTransitioning, setIsTransitioning] = useState(false);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-    const video1Ref = useRef(null);
-    const video2Ref = useRef(null);
+    const videoRefs = [useRef(null), useRef(null)];
+    const activeRefIndex = useRef(0);
 
+    // Effet pour changer de vidéo à intervalle régulier
     useEffect(() => {
         const interval = setInterval(() => {
-            setIsTransitioning(true); 
-            setTimeout(() => {
-                setCurrentVideo((prev) => (prev + 1) % videos.length);
-                setNextVideo((prev) => (prev + 1) % videos.length);
-                setIsTransitioning(false); 
-            }, 500); 
-        }, 6000); 
+            // Prépare l'index du prochain lecteur vidéo
+            const nextRefIndex = 1 - activeRefIndex.current;
+            const nextVideoElement = videoRefs[nextRefIndex].current;
+
+            // Prépare l'index de la prochaine vidéo
+            setCurrentVideoIndex(prevIndex => {
+                const nextVideoIndex = (prevIndex + 1) % videos.length;
+
+                // Précharge la prochaine vidéo dans le lecteur inactif
+                if (nextVideoElement) {
+                    nextVideoElement.src = videos[nextVideoIndex];
+                    nextVideoElement.load();
+                }
+
+                return nextVideoIndex;
+            });
+
+        }, 6000); // Change de vidéo toutes les 6 secondes
 
         return () => clearInterval(interval);
     }, []);
 
+    // Effet pour jouer la vidéo et gérer la transition visuelle
     useEffect(() => {
-        const nextRef = video1Ref.current && video2Ref.current
-            ? (isTransitioning ? video2Ref.current : video1Ref.current)
-            : null;
+        const nextRefIndex = 1 - activeRefIndex.current;
+        const activeVideoElement = videoRefs[activeRefIndex.current].current;
+        const nextVideoElement = videoRefs[nextRefIndex].current;
 
-        if (nextRef) {
-            nextRef.src = videos[nextVideo];
-            nextRef.load();
-            nextRef.oncanplay = () => {
-                nextRef.play().catch((error) => console.warn("Auto-play blocked:", error));
+        if (nextVideoElement) {
+            // Joue la vidéo dès qu'elle est prête
+            nextVideoElement.oncanplaythrough = () => {
+                nextVideoElement.play().catch(error => console.warn("Autoplay bloqué", error));
+                
+                // Inverse les classes pour la transition en fondu
+                nextVideoElement.classList.add('active');
+                if (activeVideoElement) {
+                    activeVideoElement.classList.remove('active');
+                }
+                
+                // Met à jour l'index du lecteur actif
+                activeRefIndex.current = nextRefIndex;
             };
         }
-    }, [nextVideo, isTransitioning]);
+    }, [currentVideoIndex]);
 
     return (
         <div className="HomeVideo">
             <div className="HomeOverlay"></div>
 
-            <video 
-                ref={video1Ref} 
-                className={`video ${!isTransitioning ? "visible" : "hidden"}`} 
-                src={videos[currentVideo]} 
-                autoPlay 
-                muted 
-                playsInline 
+            <video
+                ref={videoRefs[0]}
+                className="video active" // Le premier lecteur commence comme actif
+                src={videos[0]} // Charge la première vidéo initialement
+                autoPlay
+                muted
+                playsInline
+                onCanPlayThrough={e => e.target.play().catch(err => console.warn("Autoplay initial bloqué", err))}
             />
-                {/* Moyen pour précharger une vidéo pour éviter les coupures entres vidéos */}
-            <video 
-                ref={video2Ref} 
-                className={`video ${isTransitioning ? "visible" : "hidden"}`} 
-                muted 
-                playsInline 
+            <video
+                ref={videoRefs[1]}
+                className="video" // Le deuxième lecteur est initialement caché
+                muted
+                playsInline
             />
 
             <div className="HomeContent">
-                <h1>Votre solution à tous vos besoins de services,</h1>
-                <h2>c'est HelpFIX!</h2>
+                <p className='texte-accueil' style={{ fontSize: '2.5rem', color: '#fff' }}>
+                    Votre solution à tous vos besoins de services,
+                </p>
+                <p className='texte-accueil' style={{ fontSize: '2.5rem', color: '#fff' }}>
+                    c'est HelpFIX!
+                </p>
                 {!user && (<a href="./signup"><button className="comBtn">Commencer</button></a>)}
             </div>
         </div>
