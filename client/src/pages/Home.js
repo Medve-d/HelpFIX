@@ -71,6 +71,16 @@ const Home = () => {
     <div>
       <title>Bienvenue sur Helpfix !</title>
       <Homevid />
+      {/* Présentation sur la simplicité des prestations */}
+      <div style={{ margin: "20px 0", textAlign: "center" }}>
+        <h1>Bienvenue sur Helpfix !</h1>
+        <p>
+          Les prestations proposées sur Helpfix sont conçues pour simplifier votre quotidien.<br />
+          En quelques clics, trouvez un professionnel qualifié pour répondre à vos besoins, que ce soit pour des réparations, des services à domicile ou des conseils spécialisés.<br />
+          Gagnez du temps, évitez les recherches compliquées et bénéficiez de l’expertise de prestataires de confiance près de chez vous.<br />
+          Helpfix facilite la mise en relation, la gestion et le suivi de vos demandes, pour une expérience sereine et efficace.
+        </p>
+      </div>
       {role === 'prestataire' ? (
         <h2 className="hometitles">Vos Prestations</h2>
       ) : (
@@ -88,6 +98,15 @@ const Home = () => {
       </div>
       {role !== 'prestataire' && (
         <>
+        <div style={{ margin: "20px 0", textAlign: "center" }}>
+          <p>
+            Faire appel à un prestataire sur Helpfix, c’est choisir la tranquillité d’esprit.<br />
+            Nos professionnels sont sélectionnés pour leur expertise et leur sérieux.<br />
+            Vous bénéficiez d’un service rapide, fiable et adapté à vos besoins, tout en soutenant l’économie locale.<br />
+            Profitez de conseils personnalisés, d’un accompagnement sur mesure et d’une gestion simplifiée de vos demandes.<br />
+            Avec Helpfix, vous gagnez du temps et vous êtes assuré d’un résultat de qualité.
+          </p>
+        </div>
           <h2 className="hometitles">Nos Catégories</h2>
           <Categories />
         </>

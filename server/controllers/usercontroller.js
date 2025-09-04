@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 // Fonction pour créer un token JWT
 const createToken = (user) => {
-    return jwt.sign({ _id: user._id, role: user.role }, process.env.SECRET, { expiresIn: '3d' });
+    return jwt.sign({ _id: user._id, role: user.role }, process.env.SECRET, { expiresIn: '30d' });
 };
 
 // Contrôleur pour la connexion
