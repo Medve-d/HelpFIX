@@ -1,55 +1,74 @@
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-
-const connectDB = require('./config/db.js');
+// server/app.js
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
+const connectDB = require('./config/db');
+const conversationRoutes = require('./routes/conversation');
+const messageRoutes = require('./routes/message');
 const userRoutes = require('./routes/user');
 const prestationRoutes = require('./routes/prestation');
-const demandeRoutes = require('./routes/demande');
-const profileRoutes = require('./routes/userProfile');
-const messageRoutes = require('./routes/message.js');
-const http = require('http');
+const authMiddleware = require('./middleware/requireAuth');
+const Message = require('./models/message.model'); // modèle de message
+
+// --- Connexion à MongoDB ---
+connectDB();
 
 const app = express();
-
 const server = http.createServer(app);
 
-app.use(bodyParser.json());  // Parsing JSON requests
-app.use(express.json());  // Redundant, but included for completeness
+// --- Socket.IO ---
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
-const corsOptions = {
-  origin: 'http://localhost:3000', // Allow requests from this origin
-  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
-};
+// Attacher l'instance io à app pour l'utiliser dans les routes REST
+app.set('socketio', io);
 
-app.use(cors(corsOptions));
+// --- Middleware ---
+app.use(express.json());
 
-// Connect to the database and start the server
-connectDB().then(() => {
-  server.listen(process.env.PORT, () => {
-    console.log(`APP LISTENING ON http://localhost:${process.env.PORT}/`);
-  });
-}).catch(err => console.error(err));
-
-// Routes
-app.use('/api/user', userRoutes);
+// --- Routes API ---
+app.use('/api/conversations', authMiddleware, conversationRoutes);
+app.use('/api/messages', authMiddleware, messageRoutes);
 app.use('/api/prestation', prestationRoutes);
-app.use('/api/demande', demandeRoutes);
-app.use('/api/user/profile', profileRoutes);
-app.use('/api/messages', messageRoutes);
+app.use('/api/user', userRoutes);
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
+// --- Socket.IO events ---
+io.on('connection', (socket) => {
+  console.log(`✅ Nouveau client connecté : ${socket.id}`);
 
-// Error handling middleware (optional but recommended)
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+  // Rejoindre une conversation
+  socket.on('joinConversation', (conversationId) => {
+    socket.join(conversationId);
+    console.log(`👥 ${socket.id} a rejoint la conversation ${conversationId}`);
+  });
+
+  // Envoyer un message en temps réel
+  socket.on('sendMessage', async (msg) => {
+    try {
+      // Sauvegarder le message dans MongoDB
+      const newMsg = await Message.create(msg);
+
+      // Diffuser le message à tous les membres de la conversation
+      io.to(msg.conversationId).emit('receiveMessage', newMsg);
+    } catch (err) {
+      console.error('Erreur lors de l\'envoi du message :', err);
+    }
+  });
+
+  // Déconnexion
+  socket.on('disconnect', () => {
+    console.log(`❌ Client déconnecté : ${socket.id}`);
+  });
 });
 
-// Catch-all route for handling 404 errors
-app.use((req, res, next) => {
-  res.status(404).send('Route not found');
-});
+// --- Lancer le serveur ---
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+module.exports = app;

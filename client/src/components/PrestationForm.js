@@ -19,7 +19,6 @@ const PrestationForm = () => {
   const [formData, setFormData] = useState({
     title: '',
     price: '',
-    job: '',
     description: '',
     category: '',
     ville: user?.ville || '' // Initialise avec la ville de l'utilisateur si disponible
@@ -73,7 +72,6 @@ const PrestationForm = () => {
       setFormData(prev => ({
         title: '',
         price: '',
-        job: '',
         description: '',
         category: '',
         ville: prev.ville // Garde la ville sélectionnée
@@ -128,16 +126,6 @@ const PrestationForm = () => {
           <option key={ville} value={ville}>{ville}</option>
         ))}
       </select>
-
-      <label>Métier :</label>
-      <input 
-        type="text" 
-        name="job"
-        onChange={handleChange} 
-        value={formData.job}
-        className={emptyFields.includes('job') ? 'error' : ''}
-        required
-      />
 
       <label>Description :</label>
       <textarea 

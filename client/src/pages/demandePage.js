@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
-import ChatWidget from '../components/chatWidget'; // Vérifie le chemin
+import ChatWidget from '../components/chatWidget';
 
 const PrestationDetailsPage = () => {
-  const { id } = useParams(); // l'ID de la prestation depuis l'URL
+  const { id } = useParams();
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
@@ -12,6 +12,7 @@ const PrestationDetailsPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showChat, setShowChat] = useState(false);
+  const [prestataireId, setPrestataireId] = useState(null);
 
   useEffect(() => {
     const fetchPrestation = async () => {
@@ -22,19 +23,18 @@ const PrestationDetailsPage = () => {
       }
 
       try {
-        const response = await fetch(`/api/prestation/${id}`, {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
+        const res = await fetch(`/api/prestation/${id}`, {
+          headers: { Authorization: `Bearer ${user.token}` },
         });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Erreur lors de la récupération de la prestation.');
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Erreur lors de la récupération.');
         }
 
-        const json = await response.json();
-        setPrestation(json);
+        const data = await res.json();
+        setPrestation(data);
+        setPrestataireId(data.user_id); // ID du prestataire
       } catch (err) {
         setError(err.message);
       } finally {
@@ -46,30 +46,20 @@ const PrestationDetailsPage = () => {
   }, [id, user]);
 
   const handleDiscuter = () => {
-    setShowChat(true); // Ouvrir le chat
+    if (!prestataireId) return;
+    setShowChat(true); // ouvre le chat
   };
 
-  const handleRevenirEnArriere = () => {
-    navigate(-1); // Retour à la page précédente
-  };
+  const handleRevenirEnArriere = () => navigate(-1);
 
-  // --- ÉTATS ---
-  if (loading) {
-    return <div className="loading">Chargement...</div>;
-  }
-
-  if (error) {
-    return <div className="error">{error}</div>;
-  }
-
-  if (!prestation) {
-    return <div>Aucune prestation trouvée.</div>;
-  }
+  if (loading) return <div className="loading">Chargement...</div>;
+  if (error) return <div className="error">{error}</div>;
+  if (!prestation) return <div>Aucune prestation trouvée.</div>;
 
   return (
     <div className="prestation-details-page">
       <h2>Détails de la Prestation</h2>
-      
+
       <div className="prestation-details">
         <p><strong>Titre :</strong> {prestation.title}</p>
         <p><strong>Prix :</strong> {prestation.price} €</p>
@@ -89,10 +79,11 @@ const PrestationDetailsPage = () => {
         </button>
       </div>
 
-      {showChat && prestation._id && (
+      {showChat && prestataireId && (
         <ChatWidget
-          prestataireId={prestation.user_id}
+          prestataireId={prestataireId}
           prestationId={prestation._id}
+          isOpen={showChat} // <-- IMPORTANT
           onClose={() => setShowChat(false)}
         />
       )}

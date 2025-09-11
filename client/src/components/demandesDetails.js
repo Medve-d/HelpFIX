@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState } from 'react';
 import { useDemandeContext } from "../hooks/useDemandeContext";
 import { useAuthContext } from '../hooks/useAuthContext';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
@@ -15,25 +15,20 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => (
 );
 
 const DemandesDetails = ({ demande, onOpenChat }) => {
-  
   const { dispatch } = useDemandeContext();
   const { user, role } = useAuthContext();
-  const [showConfirm, setShowConfirm] = useState(false); // State to show/hide confirmation modal
+  const [showConfirm, setShowConfirm] = useState(false);
 
-  if (!user) {
-    return;
-  }
-  
+  if (!user) return null;
+
   const handleCancel = () => {
-    setShowConfirm(true); // Show confirmation modal
+    setShowConfirm(true);
   };
 
   const handleConfirmCancel = async () => {
-    setShowConfirm(false); // Hide confirmation modal
-    if (!user) {
-      return;
-    }
-    
+    setShowConfirm(false);
+    if (!user) return;
+
     const response = await fetch('/api/demande/' + demande._id, {
       method: 'DELETE',
       headers: {
@@ -46,41 +41,41 @@ const DemandesDetails = ({ demande, onOpenChat }) => {
       dispatch({ type: 'DELETE_DEMANDE', payload: json });
     }
   };
-  
+
   const handleAccept = async () => {
-    if (!user) {
-      return;
-    }
+    if (!user) return;
 
     try {
-        const response = await fetch('/api/demande/acceptdemande', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`
-            },
-            body: JSON.stringify({ demandId: demande._id, user_id: user._id })
-        });
+      const response = await fetch('/api/demande/acceptdemande', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        },
+        body: JSON.stringify({ demandId: demande._id, user_id: user._id })
+      });
 
-        const result = await response.json();
+      const result = await response.json();
 
-        if (response.ok) {
-            console.log('Demande accepted and message sent:', result);
-            dispatch({ type: 'UPDATE_DEMANDE_STATUS', payload: { _id: demande._id, status: 'accepted' } });
-        } else {
-            console.error('Failed to accept demande:', result.message);
-        }
+      if (response.ok) {
+        console.log('Demande accepted and message sent:', result);
+        dispatch({ type: 'UPDATE_DEMANDE_STATUS', payload: { _id: demande._id, status: 'accepted' } });
+      } else {
+        console.error('Failed to accept demande:', result.message);
+      }
     } catch (error) {
-        console.error('Error accepting demande:', error);
+      console.error('Error accepting demande:', error);
     }
-};
+  };
 
-  
   const handleOpenChat = () => {
     if (!user) return;
 
-    // Trigger onOpenChat with the current demande ID
-    onOpenChat(demande._id);
+    // 🔑 On passe prestataireId + prestationId
+    const prestataireId = demande.userId;   // id du prestataire lié à la demande
+    const prestationId = demande._id;       // id de la demande/prestation
+
+    onOpenChat(prestataireId, prestationId);
   };
 
   return (
@@ -90,32 +85,36 @@ const DemandesDetails = ({ demande, onOpenChat }) => {
         <p><strong>Client Name   : </strong> {demande.clientName}</p>
       )}
       {role === 'client' && (
-        <p><strong> Prestataire Nom   : </strong> {demande.userName}</p>
+        <p><strong>Prestataire Nom   : </strong> {demande.userName}</p>
       )}
       <p><strong>Client Message   : </strong> {demande.clientMessage}</p>
       <p><strong>Address   : </strong> {demande.clientAdresse}</p>
       <p><strong>Date   : </strong>{demande.prestatDate && format(parseISO(demande.prestatDate), 'dd MMMM yyyy', { locale: fr })}</p>
       <p>{formatDistanceToNow(new Date(demande.createdAt), { addSuffix: true, locale: fr })}</p>
+
       {role === 'client' && (
         <div className="mesbutton-container">
           <button className="mesbutton deny" onClick={handleCancel} title='Annuler la demande'>Annuler la demande</button>
         </div>
       )}
+
       {role === 'prestataire' && demande.status === 'pending' && (
         <div className="mesbutton-container">
           <button className="mesbutton accept" onClick={handleAccept} title='Accepter et discuter'>Accepter et discuter</button>
           <button className="mesbutton deny" onClick={handleCancel} title='Refuser la demande'>Refuser la demande</button>
         </div>
       )}
-      { demande.status === 'accepted' && (
+
+      {demande.status === 'accepted' && (
         <div className="mesbutton-container">
           <button className="mesbutton accept" onClick={handleOpenChat} title='Ouvrir le chat'>Open chat</button>
         </div>
       )}
+
       {showConfirm && (
-        <ConfirmationModal 
-          onConfirm={handleConfirmCancel} 
-          onCancel={() => setShowConfirm(false)} 
+        <ConfirmationModal
+          onConfirm={handleConfirmCancel}
+          onCancel={() => setShowConfirm(false)}
         />
       )}
     </div>

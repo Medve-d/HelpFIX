@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
 
-const conversationSchema = new mongoose.Schema(
-	{
-		participants: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "User",
-			},
-		],
-		messages: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "Message",
-				default: [],
-			},
-		],
-	},
-	{ timestamps: true }
+const ConversationSchema = new mongoose.Schema(
+  {
+    members: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'User', // tu fais référence à ton modèle User
+      required: true,
+    },
+    prestationId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Prestation', // si tu as un modèle Prestation
+      required: true,
+    },
+    lastMessage: {
+      type: String,
+      default: '',
+    },
+  },
+  { timestamps: true }
 );
 
-
-module.exports = mongoose.model('Conversation', conversationSchema);
+module.exports = mongoose.model('Conversation', ConversationSchema);

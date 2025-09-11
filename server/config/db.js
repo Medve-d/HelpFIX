@@ -17,13 +17,6 @@ const connectDB = async () => {
     // Vérification active de la connexion
     const db = mongoose.connection.db;
     console.log(`Connecté avec succès à MongoDB (Base: ${db.databaseName})`);
-    console.log(`Collections disponibles: ${(await db.listCollections().toArray()).map(c => c.name).join(', ')}`);
-
-    // Vérification que la collection 'prestations' existe
-    const collections = await db.listCollections().toArray();
-    if (!collections.some(c => c.name === 'prestations')) {
-      console.warn("Attention: La collection 'prestations' n'existe pas dans la base HelpFIX");
-    }
 
   } catch (error) {
     console.error('Échec de la connexion à MongoDB:', error.message);

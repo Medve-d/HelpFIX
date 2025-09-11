@@ -5,26 +5,32 @@ import Nodata from "../../components/nodataPhoto";
 
 const CatN = () => {
   const { prestations, dispatch } = usePrestationsContext();
-  const category = "Services de Nettoyage"; // You can dynamically set this if needed.
+  const category = "Services de Nettoyage"; // tu peux changer dynamiquement si besoin
 
   useEffect(() => {
     const fetchPrestations = async () => {
       const response = await fetch(`/api/prestation?category=${category}`, {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : ''}`,
+          "Authorization": `Bearer ${
+            localStorage.getItem('user') 
+              ? JSON.parse(localStorage.getItem('user')).token 
+              : ''
+          }`,
         },
       });
 
       if (response.ok) {
-        const prestations = await response.json();
-        dispatch({ type: 'SET_PRESTATIONS', payload: prestations });
+        const prestationsData = await response.json();
+        dispatch({ type: 'SET_PRESTATIONS', payload: prestationsData });
       }
     };
 
     fetchPrestations();
   }, [dispatch, category]);
 
-  const filteredPrestations = prestations ? prestations.filter(prestation => prestation.job === "Entretien") : [];
+  const filteredPrestations = prestations 
+    ? prestations.filter(prestation => prestation.category === "Services de Nettoyage") 
+    : [];
 
   return (
     <div>
@@ -35,14 +41,13 @@ const CatN = () => {
             filteredPrestations.map(prestation => (
               <CategoriesDtails prestation={prestation} key={prestation._id} />
             ))
-          ) : null}
+          ) : (
+            <div className="nodata-container">
+              <Nodata />
+            </div>
+          )}
         </div>
       </div>
-      {filteredPrestations.length === 0 && (
-        <div className="nodata-container">
-          <Nodata/>
-        </div>
-      )}
     </div>
   );
 };
